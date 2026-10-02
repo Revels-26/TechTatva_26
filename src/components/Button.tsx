@@ -54,7 +54,7 @@ const Button = ({
   onClick,
   type = "button",
 }: ButtonProps) => {
-  const classes = `inline-flex items-center justify-center rounded-full font-label font-normal uppercase transition-all duration-300 hover:scale-[1.03] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
+  const classes = `inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full font-label font-normal uppercase transition-all duration-300 hover:scale-[1.03] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
 
   if (href) {
     return (

@@ -57,7 +57,7 @@ const Hero = () => {
         aria-hidden="true"
       />
 
-      {/* Reality planets */}
+      {/* Reality planets — only once there's room in the gutters beside the title column */}
       <RealityPlanet
         name={aether.name}
         domain={aether.domain}
@@ -65,8 +65,8 @@ const Hero = () => {
         gradient={aether.gradient}
         baseImage={aether.baseImage}
         accentImage={aether.accentImage}
-        size={96}
-        className="absolute left-[4%] top-[30%] hidden sm:flex"
+        size={88}
+        className="absolute left-4 top-[16%] hidden xl:flex 2xl:left-12"
       />
       <RealityPlanet
         name={ember.name}
@@ -75,8 +75,8 @@ const Hero = () => {
         gradient={ember.gradient}
         baseImage={ember.baseImage}
         accentImage={ember.accentImage}
-        size={84}
-        className="absolute right-[4%] top-[18%] hidden sm:flex"
+        size={80}
+        className="absolute right-4 top-[14%] hidden xl:flex 2xl:right-12"
       />
       <RealityPlanet
         name={obsidian.name}
@@ -85,8 +85,8 @@ const Hero = () => {
         gradient={obsidian.gradient}
         baseImage={obsidian.baseImage}
         accentImage={obsidian.accentImage}
-        size={72}
-        className="absolute left-[7%] top-[48%] hidden lg:flex"
+        size={68}
+        className="absolute left-4 top-[58%] hidden xl:flex 2xl:left-12"
       />
       <RealityPlanet
         name={zenith.name}
@@ -95,29 +95,32 @@ const Hero = () => {
         gradient={zenith.gradient}
         baseImage={zenith.baseImage}
         accentImage={zenith.accentImage}
-        size={80}
-        className="absolute right-[7%] top-[38%] hidden lg:flex"
+        size={72}
+        className="absolute right-4 top-[56%] hidden xl:flex 2xl:right-12"
       />
 
       {/* Title block */}
-      <div data-aos="fade-up" className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
-        <p className="font-label text-[9px] uppercase tracking-[1.62px] text-white/80">
+      <div
+        data-aos="fade-up"
+        className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-4 px-6 text-center"
+      >
+        <p className="max-w-xs font-label text-[9px] uppercase leading-relaxed tracking-[1.2px] text-white/80 sm:max-w-none sm:tracking-[1.62px]">
           {SITE.tagline}
         </p>
 
         <img
           src="/assets/hero/logo.png"
           alt={`${SITE.name} ${SITE.edition}`}
-          className="my-2 w-64 max-w-full object-contain drop-shadow-[0_16px_40px_rgba(0,0,0,0.5)] sm:w-80"
+          className="my-2 w-52 max-w-full object-contain drop-shadow-[0_16px_40px_rgba(0,0,0,0.5)] sm:w-64 md:w-80"
         />
 
-        <h1 className="bg-[linear-gradient(to_bottom,#ffffff_0%,#f0f7ff_55%,#b5f0ff_100%)] bg-clip-text font-label text-4xl uppercase tracking-[8px] text-transparent [text-shadow:0_0_36px_rgba(181,240,255,0.3)] sm:text-5xl sm:tracking-[12px]">
+        <h1 className="w-full bg-[linear-gradient(to_bottom,#ffffff_0%,#f0f7ff_55%,#b5f0ff_100%)] bg-clip-text font-label text-xl uppercase tracking-[2px] text-transparent [text-shadow:0_0_36px_rgba(181,240,255,0.3)] sm:text-4xl sm:tracking-[8px] md:text-5xl md:tracking-[12px]">
           Convergence
         </h1>
 
         <div className="h-[2px] w-18 rounded-full bg-[linear-gradient(90deg,#6ff4fa_0%,#5e17eb_33%,#ffaa06_66%,#00bf63_100%)]" />
 
-        <p className="font-display text-3xl italic text-[#deebfa] sm:text-4xl">
+        <p className="font-display text-2xl italic text-[#deebfa] sm:text-3xl md:text-4xl">
           Realities Reengineered
         </p>
 
