@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-display: 'Cormorant Garamond', serif;
+  --font-family-label: 'Michroma', sans-serif;
+  --font-family-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+
+  --font-display: var(--font-family-display);
+  --font-label: var(--font-family-label);
+  --font-sans: var(--font-family-sans);
+
+  /* Convergence theme — night sky navy scale */
+  --color-navy-1000: #01112b;
+  --color-navy-900: #022554;
+  --color-navy-700: #153d79;
+  --color-navy-600: #1d4a8d;
+  --color-royal-600: #004aad;
+
+  /* Reality accents */
+  --color-aether: #6ff4fa;
+  --color-ember: #ffaa06;
+  --color-violet: #5e17eb;
+  --color-zenith: #00bf63;
+
+  --color-ice-glow: #b5f0ff;
+  --color-ice-50: #f0f7ff;
+
+  --color-text-primary: #f0f7ff;
+  --color-text-secondary: rgba(240, 247, 255, 0.8);
+  --color-text-muted: rgba(240, 247, 255, 0.64);
+  --color-text-display: #deebfa;
+  --color-text-inverse: #022554;
+  --color-text-brand: #b5f0ff;
+
+  --color-border-subtle: rgba(240, 247, 255, 0.12);
+  --color-border-glow: rgba(181, 240, 255, 0.6);
+  --color-border-strong: #b5f0ff;
+
+  --color-surface-glass: rgba(240, 247, 255, 0.04);
+  --color-surface-glass-hover: rgba(240, 247, 255, 0.08);
+  --color-surface-panel: rgba(2, 37, 84, 0.72);
+  --color-surface-inverse: #f0f7ff;
+
+  /* Light-mode (body sections sit on an ice-white canvas) */
+  --color-canvas: #f0f7ff;
+  --color-ink: #022554;
+  --color-ink-secondary: rgba(2, 37, 84, 0.84);
+  --color-ink-muted: rgba(2, 37, 84, 0.7);
+  --color-brand-blue: #004aad;
+  --color-ink-border-subtle: rgba(2, 37, 84, 0.12);
+  --color-ink-border-default: rgba(2, 37, 84, 0.2);
+}
+
+html {
+  background-color: var(--color-canvas);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+/* Lightweight generated grain overlay — avoids shipping a multi-MB noise texture */
+.bg-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+a,
+button,
+[role="button"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3348;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #434b69;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
