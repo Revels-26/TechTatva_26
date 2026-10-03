@@ -1,61 +1,111 @@
 import { useState } from "react";
-import GetOtp from "../components/GetOtp";
+import type { FormEvent } from "react";
+import { BrutFooter, BrutNav, BrutPage, Button } from "../components/Brut";
 
-interface SignInProps {
-  onNavigate: (page: string) => void;
-}
+// Login page (Figma "D3 Login"). The sign-in itself is handled by the separate
+// registration system this site links out to, so there is no backend call here.
+export default function SignIn({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const [identity, setIdentity] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-// UI-only mockup — no real sign-in happens here. Actual registration/auth lives on
-// the separate registration system this site links out to.
-const SignIn = ({ onNavigate }: SignInProps) => {
-  const [step, setStep] = useState<"mobile" | "otp">("mobile");
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Per-viewer convenience flag read by the Events page to unlock the event list.
+    try {
+      window.localStorage.setItem("tt26-signed-in", "1");
+    } catch {
+      // Storage can be blocked; the events page then stays locked.
+    }
+    onNavigate("events");
+  };
+
+  const labelClass =
+    "font-roboto-mono text-[11px] font-bold leading-normal tracking-[1.1px] text-brut-ink uppercase whitespace-nowrap";
+  const fieldClass =
+    "w-full border-2 border-brut-ink bg-white px-3 py-3 font-inter text-[16px] leading-normal text-brut-ink placeholder:text-[#8d887b] focus:outline-none";
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[#05070d] px-4 pt-24">
-      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
-        <h2 className="text-center font-display text-xl tracking-wide text-white">
-          SIGN IN
-        </h2>
+    <BrutPage>
+      <BrutNav onNavigate={onNavigate} />
 
-        <div className="relative mt-6 overflow-hidden">
-          <div
-            className={`transition-all duration-300 ease-in-out ${
-              step === "mobile"
-                ? "translate-x-0 opacity-100"
-                : "pointer-events-none absolute inset-0 -translate-x-4 opacity-0"
-            }`}
-          >
-            <label className="mb-2 block text-xs text-gray-400">MOBILE NUMBER</label>
-            <input
-              type="tel"
-              placeholder="+91 00000 00000"
-              className="mb-4 w-full rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm text-white placeholder:text-gray-500 focus:border-cyan-400 focus:outline-none"
-            />
-            <button
-              type="button"
-              onClick={() => setStep("otp")}
-              className="w-full rounded-full bg-cyan-500 py-2 text-sm font-medium text-black transition-transform hover:scale-[1.01] hover:bg-cyan-400 active:scale-[0.98]"
-            >
-              Sign In
-            </button>
+      <main className="flex w-full justify-center px-4 pt-[30px] pb-[60px] lg:px-14 lg:pt-[70px] lg:pb-[140px]">
+        <div className="relative flex w-full max-w-[560px] flex-col items-start gap-[18px] border-3 border-brut-ink bg-brut-cream px-5 pt-11 pb-8 drop-shadow-[9px_9px_0px_#12110f] lg:px-9">
+          <div className="absolute top-[-19px] left-[19px] bg-brut-ink px-3 py-1">
+            <p className="font-roboto-mono text-[11px] font-bold leading-normal tracking-[1.1px] whitespace-nowrap text-brut-cream uppercase">
+              Welcome back
+            </p>
           </div>
 
-          <GetOtp active={step === "otp"} onBack={() => setStep("mobile")} />
+          <h1 className="font-anton text-[64px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase [text-shadow:4px_0px_0px_#ff2d55,-4px_0px_0px_#00b8d9] lg:text-[90px]">
+            Log in
+          </h1>
+
+          <p className="font-inter text-[16px] leading-normal text-[#3c3a33]">
+            Use your college ID or your email. Events are only shown to registered travellers.
+          </p>
+
+          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-[18px]">
+            <div className="flex w-full flex-col gap-[6px]">
+              <label htmlFor="signin-identity" className={labelClass}>
+                College ID or email
+              </label>
+              <input
+                id="signin-identity"
+                type="text"
+                autoComplete="username"
+                placeholder="CS2024-001"
+                value={identity}
+                onChange={(e) => setIdentity(e.target.value)}
+                className={fieldClass}
+              />
+            </div>
+
+            <div className="flex w-full flex-col gap-[6px]">
+              <label htmlFor="signin-password" className={labelClass}>
+                Password
+              </label>
+              <div className="flex w-full items-center gap-3 border-2 border-brut-ink bg-white px-3 py-3 focus-within:outline-none">
+                <input
+                  id="signin-password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="min-w-0 flex-1 bg-transparent font-inter text-[16px] leading-normal text-brut-ink placeholder:text-[#8d887b] focus:outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="shrink-0 cursor-pointer font-roboto-mono text-[12px] font-bold text-[#6b675c] uppercase"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div className="flex w-full [&>button]:w-full">
+              <Button variant="ink" type="submit">
+                Log in
+              </Button>
+            </div>
+          </form>
+
+          <p className="font-inter text-[15px] leading-normal whitespace-nowrap text-[#6b675c]">
+            No account yet?{" "}
+            <button
+              type="button"
+              onClick={() => onNavigate("signup")}
+              className="cursor-pointer font-bold text-brut-ink underline"
+            >
+              Register
+            </button>
+          </p>
         </div>
+      </main>
 
-        <p className="mt-6 text-center text-xs text-gray-500">
-          Don't have an account?{" "}
-          <button
-            type="button"
-            onClick={() => onNavigate("signup")}
-            className="text-cyan-400 hover:underline"
-          >
-            Sign Up
-          </button>
-        </p>
-      </div>
-    </div>
+      <BrutFooter />
+    </BrutPage>
   );
-};
-
-export default SignIn;
+}

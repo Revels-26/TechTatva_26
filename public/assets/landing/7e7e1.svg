@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="323.4" height="105.02" viewBox="0 0 323.4 105.02" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ring" filter="url(#filter0_d_0_15)">
+<path d="M161.7 2C206.214 2.00002 246.436 7.41549 275.465 16.124C289.992 20.4821 301.602 25.6314 309.536 31.2588C317.522 36.9229 321.4 42.7817 321.4 48.5098C321.4 54.2379 317.522 60.0966 309.536 65.7607C301.602 71.3881 289.992 76.5384 275.465 80.8965C246.436 89.605 206.214 95.0195 161.7 95.0195C117.187 95.0195 76.964 89.605 47.9355 80.8965C33.4086 76.5384 21.7982 71.3881 13.8643 65.7607C5.87841 60.0965 2 54.238 2 48.5098C2.00011 42.7816 5.87845 36.923 13.8643 31.2588C21.7982 25.6314 33.4087 20.4821 47.9355 16.124C76.964 7.41548 117.187 2 161.7 2Z" stroke="#12110F" stroke-width="4"/>
+</g>
+<defs>
+<filter id="filter0_d_0_15" x="0" y="0" width="323.4" height="105.02" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="8"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.176471 0 0 0 0 0.333333 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_15"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_15" result="shape"/>
+</filter>
+</defs>
+</svg>

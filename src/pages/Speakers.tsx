@@ -1,111 +1,202 @@
-import { useState, type FormEvent } from "react";
-import toast from "react-hot-toast";
-import { Mic2 } from "lucide-react";
-import { saveEmail } from "../utils/notifyMe";
+import { useState } from "react";
+import { BrutFooter, BrutNav, BrutPage } from "../components/Brut";
 
-// Flip to false once a real speaker lineup is confirmed — the card grid below is
-// ready to go, it just needs real names/photos swapped in.
-export const SHOW_COMING_SOON = true;
+type ArtKind = "stripes" | "cross" | "dots" | "zig" | "rings";
+type Tone = "ink" | "red";
 
-const PLACEHOLDER_SPEAKERS = [
-  { name: "Speaker Name", role: "Keynote Speaker", day: "Day 1" },
-  { name: "Speaker Name", role: "Industry Expert", day: "Day 1" },
-  { name: "Speaker Name", role: "Keynote Speaker", day: "Day 2" },
-  { name: "Speaker Name", role: "Panelist", day: "Day 2" },
+type Act = {
+  name: string;
+  label: string;
+  time: string;
+  venue: string;
+  role: string;
+  art: ArtKind;
+  tone: Tone;
+};
+
+// Lineup per Conclave day, as laid out in the Figma frames (77:2, 77:156, 77:266).
+const DAYS: { day: number; acts: Act[] }[] = [
+  {
+    day: 1,
+    acts: [
+      { name: "Arjun Mehra", label: "Arjun", time: "5:00 PM", venue: "Quadrangle", role: "Panel speaker", art: "stripes", tone: "ink" },
+      { name: "Noora Vale", label: "Noora", time: "8:00 PM", venue: "Open Air Theatre", role: "Conclave artist", art: "rings", tone: "red" },
+    ],
+  },
+  {
+    day: 2,
+    acts: [
+      { name: "Dr. Sana Iqbal", label: "Dr.", time: "4:30 PM", venue: "Seminar Hall", role: "Keynote", art: "cross", tone: "ink" },
+      { name: "The Last Bus Home", label: "The", time: "8:30 PM", venue: "Quadrangle", role: "Band", art: "dots", tone: "red" },
+    ],
+  },
+  {
+    day: 3,
+    acts: [
+      { name: "Kabir Tandon", label: "Kabir", time: "5:30 PM", venue: "Auditorium", role: "Stand-up comedian", art: "zig", tone: "ink" },
+      { name: "DJ Mirage", label: "DJ", time: "9:00 PM", venue: "Quadrangle", role: "Closing act", art: "rings", tone: "red" },
+    ],
+  },
 ];
 
-const Speakers = () => {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+// Figma asset hashes. Stripes use a different cut for mobile and desktop.
+const PATTERN_FILES: Record<Exclude<ArtKind, "rings">, { mobile: string; desktop: string }> = {
+  stripes: { mobile: "949b3", desktop: "e94de" },
+  cross: { mobile: "768c4", desktop: "768c4" },
+  dots: { mobile: "c459c", desktop: "c459c" },
+  zig: { mobile: "3bc20", desktop: "3bc20" },
+};
 
-  const handleNotifySubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
+// Placement of the pattern artwork inside the art box (desktop lg: and mobile).
+const PATTERN_BOX: Record<Exclude<ArtKind, "rings">, { mobile: string; desktop: string }> = {
+  stripes: { mobile: "left-[-54.7%] w-[205.7%]", desktop: "left-[-43.7%] w-[186.7%]" },
+  cross: { mobile: "", desktop: "" },
+  dots: { mobile: "", desktop: "" },
+  zig: { mobile: "", desktop: "left-[-43.7%] w-[186%]" },
+};
 
-    setIsSubmitting(true);
-    const result = saveEmail("speakers", email.trim());
-    setIsSubmitting(false);
+// Concentric rings: 45 on desktop, the first 24 on mobile. Ring n is 16 + 30n px wide.
+const RING_FILES = [
+  "6ad1e", "cf0e5", "3b0c7", "34df2", "eea2e", "f4b6b", "e6b2a", "7bead",
+  "bd795", "ce90c", "9d16e", "bea59", "fb86f", "0755c", "353e1", "cfb2c",
+  "95587", "26c05", "6fd6e", "7dbde", "61a34", "e6030", "e28ee", "debcd",
+  "a28d5", "493b1", "c7b12", "5fed0", "21592", "6b89d", "4aa68", "7aa2c",
+  "2ea87", "94bba", "3930b", "cb3d4", "c4d9a", "a35df", "9621f", "07754",
+  "d58f4", "c80f0", "71b10", "12864", "1c4ff",
+];
+const MOBILE_RING_COUNT = 24;
 
-    if (result === "duplicate") {
-      toast("You're already on the list!", { icon: "ℹ️" });
-    } else {
-      toast.success("You'll be notified when speakers are announced!");
-      setEmail("");
-    }
-  };
+const RingArt = () => (
+  <>
+    {RING_FILES.map((file, i) => {
+      const size = 16 + i * 30;
+      return (
+        <img
+          key={file}
+          src={`/assets/landing/${file}.svg`}
+          alt=""
+          aria-hidden="true"
+          className={`absolute max-w-none -translate-x-1/2 -translate-y-1/2 ${
+            i >= MOBILE_RING_COUNT ? "hidden lg:block" : ""
+          }`}
+          style={{ left: "28.9%", top: "70.3%", width: size, height: size }}
+        />
+      );
+    })}
+  </>
+);
 
-  if (SHOW_COMING_SOON) {
-    return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-[#05070d] px-6 pt-24 text-center">
-        <Mic2 className="mb-6 text-cyan-400" size={40} />
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-cyan-400">
-          Coming Soon
-        </p>
-        <h1 className="mt-2 font-display text-4xl font-bold text-white sm:text-5xl">
-          Keynote Speakers
-        </h1>
-        <p className="mt-4 max-w-md text-gray-400">
-          Our speaker lineup is still being finalized. Drop your email and we'll let
-          you know the moment it's announced.
-        </p>
-
-        <form
-          onSubmit={handleNotifySubmit}
-          className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:flex-row"
-        >
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            className="flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm text-white placeholder:text-gray-500 focus:border-cyan-400 focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="rounded-full bg-cyan-500 px-6 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-105 hover:bg-cyan-400 disabled:opacity-60"
-          >
-            Notify Me
-          </button>
-        </form>
-      </div>
-    );
-  }
-
+const PatternArt = ({ art }: { art: Exclude<ArtKind, "rings"> }) => {
+  const files = PATTERN_FILES[art];
+  const box = PATTERN_BOX[art];
   return (
-    <div className="min-h-screen w-full bg-[#05070d] pb-24 pt-32">
-      <section className="mx-auto max-w-6xl px-6">
-        <div data-aos="fade-up" className="text-center">
-          <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
-            Keynote Speakers
-          </h1>
-          <p className="mt-4 text-gray-400">Placeholder lineup — swap in real speakers.</p>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PLACEHOLDER_SPEAKERS.map((speaker, i) => (
-            <div
-              key={i}
-              data-aos="fade-up"
-              className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center"
-            >
-              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-cyan-400/10 font-display text-xl text-cyan-300">
-                {speaker.name.charAt(0)}
-              </div>
-              <h3 className="font-display text-sm font-semibold text-white">
-                {speaker.name}
-              </h3>
-              <p className="mt-1 text-xs text-gray-500">{speaker.role}</p>
-              <span className="mt-3 rounded-full bg-white/5 px-3 py-1 text-[10px] text-gray-400">
-                {speaker.day}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+    <>
+      <img
+        src={`/assets/landing/${files.mobile}.svg`}
+        alt=""
+        aria-hidden="true"
+        className={`absolute top-0 h-full max-w-none lg:hidden ${box.mobile || "left-0 w-full"}`}
+      />
+      <img
+        src={`/assets/landing/${files.desktop}.svg`}
+        alt=""
+        aria-hidden="true"
+        className={`absolute top-0 hidden h-full max-w-none lg:block ${box.desktop || "left-0 w-full"}`}
+      />
+    </>
   );
 };
 
-export default Speakers;
+const ActCard = ({ act }: { act: Act }) => {
+  const isRed = act.tone === "red";
+  return (
+    <article
+      className={`flex min-w-0 flex-1 flex-col items-start gap-3.5 border-3 border-brut-ink p-[18px] ${
+        isRed
+          ? "bg-brut-red drop-shadow-[8px_8px_0px_#12110f]"
+          : "bg-brut-ink drop-shadow-[8px_8px_0px_#ff2d55]"
+      }`}
+    >
+      <div className="relative h-[170px] w-full shrink-0 overflow-hidden border-3 border-brut-ink bg-brut-paper lg:h-[260px]">
+        {act.art === "rings" ? <RingArt /> : <PatternArt art={act.art} />}
+        <span className="absolute bottom-3 left-4 font-anton text-[56px] leading-[0.95] text-brut-cream uppercase lp-shadow-ink lg:bottom-[18px] lg:left-[33px]">
+          {act.label}
+        </span>
+      </div>
+      <div className="flex items-start gap-2.5">
+        <span className="bg-brut-cream px-2.5 py-[5px] font-roboto-mono text-[12px] font-bold leading-normal whitespace-nowrap text-brut-ink uppercase">
+          {act.time}
+        </span>
+        <span className="border-2 border-brut-ink bg-brut-paper px-2.5 py-[5px] font-roboto-mono text-[12px] font-bold leading-normal whitespace-nowrap text-brut-ink uppercase">
+          {act.venue}
+        </span>
+      </div>
+      <h3 className="font-anton text-[44px] leading-[0.95] text-brut-cream uppercase">{act.name}</h3>
+      <p className="font-inter text-[16px] font-medium leading-normal text-[rgba(255,253,247,0.9)]">{act.role}</p>
+    </article>
+  );
+};
+
+const Conclave = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
+  const [activeDay, setActiveDay] = useState(1);
+  const current = DAYS.find((d) => d.day === activeDay) ?? DAYS[0];
+
+  return (
+    <BrutPage>
+      <BrutNav onNavigate={onNavigate} />
+
+      <main className="mx-auto w-full max-w-[1440px] px-4 pt-14 pb-12 lg:px-14 lg:pt-20 lg:pb-[90px]">
+        <h1 className="lp-glitch-hero font-anton text-[84px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase lg:text-[190px]">
+          Conclave
+        </h1>
+
+        <div className="mt-3.5 flex flex-wrap gap-2.5">
+          <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
+            <span className="text-brut-red">3</span> days
+          </span>
+          <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
+            <span className="text-brut-red">6</span> acts
+          </span>
+          <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
+            <span className="text-brut-red">Free with</span> any pass
+          </span>
+        </div>
+
+        <div role="tablist" aria-label="Conclave days" className="mt-7 flex gap-3.5 lg:mt-10">
+          {DAYS.map((d) => {
+            const selected = d.day === activeDay;
+            return (
+              <button
+                key={d.day}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActiveDay(d.day)}
+                className={`cursor-pointer border-3 border-brut-ink px-4 py-3 font-anton text-[28px] leading-[0.95] tracking-[1.68px] whitespace-nowrap uppercase lg:px-6 ${
+                  selected
+                    ? "bg-brut-ink text-brut-cream drop-shadow-[5px_5px_0px_#ff2d55]"
+                    : "bg-brut-cream text-brut-ink drop-shadow-[5px_5px_0px_#12110f]"
+                }`}
+              >
+                Day {d.day}
+              </button>
+            );
+          })}
+        </div>
+
+        <div
+          role="tabpanel"
+          className="mt-9 flex flex-col gap-10 lg:mt-5 lg:flex-row lg:gap-10"
+        >
+          {current.acts.map((act) => (
+            <ActCard key={act.name} act={act} />
+          ))}
+        </div>
+      </main>
+
+      <BrutFooter />
+    </BrutPage>
+  );
+};
+
+export default Conclave;

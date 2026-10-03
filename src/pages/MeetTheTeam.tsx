@@ -1,5 +1,6 @@
 import { CONVENERS, DEVELOPERS, type TeamMember } from "../data/team";
 import { InstagramIcon, LinkedinIcon } from "../components/SocialIcons";
+import { BrutFooter, BrutNav, BrutPage, SectionHead } from "../components/Brut";
 
 const initials = (name: string) =>
   name
@@ -10,25 +11,22 @@ const initials = (name: string) =>
     .toUpperCase();
 
 const TeamCard = ({ member }: { member: TeamMember }) => (
-  <div
-    data-aos="fade-up"
-    className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center"
-  >
-    <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-cyan-400/10 font-display text-xl text-cyan-300">
+  <div className="flex flex-col items-center gap-3 border-3 border-brut-ink bg-brut-cream p-6 text-center drop-shadow-[6px_6px_0px_#12110f]">
+    <div className="flex size-20 items-center justify-center border-3 border-brut-ink bg-brut-red font-anton text-[26px] text-brut-cream">
       {initials(member.name)}
     </div>
-    <h3 className="font-display text-sm font-semibold text-white">{member.name}</h3>
-    <p className="mt-1 text-xs text-gray-500">{member.role}</p>
-    <div className="mt-3 flex gap-3">
+    <p className="font-anton text-[22px] leading-[1] text-brut-ink uppercase">{member.name}</p>
+    <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] text-brut-body uppercase">{member.role}</p>
+    <div className="flex gap-3 text-brut-ink">
       {member.instagram && (
         <a
           href={member.instagram}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${member.name} on Instagram`}
-          className="text-gray-500 hover:text-cyan-300"
+          className="hover:text-brut-pink"
         >
-          <InstagramIcon className="h-4 w-4" />
+          <InstagramIcon className="h-5 w-5" />
         </a>
       )}
       {member.linkedin && (
@@ -37,48 +35,42 @@ const TeamCard = ({ member }: { member: TeamMember }) => (
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${member.name} on LinkedIn`}
-          className="text-gray-500 hover:text-cyan-300"
+          className="hover:text-brut-pink"
         >
-          <LinkedinIcon className="h-4 w-4" />
+          <LinkedinIcon className="h-5 w-5" />
         </a>
       )}
     </div>
   </div>
 );
 
-const MeetTheTeam = () => {
-  return (
-    <div className="min-h-screen w-full bg-[#05070d] pb-24 pt-32">
-      <section className="mx-auto max-w-6xl px-6">
-        <div data-aos="fade-up" className="text-center">
-          <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
-            Meet the Team
-          </h1>
-          <p className="mt-4 text-gray-400">
-            Placeholder roster — swap in the real organizing committee.
-          </p>
-        </div>
+const MeetTheTeam = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
+  <BrutPage>
+    <BrutNav onNavigate={onNavigate} />
+    <main className="mx-auto w-full max-w-[1440px] px-4 pb-20 lg:px-14">
+      <h1 className="pt-[50px] font-anton text-[clamp(52px,5.84vw,84px)] leading-[0.95] text-brut-ink uppercase lp-glitch lg:pt-20">
+        Meet the team
+      </h1>
+      <p className="mt-4 font-inter text-[18px] text-brut-body">
+        Placeholder roster. Swap in the real organizing committee.
+      </p>
 
-        <h2 className="mt-16 text-center font-display text-xl font-semibold text-white">
-          Conveners
-        </h2>
-        <div className="mt-8 grid grid-cols-2 gap-6 lg:grid-cols-4">
-          {CONVENERS.map((member) => (
-            <TeamCard key={member.name} member={member} />
-          ))}
-        </div>
+      <SectionHead>Conveners</SectionHead>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {CONVENERS.map((member) => (
+          <TeamCard key={member.name} member={member} />
+        ))}
+      </div>
 
-        <h2 className="mt-16 text-center font-display text-xl font-semibold text-white">
-          Developers
-        </h2>
-        <div className="mt-8 grid grid-cols-2 gap-6 lg:grid-cols-3">
-          {DEVELOPERS.map((member) => (
-            <TeamCard key={member.name} member={member} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-};
+      <SectionHead>Developers</SectionHead>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {DEVELOPERS.map((member) => (
+          <TeamCard key={member.name} member={member} />
+        ))}
+      </div>
+    </main>
+    <BrutFooter />
+  </BrutPage>
+);
 
 export default MeetTheTeam;

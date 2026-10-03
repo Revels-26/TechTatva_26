@@ -49,6 +49,75 @@
   --color-brand-blue: #004aad;
   --color-ink-border-subtle: rgba(2, 37, 84, 0.12);
   --color-ink-border-default: rgba(2, 37, 84, 0.2);
+
+  /* TT26 landing (Figma "TT26 Landing Page") — printed/brutalist palette */
+  --color-brut-paper: #efece2;
+  --color-brut-cream: #fffdf7;
+  --color-brut-ink: #12110f;
+  --color-brut-body: #2c2a25;
+  --color-brut-red: #c8102e;
+  --color-brut-pink: #ff2d55;
+  --color-brut-cyan: #00b8d9;
+
+  --font-anton: 'Anton', Impact, sans-serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
+}
+
+/* Landing text effects: pink/cyan offset "glitch" shadows, sized per breakpoint like the Figma frames */
+.lp-glitch-logo {
+  text-shadow: 2px 0 0 #ff2d55, -2px 0 0 #00b8d9;
+}
+.lp-glitch {
+  text-shadow: 3px 0 0 #ff2d55, -3px 0 0 #00b8d9;
+}
+.lp-glitch-hero {
+  text-shadow: 5px 0 0 #ff2d55, -5px 0 0 #00b8d9;
+}
+.lp-shadow-ink {
+  text-shadow: 5px 5px 0 #12110f;
+}
+@media (min-width: 1024px) {
+  .lp-glitch {
+    text-shadow: 5px 0 0 #ff2d55, -5px 0 0 #00b8d9;
+  }
+  .lp-glitch-hero {
+    text-shadow: 8px 0 0 #ff2d55, -8px 0 0 #00b8d9;
+  }
+}
+
+/* Landing pattern fills — desktop artwork by default, mobile artwork below lg (1024px) */
+.lp-pattern-stripes {
+  background: url("/assets/landing/23df3.svg") -203px -3px / 610.4px 202.4px repeat;
+}
+.lp-pattern-cross {
+  background: url("/assets/landing/bf184.svg") -3px -3px / 425.5px 231.5px repeat;
+}
+.lp-pattern-dots {
+  background: url("/assets/landing/878a0.svg") -3px -3px / 419.4px 227.4px repeat;
+}
+.lp-pattern-zig {
+  background: url("/assets/landing/a7093.svg") -203px -3px / 612px 202px repeat;
+}
+.lp-pattern-cross-sm {
+  background: url("/assets/landing/6ac91.svg") -3px -3px / 220px 200px repeat;
+}
+@media (max-width: 1023.98px) {
+  .lp-pattern-stripes {
+    background: url("/assets/landing/e9dba.svg") -153px -3px / 620.4px 152.4px repeat;
+  }
+  .lp-pattern-cross {
+    background: url("/assets/landing/e5116.svg") -3px -3px / 323.5px 231.5px repeat;
+  }
+  .lp-pattern-dots {
+    background: url("/assets/landing/839f5.svg") -3px -3px / 323.4px 227.4px repeat;
+  }
+  .lp-pattern-zig {
+    background: url("/assets/landing/6aae4.svg") -153px -3px / 622px 152px repeat;
+  }
+  .lp-pattern-cross-sm {
+    background: url("/assets/landing/0211b.svg") -3px -3px / 323.5px 151.5px repeat;
+  }
 }
 
 html {
