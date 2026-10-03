@@ -96,12 +96,9 @@ export const BrutNav = ({ onNavigate, onSection }: NavProps) => {
         <button
           type="button"
           onClick={() => onNavigate("home")}
-          className="flex cursor-pointer items-center gap-2.5"
+          className="flex cursor-pointer items-center"
         >
-          <img src={TECHTATVA_LOGO} alt="" aria-hidden="true" className="h-7 w-auto max-w-none lg:h-9" />
-          <span className="font-anton text-[18px] leading-[0.95] tracking-[0.6px] text-brut-ink uppercase lp-glitch-logo lg:text-[26px] lg:tracking-[1.04px]">
-            TechTatva 26
-          </span>
+          <img src={TECHTATVA_LOGO} alt="TechTatva 26" className="h-9 w-auto max-w-none lg:h-11" />
         </button>
         <div className="hidden items-center gap-1.5 lg:flex">
           <button type="button" className={linkClass} onClick={section("lp-passes")}>Passes</button>
