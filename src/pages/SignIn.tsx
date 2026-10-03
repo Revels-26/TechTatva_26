@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { BrutFooter, BrutNav, BrutPage, Button } from "../components/Brut";
+import { AppNav, BrutFooter, BrutPage } from "../components/Brut";
 
 // Login page (Figma "D3 Login"). The sign-in itself is handled by the separate
 // registration system this site links out to, so there is no backend call here.
@@ -27,17 +27,17 @@ export default function SignIn({ onNavigate }: { onNavigate: (page: string) => v
 
   return (
     <BrutPage>
-      <BrutNav onNavigate={onNavigate} />
+      <AppNav onNavigate={onNavigate} page="signin" />
 
       <main className="flex w-full justify-center px-4 pt-[30px] pb-[60px] lg:px-14 lg:pt-[70px] lg:pb-[140px]">
-        <div className="relative flex w-full max-w-[560px] flex-col items-start gap-[18px] border-3 border-brut-ink bg-brut-cream px-5 pt-11 pb-8 drop-shadow-[9px_9px_0px_#12110f] lg:px-9">
+        <div className="relative flex w-full max-w-[560px] flex-col items-start gap-[18px] border-3 border-brut-ink bg-brut-cream px-5 pt-11 pb-8 drop-shadow-[9px_9px_0px_#59a7ff] lg:px-9">
           <div className="absolute top-[-19px] left-[19px] bg-brut-ink px-3 py-1">
             <p className="font-roboto-mono text-[11px] font-bold leading-normal tracking-[1.1px] whitespace-nowrap text-brut-cream uppercase">
               Welcome back
             </p>
           </div>
 
-          <h1 className="font-anton text-[64px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase [text-shadow:4px_0px_0px_#ff2d55,-4px_0px_0px_#00b8d9] lg:text-[90px]">
+          <h1 className="font-anton text-[64px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase lg:text-[90px]">
             Log in
           </h1>
 
@@ -78,17 +78,20 @@ export default function SignIn({ onNavigate }: { onNavigate: (page: string) => v
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="shrink-0 cursor-pointer font-roboto-mono text-[12px] font-bold text-[#6b675c] uppercase"
+                  className="shrink-0 cursor-pointer bg-[#efece2] px-1.5 py-0.5 font-roboto-mono text-[12px] font-bold text-[#6b675c] uppercase"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </div>
 
-            <div className="flex w-full [&>button]:w-full">
-              <Button variant="ink" type="submit">
+            <div>
+              <button
+                type="submit"
+                className="inline-flex cursor-pointer items-center justify-center border-3 border-brut-ink bg-brut-ink px-16 py-3.5 font-anton text-[20px] leading-[0.95] tracking-[1.6px] whitespace-nowrap uppercase text-brut-cream drop-shadow-[6px_6px_0px_#59a7ff] transition-transform duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5"
+              >
                 Log in
-              </Button>
+              </button>
             </div>
           </form>
 

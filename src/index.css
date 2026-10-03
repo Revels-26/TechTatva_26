@@ -164,6 +164,42 @@ button,
   background: #434b69;
 }
 
+/* Scroll-in reveal (driven by components/Reveal.tsx) */
+.tt-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.tt-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gentle floating motion for the hero planet */
+@keyframes tt-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.lp-float {
+  animation: tt-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tt-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .lp-float {
+    animation: none;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

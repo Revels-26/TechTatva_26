@@ -1,12 +1,18 @@
 import type { ReactNode } from "react";
-import { Button, BrutFooter, BrutNav, BrutPage, ConcentricRings, SectionHead, scrollToId } from "./Brut";
+import { AppNav, Button, BrutFooter, BrutPage, ConcentricRings, SectionHead, scrollToId } from "./Brut";
+import { Reveal } from "./Reveal";
 
 type Props = {
   onNavigate: (page: string) => void;
 };
 
+// Offset colours used across the page 3 screens: blue, green, yellow.
+const BLUE = "#59a7ff";
+const GREEN = "#2db84d";
+const YELLOW = "#ffc93c";
+
 const Planet = () => (
-  <div className="relative aspect-square w-full max-w-[330px] lg:w-[484px] lg:max-w-none">
+  <div className="lp-float relative aspect-square w-full max-w-[330px] lg:w-[484px] lg:max-w-none">
     <div className="absolute top-[16.36%] left-[16.36%] size-[67.27%] overflow-hidden rounded-full border-4 border-brut-ink bg-brut-cream shadow-[10px_10px_0px_0px_#12110f]">
       <img src="/assets/landing/bb2fc.svg" alt="" className="absolute -top-[1.2%] -left-[1.2%] w-[99%] max-w-none" />
       <img src="/assets/landing/fec67.svg" alt="" className="absolute top-[11.8%] left-[15.8%] w-[15%] max-w-none" />
@@ -22,10 +28,10 @@ const Planet = () => (
 const Hero = ({ onNavigate }: Props) => (
   <section className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[30px] px-4 pt-[50px] pb-10 lg:flex-row lg:px-14 lg:pb-20">
     <div className="flex w-full flex-col items-start gap-5 lg:w-[700px] lg:shrink-0">
-      <div className="border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#ff2d55]">
+      <div className="border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
         <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">14 - 16 Oct 2026</p>
       </div>
-      <h1 className="font-anton text-[clamp(110px,14.58vw,210px)] leading-[0.88] whitespace-nowrap text-brut-ink uppercase lp-glitch-hero">
+      <h1 className="font-anton text-[clamp(110px,14.58vw,210px)] leading-[0.88] whitespace-nowrap text-brut-ink uppercase">
         Tech
         <br />
         Tatva
@@ -39,13 +45,13 @@ const Hero = ({ onNavigate }: Props) => (
       </div>
       <div className="flex flex-wrap gap-2.5">
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-brut-red">3</span> days
+          <span className="text-[#1f5fd6]">3</span> days
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-brut-red">14</span> events
+          <span className="text-[#1f5fd6]">14</span> events
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-brut-red">5</span> universes
+          <span className="text-[#1f5fd6]">5</span> universes
         </span>
       </div>
     </div>
@@ -55,16 +61,22 @@ const Hero = ({ onNavigate }: Props) => (
 
 const Schedule = () => {
   const days = [
-    { day: "Day 1", date: "14 Oct", tone: "bg-brut-cream text-brut-ink" },
-    { day: "Day 2", date: "15 Oct", tone: "bg-brut-pink text-brut-cream" },
-    { day: "Day 3", date: "16 Oct", tone: "bg-brut-cream text-brut-ink" },
+    { day: "Day 1", date: "14 Oct", shadow: BLUE },
+    { day: "Day 2", date: "15 Oct", shadow: GREEN },
+    { day: "Day 3", date: "16 Oct", shadow: YELLOW },
   ];
   return (
     <section id="lp-schedule" className="mx-auto w-full max-w-[1440px] scroll-mt-6 px-4 lg:px-14">
-      <SectionHead>Schedule</SectionHead>
-      <div className="grid grid-cols-1 gap-5 pb-5 uppercase md:grid-cols-3">
+      <SectionHead>
+        Three <span className="text-[#1f5fd6]">days</span>
+      </SectionHead>
+      <div className="grid grid-cols-1 gap-6 pb-5 uppercase md:grid-cols-3">
         {days.map((d) => (
-          <div key={d.day} className={`flex flex-col gap-1 border-3 border-brut-ink p-[22px] drop-shadow-[7px_7px_0px_#12110f] ${d.tone}`}>
+          <div
+            key={d.day}
+            className="flex flex-col gap-1 border-3 border-brut-ink bg-white p-[22px]"
+            style={{ boxShadow: `7px 7px 0px 0px ${d.shadow}` }}
+          >
             <p className="font-anton text-[56px] leading-[0.95]">{d.day}</p>
             <p className="font-roboto-mono text-[14px] font-bold tracking-[0.84px]">{d.date}</p>
           </div>
@@ -81,6 +93,7 @@ const ComboCard = ({
   label,
   artClass,
   rings,
+  shadow,
 }: {
   title: string;
   body: string;
@@ -88,19 +101,23 @@ const ComboCard = ({
   label: string;
   artClass?: string;
   rings?: boolean;
+  shadow: string;
 }) => (
-  <div className="flex flex-col gap-5 border-3 border-brut-ink bg-brut-red p-[18px] drop-shadow-[8px_8px_0px_#12110f] lg:flex-1 lg:flex-row lg:items-center">
+  <div
+    className="flex flex-col gap-5 border-3 border-brut-ink bg-white p-[18px] lg:flex-1 lg:flex-row lg:items-center"
+    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
+  >
     <div className="relative h-[150px] w-full shrink-0 overflow-hidden border-3 border-brut-ink bg-brut-paper lg:h-[200px] lg:w-[220px]">
       {rings ? <ConcentricRings /> : <div className={`absolute inset-0 ${artClass}`} />}
-      <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-brut-cream uppercase lp-shadow-ink lg:left-2.5">
+      <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-2.5">
         {label}
       </span>
     </div>
     <div className="flex w-full min-w-0 flex-col gap-2.5 lg:flex-1">
-      <p className="font-anton text-[34px] leading-[0.95] text-brut-cream uppercase">{title}</p>
-      <p className="font-inter text-[15px] leading-normal text-[rgba(255,253,247,0.92)]">{body}</p>
+      <p className="font-anton text-[34px] leading-[0.95] text-brut-ink uppercase">{title}</p>
+      <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
       <div className="flex">
-        <Button variant="cream">{price}</Button>
+        <Button variant="blue">{price}</Button>
       </div>
     </div>
   </div>
@@ -108,7 +125,9 @@ const ComboCard = ({
 
 const ComboOffers = () => (
   <section className="mx-auto w-full max-w-[1440px] px-4 lg:px-14">
-    <SectionHead>Combo offers</SectionHead>
+    <SectionHead>
+      Combo <span className="text-[#1f5fd6]">offers</span>
+    </SectionHead>
     <div className="flex flex-col gap-10 pb-5 lg:flex-row">
       <ComboCard
         title="Flagship combo"
@@ -116,6 +135,7 @@ const ComboOffers = () => (
         price="Buy for 500 rupees"
         label="FLAG"
         rings
+        shadow={BLUE}
       />
       <ComboCard
         title="General combo"
@@ -123,6 +143,7 @@ const ComboOffers = () => (
         price="Buy for 200 rupees"
         label="GEN"
         artClass="lp-pattern-stripes"
+        shadow={GREEN}
       />
     </div>
   </section>
@@ -135,6 +156,7 @@ const PassCard = ({
   price,
   body,
   action,
+  shadow,
 }: {
   name: string;
   artClass: string;
@@ -142,24 +164,30 @@ const PassCard = ({
   price: string;
   body: string;
   action: ReactNode;
+  shadow: string;
 }) => (
-  <div className="flex w-full max-w-[460px] flex-col gap-3.5 border-3 border-brut-ink bg-brut-ink p-[18px] drop-shadow-[8px_8px_0px_#ff2d55] lg:w-[460px]">
+  <div
+    className="flex w-full max-w-[460px] flex-col gap-3.5 border-3 border-brut-ink bg-white p-[18px] lg:w-[460px]"
+    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
+  >
     <div className="relative h-[230px] w-full overflow-hidden border-3 border-brut-ink bg-brut-paper">
       <div className={`absolute inset-0 ${artClass}`} />
-      <span className="absolute bottom-2 left-4 font-anton text-[56px] leading-[0.95] text-brut-cream uppercase lp-shadow-ink lg:left-[22px]">
+      <span className="absolute bottom-2 left-4 font-anton text-[56px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-[22px]">
         {label}
       </span>
     </div>
-    <p className="font-anton text-[40px] leading-[0.95] text-brut-cream uppercase">{name}</p>
-    <p className="font-roboto-mono text-[13px] font-bold tracking-[0.78px] text-brut-cream uppercase">{price}</p>
-    <p className="font-inter text-[15px] leading-normal text-[rgba(255,253,247,0.9)]">{body}</p>
-    <div className="flex">{action}</div>
+    <p className="font-anton text-[40px] leading-[0.95] text-brut-ink uppercase">{name}</p>
+    <p className="font-roboto-mono text-[13px] tracking-[0.78px] text-[#1f5fd6]">{price}</p>
+    <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
+    <div className="flex flex-wrap gap-3">{action}</div>
   </div>
 );
 
 const EventPasses = ({ onNavigate }: Props) => (
   <section id="lp-passes" className="mx-auto w-full max-w-[1440px] scroll-mt-6 px-4 lg:px-14">
-    <SectionHead>Event passes</SectionHead>
+    <SectionHead>
+      Event <span className="text-[#1f5fd6]">passes</span>
+    </SectionHead>
     <div className="flex flex-col items-center gap-[60px] pb-5 lg:flex-row lg:justify-center">
       <PassCard
         name="General pass"
@@ -167,7 +195,13 @@ const EventPasses = ({ onNavigate }: Props) => (
         label="General"
         price="200 rupees"
         body="Placeholder copy for the pass. Entry to the events listed under it."
-        action={<Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>}
+        shadow={BLUE}
+        action={
+          <>
+            <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
+            <Button variant="blue" onClick={() => onNavigate("signup")}>Purchase pass</Button>
+          </>
+        }
       />
       <img src="/assets/landing/ea64b.svg" alt="" aria-hidden="true" className="hidden h-[90px] w-[70px] shrink-0 lg:block" />
       <PassCard
@@ -176,7 +210,13 @@ const EventPasses = ({ onNavigate }: Props) => (
         label="Flagship"
         price="500 rupees"
         body="Placeholder copy for the pass. Entry to the events listed under it."
-        action={<Button variant="red" onClick={() => onNavigate("signup")}>Purchase pass</Button>}
+        shadow={GREEN}
+        action={
+          <>
+            <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
+            <Button variant="blue" onClick={() => onNavigate("signup")}>Purchase pass</Button>
+          </>
+        }
       />
     </div>
   </section>
@@ -192,6 +232,7 @@ const WideCard = ({
   primaryAction,
   secondary,
   secondaryAction,
+  shadow,
 }: {
   reverse?: boolean;
   artClass: string;
@@ -202,24 +243,26 @@ const WideCard = ({
   primaryAction: () => void;
   secondary: string;
   secondaryAction: () => void;
+  shadow: string;
 }) => (
   <div
-    className={`flex w-full flex-col gap-5 border-3 border-brut-ink bg-brut-ink p-[18px] drop-shadow-[8px_8px_0px_#ff2d55] lg:items-center ${
+    className={`flex w-full flex-col gap-5 border-3 border-brut-ink bg-white p-[18px] lg:items-center ${
       reverse ? "lg:flex-row-reverse" : "lg:flex-row"
     }`}
+    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
   >
     <div className="relative h-[150px] w-full shrink-0 overflow-hidden border-3 border-brut-ink bg-brut-paper lg:h-[200px] lg:w-[220px]">
       <div className={`absolute inset-0 ${artClass}`} />
-      <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-brut-cream uppercase lp-shadow-ink lg:left-2.5">
+      <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-2.5">
         {label}
       </span>
     </div>
     <div className="flex w-full min-w-0 flex-col gap-2.5 lg:flex-1">
-      <p className="font-anton text-[44px] leading-[0.95] text-brut-cream uppercase">{title}</p>
-      <p className="font-inter text-[15px] leading-normal text-[rgba(255,253,247,0.92)]">{body}</p>
+      <p className="font-anton text-[44px] leading-[0.95] text-brut-ink uppercase">{title}</p>
+      <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
       <div className="flex flex-wrap gap-3">
         <Button variant="cream" onClick={primaryAction}>{primary}</Button>
-        <Button variant="red" onClick={secondaryAction}>{secondary}</Button>
+        <Button variant="blue" onClick={secondaryAction}>{secondary}</Button>
       </div>
     </div>
   </div>
@@ -227,7 +270,9 @@ const WideCard = ({
 
 const MorePasses = ({ onNavigate }: Props) => (
   <section id="lp-more" className="mx-auto w-full max-w-[1440px] scroll-mt-6 px-4 lg:px-14">
-    <SectionHead>More</SectionHead>
+    <SectionHead>
+      More at the <span className="text-[#1f5fd6]">Tatverse</span>
+    </SectionHead>
     <div className="flex flex-col gap-10 pb-[50px] lg:pb-[90px]">
       <WideCard
         label="CONCLAVE"
@@ -238,6 +283,7 @@ const MorePasses = ({ onNavigate }: Props) => (
         primaryAction={() => onNavigate("speakers")}
         secondary="Purchase pass"
         secondaryAction={() => onNavigate("signup")}
+        shadow={BLUE}
       />
       <WideCard
         reverse
@@ -249,6 +295,7 @@ const MorePasses = ({ onNavigate }: Props) => (
         primaryAction={() => onNavigate("signup")}
         secondary="Purchase merch"
         secondaryAction={() => onNavigate("signup")}
+        shadow={GREEN}
       />
     </div>
   </section>
@@ -256,12 +303,20 @@ const MorePasses = ({ onNavigate }: Props) => (
 
 const Landing = ({ onNavigate }: Props) => (
   <BrutPage>
-    <BrutNav onNavigate={onNavigate} onSection={scrollToId} />
+    <AppNav onNavigate={onNavigate} page="home" />
     <Hero onNavigate={onNavigate} />
-    <Schedule />
-    <ComboOffers />
-    <EventPasses onNavigate={onNavigate} />
-    <MorePasses onNavigate={onNavigate} />
+    <Reveal>
+      <Schedule />
+    </Reveal>
+    <Reveal>
+      <ComboOffers />
+    </Reveal>
+    <Reveal>
+      <EventPasses onNavigate={onNavigate} />
+    </Reveal>
+    <Reveal>
+      <MorePasses onNavigate={onNavigate} />
+    </Reveal>
     <BrutFooter />
   </BrutPage>
 );

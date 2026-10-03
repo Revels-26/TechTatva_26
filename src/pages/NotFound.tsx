@@ -1,4 +1,4 @@
-import { BrutFooter, BrutNav, BrutPage, Button } from "../components/Brut";
+import { AppNav, BrutFooter, BrutPage, Button } from "../components/Brut";
 
 interface NotFoundProps {
   onNavigate: (page: string) => void;
@@ -6,7 +6,7 @@ interface NotFoundProps {
 
 const NotFound = ({ onNavigate }: NotFoundProps) => (
   <BrutPage>
-    <BrutNav onNavigate={onNavigate} />
+    <AppNav onNavigate={onNavigate} page="404" />
     <main className="mx-auto flex min-h-[70vh] w-full max-w-[1440px] flex-col items-start justify-center gap-5 px-4 py-20 lg:px-14">
       <p className="font-anton text-[clamp(120px,22vw,300px)] leading-[0.85] text-brut-ink lp-glitch-hero">404</p>
       <p className="font-anton text-[clamp(36px,4vw,56px)] leading-[0.95] text-brut-ink uppercase">This page doesn't exist.</p>

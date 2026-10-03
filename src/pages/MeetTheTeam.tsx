@@ -1,6 +1,6 @@
 import { CONVENERS, DEVELOPERS, type TeamMember } from "../data/team";
 import { InstagramIcon, LinkedinIcon } from "../components/SocialIcons";
-import { BrutFooter, BrutNav, BrutPage, SectionHead } from "../components/Brut";
+import { AppNav, BrutFooter, BrutPage, SectionHead } from "../components/Brut";
 
 const initials = (name: string) =>
   name
@@ -46,7 +46,7 @@ const TeamCard = ({ member }: { member: TeamMember }) => (
 
 const MeetTheTeam = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
   <BrutPage>
-    <BrutNav onNavigate={onNavigate} />
+    <AppNav onNavigate={onNavigate} page="meettheteam" />
     <main className="mx-auto w-full max-w-[1440px] px-4 pb-20 lg:px-14">
       <h1 className="pt-[50px] font-anton text-[clamp(52px,5.84vw,84px)] leading-[0.95] text-brut-ink uppercase lp-glitch lg:pt-20">
         Meet the team

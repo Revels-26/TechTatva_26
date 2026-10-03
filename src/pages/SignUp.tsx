@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent, ReactNode } from "react";
-import { BrutFooter, BrutNav, BrutPage, Button, scrollToId } from "../components/Brut";
+import { AppNav, BrutFooter, BrutPage, scrollToId } from "../components/Brut";
 
 // Registration page (Figma "D3 Registration" frames: desktop 1440, success 1440, mobile 390).
 // UI only: no backend call. Submitting the form shows the success state.
@@ -33,7 +33,6 @@ const UNIVERSES = [
 const TICKER_TEXT =
   "ONE ACCOUNT // THREE DAYS // EVERY CLUB'S EVENTS // MEANWHILE, IN ANOTHER UNIVERSE... // ".repeat(4);
 
-const HEAD_SHADOW = "[text-shadow:4px_0px_0px_#ff2d55,-4px_0px_0px_#00b8d9]";
 
 // Barcode bars, one class string per bar (kept as literals so Tailwind picks them up).
 const STUB_BARS = [
@@ -50,7 +49,7 @@ const inputClass =
   "w-full border-2 border-brut-ink bg-white p-3 font-inter text-[16px] text-brut-ink placeholder:text-[#8d887b] focus:outline-none focus:drop-shadow-[4px_4px_0px_#ff2d55]";
 
 const solidButtonClass =
-  "inline-flex cursor-pointer items-center justify-center border-3 border-brut-ink bg-brut-ink px-[22px] py-[13px] font-anton text-[22px] leading-[0.95] tracking-[1.76px] whitespace-nowrap uppercase text-brut-cream drop-shadow-[6px_6px_0px_#ff2d55]";
+  "inline-flex cursor-pointer items-center justify-center border-3 border-brut-ink bg-brut-ink px-[22px] py-[13px] font-anton text-[22px] leading-[0.95] tracking-[1.76px] whitespace-nowrap uppercase text-brut-cream drop-shadow-[6px_6px_0px_#59a7ff]";
 
 // Image pair: the mobile artwork at <lg, the desktop artwork at lg and up.
 const ArtImg = ({ m, d, className }: { m: string; d: string; className: string }) => (
@@ -80,23 +79,27 @@ const Field = ({ id, label, children }: { id: string; label: string; children: R
 const Hero = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
   <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-[30px] px-4 pt-5 pb-10 lg:flex-row lg:items-center lg:gap-10 lg:px-14 lg:pt-10 lg:pb-[60px]">
     <div className="flex w-full flex-col items-start gap-5 lg:w-[720px] lg:shrink-0">
-      <div className="inline-flex border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#ff2d55]">
+      <div className="inline-flex border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
         <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">
           Meanwhile, in another universe...
         </p>
       </div>
-      <h1 className={`font-anton text-[76px] leading-[0.92] text-brut-ink uppercase ${HEAD_SHADOW} lg:text-[142px] lg:[text-shadow:6px_0px_0px_#ff2d55,-6px_0px_0px_#00b8d9]`}>
+      <h1 className="font-anton text-[76px] leading-[0.92] text-brut-ink uppercase lg:text-[142px]">
         <span className="block">You join</span>
         <span className="block">the</span>
-        <span className="block">TechTatva 26</span>
+        <span className="block">Tatverse</span>
       </h1>
       <p className="bg-[rgba(239,236,226,0.9)] px-2.5 py-2 font-inter text-[16px] leading-normal text-[#2c2a25] lg:text-[18px]">
         Create your account once. Pick the universe you belong to. After you log in, choose which events to join across the TechTatva 26.
       </p>
       <div className="flex flex-wrap items-center gap-5">
-        <Button variant="ink" large onClick={() => scrollToId("register")}>
+        <button
+          type="button"
+          onClick={() => scrollToId("register")}
+          className="inline-flex cursor-pointer items-center justify-center border-3 border-brut-ink bg-brut-ink px-7 py-4 font-anton text-[22px] leading-[0.95] tracking-[1.76px] whitespace-nowrap uppercase text-brut-cream drop-shadow-[6px_6px_0px_#59a7ff] transition-transform duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5"
+        >
           Register now
-        </Button>
+        </button>
         <button
           type="button"
           onClick={() => onNavigate("signin")}
@@ -107,13 +110,13 @@ const Hero = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
       </div>
       <div className="flex flex-wrap gap-2.5">
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#c8102e]">1</span> account
+          <span className="text-[#1f5fd6]">1</span> account
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#c8102e]">3</span> days
+          <span className="text-[#1f5fd6]">3</span> days
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#c8102e]">Every</span> club's events
+          <span className="text-[#1f5fd6]">Every</span> club's events
         </span>
       </div>
     </div>
@@ -179,7 +182,7 @@ const RegisterForm = ({ onSubmit }: { onSubmit: (fullName: string) => void }) =>
   };
 
   return (
-    <div className="relative flex w-full flex-col border-3 border-brut-ink bg-brut-cream px-5 pt-[38px] pb-[30px] drop-shadow-[9px_9px_0px_#12110f] lg:w-[580px] lg:px-[34px]">
+    <div className="relative flex w-full flex-col border-3 border-brut-ink bg-brut-cream px-5 pt-[38px] pb-[30px] drop-shadow-[9px_9px_0px_#59a7ff] lg:w-[580px] lg:px-[34px]">
       <TravellerTab />
 
       <div className="flex items-end justify-between gap-4 pb-4">
@@ -192,7 +195,7 @@ const RegisterForm = ({ onSubmit }: { onSubmit: (fullName: string) => void }) =>
         <Bars bars={CARD_BARS} heightClass="h-[34px]" className="gap-[1.5px]" />
       </div>
 
-      <div className="h-[2px] w-full bg-brut-ink" />
+      <div className="w-full border-t-2 border-dashed border-brut-ink" />
 
       <form
         onSubmit={handleSubmit}
@@ -328,7 +331,7 @@ const WelcomeCard = ({ name, onContinue }: { name: string; onContinue: () => voi
       <TravellerTab />
 
       <div className="flex flex-col items-center gap-4 text-center">
-        <div className="inline-flex border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#ff2d55]">
+        <div className="inline-flex border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
           <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">
             You're in!
           </p>
@@ -360,7 +363,7 @@ export default function SignUp({ onNavigate }: { onNavigate: (page: string) => v
 
   return (
     <BrutPage>
-      <BrutNav onNavigate={onNavigate} />
+      <AppNav onNavigate={onNavigate} page="signup" />
 
       {!submitted && (
         <>
@@ -376,11 +379,11 @@ export default function SignUp({ onNavigate }: { onNavigate: (page: string) => v
         <div className="flex flex-col items-start gap-1.5">
           <p
             aria-hidden="true"
-            className={`font-anton text-[130px] leading-[0.95] text-transparent uppercase lg:text-[210px] ${HEAD_SHADOW}`}
+            className="font-anton text-[130px] leading-[0.95] text-[#59a7ff] uppercase drop-shadow-[4px_4px_0px_#2db84d] [-webkit-text-stroke:3px_#12110f] lg:text-[210px]"
           >
             01
           </p>
-          <h2 className={`font-anton text-[56px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase lg:text-[72px] ${HEAD_SHADOW}`}>
+          <h2 className="font-anton text-[56px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase lg:text-[72px]">
             Register
           </h2>
           <p className="max-w-[320px] bg-[rgba(239,236,226,0.9)] px-2 py-1.5 font-inter text-[16px] leading-normal text-[#3c3a33] lg:max-w-[330px]">
