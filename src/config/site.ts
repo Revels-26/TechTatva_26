@@ -6,11 +6,11 @@ export const SITE = {
   dates: "Dates to be announced",
   venue: "MIT Manipal, Karnataka",
   // Registration is handled by a separate system — point this at that app/site.
-  registerUrl: "#",
-  // Placeholder download links — swap for the real hosted files once available.
+  registerUrl: "https://dev-register-techtatva.manipal.edu/dashboard",
+  // PDFs live in public/assets/docs/. Drop the real files there with these names.
   downloads: {
-    brochure: "#",
-    timetable: "#",
+    rulebook: "/assets/docs/rulebook.pdf",
+    timetable: "/assets/docs/timetable.pdf",
   },
   socials: {
     instagram: "#",
@@ -47,4 +47,4 @@ export const NAV_LINKS: { label: string; page: string; anchor?: string }[] = [
   { label: "Contact", page: "home", anchor: "#contact" },
 ];
 
-export const VALID_PAGES = ["home", "events", "speakers", "meettheteam", "signin", "signup"];
+export const VALID_PAGES = ["home", "events", "timetable", "speakers", "meettheteam"];

@@ -8,10 +8,15 @@ const NotFound = ({ onNavigate }: NotFoundProps) => (
   <BrutPage>
     <AppNav onNavigate={onNavigate} page="404" />
     <main className="mx-auto flex min-h-[70vh] w-full max-w-[1440px] flex-col items-start justify-center gap-5 px-4 py-20 lg:px-14">
-      <p className="font-anton text-[clamp(120px,22vw,300px)] leading-[0.85] text-brut-ink lp-glitch-hero">404</p>
-      <p className="font-anton text-[clamp(36px,4vw,56px)] leading-[0.95] text-brut-ink uppercase">This page doesn't exist.</p>
+      <div className="border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
+        <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] text-brut-ink uppercase">Coming soon</p>
+      </div>
+      <p className="font-anton text-[clamp(90px,16vw,220px)] leading-[0.85] text-brut-ink uppercase">
+        Coming <span className="text-[#1f5fd6]">soon</span>
+      </p>
+      <p className="font-anton text-[clamp(36px,4vw,56px)] leading-[0.95] text-brut-ink uppercase">This page isn't ready yet.</p>
       <p className="max-w-[560px] font-inter text-[18px] leading-normal text-brut-body">
-        The page you were looking for has moved, or never existed. Head back to the landing page to find your way.
+        We're still building this part of TechTatva 26. Check back soon, or head back to the home page.
       </p>
       <Button variant="ink" large onClick={() => onNavigate("home")}>Back to home</Button>
     </main>

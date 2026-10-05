@@ -1,6 +1,10 @@
 import type { ReactNode } from "react";
 import { AppNav, Button, BrutFooter, BrutPage, ConcentricRings, SectionHead, scrollToId } from "./Brut";
 import { Reveal } from "./Reveal";
+import { Documents, Faq, SocialTrending } from "./LandingSections";
+// TODO: Gallery, Legacy and Sponsors are commented out until their design is finished.
+// import { Gallery, Legacy, Sponsors } from "./LandingSections";
+import { openRegistration } from "../lib/navigation";
 
 type Props = {
   onNavigate: (page: string) => void;
@@ -9,7 +13,6 @@ type Props = {
 // Offset colours used across the page 3 screens: blue, green, yellow.
 const BLUE = "#59a7ff";
 const GREEN = "#2db84d";
-const YELLOW = "#ffc93c";
 
 const Planet = () => (
   <div className="lp-float relative aspect-square w-full max-w-[330px] lg:w-[484px] lg:max-w-none">
@@ -25,11 +28,11 @@ const Planet = () => (
   </div>
 );
 
-const Hero = ({ onNavigate }: Props) => (
+const Hero = () => (
   <section className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[30px] px-4 pt-[50px] pb-10 lg:flex-row lg:px-14 lg:pb-20">
     <div className="flex w-full flex-col items-start gap-5 lg:w-[700px] lg:shrink-0">
       <div className="border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
-        <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">14 - 16 Oct 2026</p>
+        <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">14 - 17 Oct 2026</p>
       </div>
       <h1 className="font-anton text-[clamp(110px,14.58vw,210px)] leading-[0.88] whitespace-nowrap text-brut-ink uppercase">
         Tech
@@ -37,15 +40,14 @@ const Hero = ({ onNavigate }: Props) => (
         Tatva
       </h1>
       <p className="max-w-[640px] font-inter text-[18px] leading-normal text-brut-body">
-        Three days across the TechTatva 26: talks, machines, design, business and culture. Pick your passes, then your universes.
+        Four days across the TechTatva 26: talks, machines, design, business and culture. Pick your passes, then your universes.
       </p>
       <div className="flex flex-wrap gap-4">
         <Button variant="ink" large onClick={() => scrollToId("lp-passes")}>Buy passes</Button>
-        <Button variant="cream" large onClick={() => onNavigate("signup")}>Register</Button>
       </div>
       <div className="flex flex-wrap gap-2.5">
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#1f5fd6]">3</span> days
+          <span className="text-[#1f5fd6]">4</span> days
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
           <span className="text-[#1f5fd6]">14</span> events
@@ -59,37 +61,9 @@ const Hero = ({ onNavigate }: Props) => (
   </section>
 );
 
-const Schedule = () => {
-  const days = [
-    { day: "Day 1", date: "14 Oct", shadow: BLUE },
-    { day: "Day 2", date: "15 Oct", shadow: GREEN },
-    { day: "Day 3", date: "16 Oct", shadow: YELLOW },
-  ];
-  return (
-    <section id="lp-schedule" className="mx-auto w-full max-w-[1440px] scroll-mt-6 px-4 lg:px-14">
-      <SectionHead>
-        Three <span className="text-[#1f5fd6]">days</span>
-      </SectionHead>
-      <div className="grid grid-cols-1 gap-6 pb-5 uppercase md:grid-cols-3">
-        {days.map((d) => (
-          <div
-            key={d.day}
-            className="flex flex-col gap-1 border-3 border-brut-ink bg-white p-[22px]"
-            style={{ boxShadow: `7px 7px 0px 0px ${d.shadow}` }}
-          >
-            <p className="font-anton text-[56px] leading-[0.95]">{d.day}</p>
-            <p className="font-roboto-mono text-[14px] font-bold tracking-[0.84px]">{d.date}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
 const ComboCard = ({
   title,
   body,
-  price,
   label,
   artClass,
   rings,
@@ -97,7 +71,6 @@ const ComboCard = ({
 }: {
   title: string;
   body: string;
-  price: string;
   label: string;
   artClass?: string;
   rings?: boolean;
@@ -117,7 +90,7 @@ const ComboCard = ({
       <p className="font-anton text-[34px] leading-[0.95] text-brut-ink uppercase">{title}</p>
       <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
       <div className="flex">
-        <Button variant="blue">{price}</Button>
+        <Button variant="blue" onClick={openRegistration}>Buy combo</Button>
       </div>
     </div>
   </div>
@@ -130,19 +103,17 @@ const ComboOffers = () => (
     </SectionHead>
     <div className="flex flex-col gap-10 pb-5 lg:flex-row">
       <ComboCard
-        title="Flagship combo"
-        body="Placeholder offer text. Everything in one pass, one account."
-        price="Buy for 500 rupees"
+        title="Flagship + Merch"
+        body="A Flagship pass with the TechTatva 26 merch pack. One purchase, everything in it."
         label="FLAG"
         rings
         shadow={BLUE}
       />
       <ComboCard
-        title="General combo"
-        body="Placeholder offer text. Everything in one pass, one account."
-        price="Buy for 200 rupees"
-        label="GEN"
-        artClass="lp-pattern-stripes"
+        title="Conclave + Merch"
+        body="A Conclave pass with the TechTatva 26 merch pack. The evening talks and acts, plus the merch."
+        label="CONCLAVE"
+        artClass="lp-pattern-zig"
         shadow={GREEN}
       />
     </div>
@@ -199,7 +170,7 @@ const EventPasses = ({ onNavigate }: Props) => (
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
-            <Button variant="blue" onClick={() => onNavigate("signup")}>Purchase pass</Button>
+            <Button variant="blue" onClick={openRegistration}>Purchase pass</Button>
           </>
         }
       />
@@ -214,7 +185,7 @@ const EventPasses = ({ onNavigate }: Props) => (
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
-            <Button variant="blue" onClick={() => onNavigate("signup")}>Purchase pass</Button>
+            <Button variant="blue" onClick={openRegistration}>Purchase pass</Button>
           </>
         }
       />
@@ -271,7 +242,7 @@ const WideCard = ({
 const MorePasses = ({ onNavigate }: Props) => (
   <section id="lp-more" className="mx-auto w-full max-w-[1440px] scroll-mt-6 px-4 lg:px-14">
     <SectionHead>
-      More at the <span className="text-[#1f5fd6]">Tatverse</span>
+      More at the <span className="text-[#1f5fd6]">Tech Tatva</span>
     </SectionHead>
     <div className="flex flex-col gap-10 pb-[50px] lg:pb-[90px]">
       <WideCard
@@ -282,7 +253,7 @@ const MorePasses = ({ onNavigate }: Props) => (
         primary="View lineup"
         primaryAction={() => onNavigate("speakers")}
         secondary="Purchase pass"
-        secondaryAction={() => onNavigate("signup")}
+        secondaryAction={openRegistration}
         shadow={BLUE}
       />
       <WideCard
@@ -292,9 +263,9 @@ const MorePasses = ({ onNavigate }: Props) => (
         title="Merchandise"
         body="Tees, posters and stickers in the printed TechTatva 26 style."
         primary="View merch"
-        primaryAction={() => onNavigate("signup")}
+        primaryAction={openRegistration}
         secondary="Purchase merch"
-        secondaryAction={() => onNavigate("signup")}
+        secondaryAction={openRegistration}
         shadow={GREEN}
       />
     </div>
@@ -304,10 +275,7 @@ const MorePasses = ({ onNavigate }: Props) => (
 const Landing = ({ onNavigate }: Props) => (
   <BrutPage>
     <AppNav onNavigate={onNavigate} page="home" />
-    <Hero onNavigate={onNavigate} />
-    <Reveal>
-      <Schedule />
-    </Reveal>
+    <Hero />
     <Reveal>
       <ComboOffers />
     </Reveal>
@@ -317,6 +285,12 @@ const Landing = ({ onNavigate }: Props) => (
     <Reveal>
       <MorePasses onNavigate={onNavigate} />
     </Reveal>
+    {/* <Gallery /> */}
+    {/* <Legacy /> */}
+    {/* <Sponsors /> */}
+    <SocialTrending />
+    <Documents />
+    <Faq />
     <BrutFooter />
   </BrutPage>
 );

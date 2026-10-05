@@ -3,10 +3,9 @@ import { VALID_PAGES } from "./config/site";
 
 import Landing from "./components/Landing";
 import EventsPage from "./pages/Events";
+import Timetable from "./pages/Timetable";
 import Speakers from "./pages/Speakers";
 import MeetTheTeam from "./pages/MeetTheTeam";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -69,7 +68,16 @@ function App() {
     window.scrollTo(0, 0);
   };
 
+  // Footer links dispatch "tt-navigate" (see goToPage in components/Brut.tsx).
+  useEffect(() => {
+    const onNavigateEvent = (e: Event) => handleNavigate((e as CustomEvent<string>).detail);
+    window.addEventListener("tt-navigate", onNavigateEvent);
+    return () => window.removeEventListener("tt-navigate", onNavigateEvent);
+  });
+
   switch (currentPage) {
+    case "timetable":
+      return <Timetable onNavigate={handleNavigate} />;
     case "404":
       return <NotFound onNavigate={handleNavigate} />;
     case "events":
@@ -78,10 +86,6 @@ function App() {
       return <Speakers onNavigate={handleNavigate} />;
     case "meettheteam":
       return <MeetTheTeam onNavigate={handleNavigate} />;
-    case "signin":
-      return <SignIn onNavigate={handleNavigate} />;
-    case "signup":
-      return <SignUp onNavigate={handleNavigate} />;
     default:
       return <Landing onNavigate={handleNavigate} />;
   }

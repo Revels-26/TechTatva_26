@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AppNav, BrutFooter, BrutPage } from "../components/Brut";
+import { openRegistration } from "../lib/navigation";
 
 type ArtKind = "stripes" | "cross" | "dots" | "zig" | "rings";
 
@@ -17,7 +18,7 @@ type Act = {
 const DAYS: { day: number; date: string; acts: Act[] }[] = [
   {
     day: 1,
-    date: "29 October 2026",
+    date: "14 October 2026",
     acts: [
       {
         name: "Arjun Mehra",
@@ -41,7 +42,7 @@ const DAYS: { day: number; date: string; acts: Act[] }[] = [
   },
   {
     day: 2,
-    date: "30 October 2026",
+    date: "15 October 2026",
     acts: [
       {
         name: "Dr. Sana Iqbal",
@@ -65,7 +66,7 @@ const DAYS: { day: number; date: string; acts: Act[] }[] = [
   },
   {
     day: 3,
-    date: "31 October 2026",
+    date: "16 October 2026",
     acts: [
       {
         name: "Kabir Tandon",
@@ -206,6 +207,7 @@ const Conclave = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
           </p>
           <button
             type="button"
+            onClick={openRegistration}
             className="inline-flex shrink-0 cursor-pointer items-center justify-center self-start border-3 border-brut-ink bg-[#1f5fd6] px-6 py-2.5 font-anton text-[20px] leading-[0.95] tracking-[1.2px] whitespace-nowrap text-white uppercase drop-shadow-[5px_5px_0px_#12110f] lg:self-auto"
           >
             Buy ticket
