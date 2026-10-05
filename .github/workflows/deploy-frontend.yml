@@ -1,0 +1,112 @@
+name: Deploy TechTatva 26 Frontend (Docker)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**"
+      - ".github/workflows/deploy-frontend.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    env:
+      # Works even if the VM path differs per environment — set VM_DEPLOY_PATH
+      # as a repo/environment secret to override; falls back to a sane default.
+      DEPLOY_PATH: ${{ secrets.VM_DEPLOY_PATH || '~/techtatva26' }}
+      SSH_PORT: ${{ secrets.VM_PORT || '22' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SSH_PORT" -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create deployment directory on VM
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key \
+            ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} \
+            "mkdir -p $DEPLOY_PATH"
+
+      - name: Copy frontend files to VM
+        run: |
+          # --delete is required: it removes files on the VM that no longer
+          # exist in this checkout.
+          rsync -az --delete \
+            -e "ssh -p $SSH_PORT -i ~/.ssh/deploy_key" \
+            --exclude 'node_modules' \
+            --exclude 'dist' \
+            --exclude '.git' \
+            ./ ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:"$DEPLOY_PATH/"
+
+      - name: Verify required files landed on VM
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "
+            set -e
+            echo \"📂 Contents of $DEPLOY_PATH:\"
+            ls -la $DEPLOY_PATH
+
+            echo '🔎 Checking for exact-case Dockerfile / docker-compose.yml...'
+            for f in Dockerfile docker-compose.yml; do
+              if [ ! -f $DEPLOY_PATH/\$f ]; then
+                echo \"❌ Missing: \$f\"
+                echo '   Files actually present matching that name (any case):'
+                find $DEPLOY_PATH -maxdepth 1 -iname \"\$f\" -exec ls -la {} \;
+                exit 1
+              fi
+              echo \"✅ Found: \$f\"
+            done
+          "
+
+      - name: Create frontend .env on VM
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} \
+            "touch $DEPLOY_PATH/.env"
+
+      - name: Ensure external docker network exists
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} \
+            "docker network inspect webnet >/dev/null 2>&1 || docker network create webnet"
+
+      - name: Build and Start frontend
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "
+            set -e
+            cd $DEPLOY_PATH
+
+            echo '📦 Cleaning old containers...'
+            docker compose down --remove-orphans || true
+            docker rm -f techtatva26 tt_landing_page || true
+
+            echo '🚀 Building and starting fresh...'
+            docker compose up -d --build
+
+            echo '📊 Running containers:'
+            docker ps
+          "
+
+      - name: Verify frontend container
+        run: |
+          ssh -p "$SSH_PORT" -i ~/.ssh/deploy_key ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "
+            echo '🔍 Checking containers...'
+            docker ps -a
+
+            echo '📜 Logs:'
+            docker logs techtatva26 || true
+
+            echo '🩺 Health check (container running?):'
+            docker inspect -f '{{.State.Status}}' techtatva26
+          "
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
