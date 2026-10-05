@@ -1,3 +1,7 @@
+import { AppNav, BrutFooter, BrutPage } from "../components/Brut";
+
+/* Conclave design, commented out until the page is ready. Restore by removing this comment and the coming-soon component below.
+
 import { useState } from "react";
 import { AppNav, BrutFooter, BrutPage } from "../components/Brut";
 import { openRegistration } from "../lib/navigation";
@@ -256,5 +260,36 @@ const Conclave = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
     </BrutPage>
   );
 };
+
+*/
+
+const Conclave = ({ onNavigate }: { onNavigate: (page: string) => void }) => (
+  <BrutPage>
+    <AppNav onNavigate={onNavigate} page="speakers" />
+
+    <main className="mx-auto w-full max-w-[1440px] px-4 pt-10 pb-12 lg:px-[100px] lg:pt-[60px] lg:pb-[90px]">
+      <h1 className="font-anton text-[84px] leading-[0.95] whitespace-nowrap text-brut-ink uppercase lg:text-[190px]">
+        Conclave
+      </h1>
+
+      <div className="mt-8 flex flex-col gap-4 border-3 border-brut-ink bg-[#f1f4ee] px-5 py-4 drop-shadow-[8px_8px_0px_#aef5c4] lg:mt-10 lg:flex-row lg:items-center lg:px-6 lg:py-5">
+        <p className="font-inter text-[16px] text-brut-ink lg:text-[18px]">
+          <span className="font-semibold text-[#2db84d]">Join the Conclave</span> and tap into the knowledge of industry experts.
+        </p>
+      </div>
+
+      <div className="mt-8 flex flex-col gap-10">
+        <p className="font-inter text-[18px] font-semibold text-brut-ink">Upcoming Conclave Event</p>
+        <div className="flex w-full justify-center py-10">
+          <p className="text-center font-anton text-[clamp(60px,10vw,140px)] leading-[0.85] text-brut-ink uppercase">
+            Coming <span className="text-[#1f5fd6]">soon</span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <BrutFooter />
+  </BrutPage>
+);
 
 export default Conclave;

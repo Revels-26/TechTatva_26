@@ -1,14 +1,11 @@
 import { useMemo, useState } from "react";
-import { SITE } from "../config/site";
 import { EVENTS, UNIVERSES, type EventEntry, type UniverseKey } from "../data/events";
 import { AppNav, BrutFooter, BrutPage, Button } from "../components/Brut";
+import { shadowFor } from "../lib/shadows";
 
 type TimetablePageProps = {
   onNavigate: (page: string) => void;
 };
-
-// Offset colours cycle down the list, as on the Events page.
-const ROW_SHADOWS = ["#59a7ff", "#2db84d", "#ffc93c"];
 
 // Chips are ["Day 1 // 14 Oct", "9:00 AM", venue, team size]. Split them into the parts the timetable needs.
 const parseDay = (chip: string) => {
@@ -93,17 +90,11 @@ export default function Timetable({ onNavigate }: TimetablePageProps) {
       <main className="mx-auto w-full max-w-[1440px] px-4 lg:px-14">
         <div className="flex flex-col gap-6 pt-[30px] pb-6 lg:flex-row lg:items-end lg:justify-between lg:pt-[60px]">
           <div className="flex flex-col gap-4">
-            <div className="w-fit border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
-              <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] text-brut-ink uppercase">14 - 17 Oct 2026 · {SITE.venue}</p>
-            </div>
             <h1 className="font-anton text-[84px] leading-[0.9] text-brut-ink uppercase lg:text-[170px]">
               Time<span className="text-[#1f5fd6]">table</span>
             </h1>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href={SITE.downloads.timetable} download>
-              <Button variant="cream" large>Download PDF</Button>
-            </a>
             <Button variant="ink" large onClick={() => onNavigate("events")}>See all events</Button>
           </div>
         </div>
@@ -134,7 +125,7 @@ export default function Timetable({ onNavigate }: TimetablePageProps) {
 
         {/* Universe filter */}
         <div role="group" aria-label="Filter by universe" className="flex flex-wrap items-center gap-2.5 pb-7">
-          {[{ key: "all" as const, name: "All" }, ...UNIVERSES].map((u) => {
+          {[{ key: "all" as const, name: "All", color: "#12110f" }, ...UNIVERSES.map((u) => ({ ...u, color: u.shadow }))].map((u) => {
             const selected = universe === u.key;
             return (
               <button
@@ -143,8 +134,9 @@ export default function Timetable({ onNavigate }: TimetablePageProps) {
                 aria-pressed={selected}
                 onClick={() => setUniverse(u.key)}
                 className={`cursor-pointer border-2 border-brut-ink px-3.5 py-1.5 font-roboto-mono text-[12px] font-bold uppercase ${
-                  selected ? "bg-brut-ink text-brut-cream" : "bg-brut-cream text-brut-ink"
+                  selected ? (u.key === "all" ? "text-brut-cream" : "text-brut-ink") : "bg-brut-cream text-brut-ink"
                 }`}
+                style={selected ? { backgroundColor: u.color } : undefined}
               >
                 {u.name} <span className="opacity-70">({countFor(u.key)})</span>
               </button>
@@ -163,8 +155,8 @@ export default function Timetable({ onNavigate }: TimetablePageProps) {
               No events in this universe on this day. Pick another day or choose All.
             </p>
           )}
-          {visible.map((event, i) => (
-            <TimetableRow key={event.title} event={event} shadow={ROW_SHADOWS[i % ROW_SHADOWS.length]} />
+          {visible.map((event) => (
+            <TimetableRow key={event.title} event={event} shadow={shadowFor(event.title)} />
           ))}
         </div>
       </main>

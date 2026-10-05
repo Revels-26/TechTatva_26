@@ -31,31 +31,47 @@ export const SOCIAL_POSTS: { src: string; alt: string }[] = [
 
 export const FAQS: { q: string; a: string }[] = [
   {
-    q: "What is TechTatva 26?",
-    a: "TechTatva is MIT Manipal's national-level techno-management fest. This edition runs over four days with competitions, workshops and talks across five universes.",
+    q: "Can students from non-MAHE colleges participate in TechTatva 26?",
+    a: "Students from non MAHE institutions are eligible only if they are from BTech or Engineering colleges. All MAHE colleges are allowed to participate without this restriction.",
   },
   {
-    q: "How do I get a pass?",
-    a: "Passes, combos and merch are bought on the registration site. The Buy and Purchase buttons on this page take you there.",
+    q: "What’s the difference between the flagship and the general pass ?",
+    a: "The flagship pass gives you access to register for both flagship and general events, while the general pass only allows you to register for general events.",
   },
   {
-    q: "What is the difference between the General and Flagship pass?",
-    a: "The General pass gives entry to the events open to all streams. The Flagship pass includes everything in General plus the flagship events. Placeholder copy, to be confirmed.",
+    q: "I tried to log in as MAHE, but my enrollment number is not found.",
+    a: "Please recheck your enrollment number. If your branch was changed, please try using the old registration number.",
   },
   {
-    q: "What does the Conclave pass cover?",
-    a: "The Conclave pass gives access to the talks and headline acts on each of the three evenings.",
+    q: "I logged in as MAHE, and my enrollment number is recognised, but I cannot recognize the number I am getting OTP to.",
+    a: "Please recheck your enrollment number. If that is correct, and the system is sending OTP to some number, please check if the number displayed is of your parent or guardian. If that isn't the case, please log in to your SLcM 1.0 (Go to SLcM 2.0 -> Profile -> Navigate to SLcM 1.0), go to Admissions Profile, go to address, and change your present details phone number to the desired phone number. Wait 24 hours before trying to sign up.",
   },
   {
-    q: "What is in the combos?",
-    a: "Flagship + Merch bundles a Flagship pass with the TechTatva 26 merch pack. Conclave + Merch bundles a Conclave pass with the same merch.",
+    q: "What should I do if I make the payment, and it's not reflected on the website?",
+    a: "If payment is debited, the website will update in 48 hours, else you will get a refund automatically.",
   },
   {
-    q: "Can I get my money back?",
-    a: "Refund terms will be published with the pass details. Placeholder answer until the policy is confirmed.",
+    q: "What is the cancellation and refund policy for all purchases?",
+    a: "No refunds are provided once a purchase is confirmed.",
   },
   {
-    q: "Who do I contact for outstation help?",
-    a: "Use the contacts in the footer. The Outstation Management team can help with travel and stay questions.",
+    q: "Offline ticket sales",
+    a: "There will be no offline sales for any of the passes.",
+  },
+  {
+    q: "Will accommodation be provided for Outstation participants?",
+    a: "Yes, accommodation will be provided on a nominal cost. However, it is allocated on a first-come, first-served basis and is subject to availability.",
+  },
+  {
+    q: "Are mentors permitted to accompany their teams, and will they be provided with accommodation?",
+    a: "Mentors are welcome to accompany their teams. Accommodation for mentors will also be provided on a first-come, first-served basis, based upon availability.",
+  },
+  {
+    q: "What documents are required upon arrival?",
+    a: "All participants must present the following documents for verification: a bonafide certificate from your college authorizing your team's participation; a physical valid government-issued photo ID (e.g., Aadhar Card, Driver's License, etc.), along with a copy as well; and your current college ID card.",
+  },
+  {
+    q: "Is individual registration and pass purchase required for each team member?",
+    a: "Yes, it is mandatory for every team member to individually purchase a pass and complete the registration process on the official website.",
   },
 ];

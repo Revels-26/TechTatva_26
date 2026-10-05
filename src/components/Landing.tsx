@@ -5,14 +5,11 @@ import { Documents, Faq, SocialTrending } from "./LandingSections";
 // TODO: Gallery, Legacy and Sponsors are commented out until their design is finished.
 // import { Gallery, Legacy, Sponsors } from "./LandingSections";
 import { openRegistration } from "../lib/navigation";
+import { shadowFor } from "../lib/shadows";
 
 type Props = {
   onNavigate: (page: string) => void;
 };
-
-// Offset colours used across the page 3 screens: blue, green, yellow.
-const BLUE = "#59a7ff";
-const GREEN = "#2db84d";
 
 const Planet = () => (
   <div className="lp-float relative aspect-square w-full max-w-[330px] lg:w-[484px] lg:max-w-none">
@@ -31,9 +28,6 @@ const Planet = () => (
 const Hero = () => (
   <section className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[30px] px-4 pt-[50px] pb-10 lg:flex-row lg:px-14 lg:pb-20">
     <div className="flex w-full flex-col items-start gap-5 lg:w-[700px] lg:shrink-0">
-      <div className="border-3 border-brut-ink bg-brut-cream px-3 py-1.5 drop-shadow-[5px_5px_0px_#2db84d]">
-        <p className="font-roboto-mono text-[12px] font-bold tracking-[0.6px] whitespace-nowrap text-brut-ink uppercase">14 - 17 Oct 2026</p>
-      </div>
       <h1 className="font-anton text-[clamp(110px,14.58vw,210px)] leading-[0.88] whitespace-nowrap text-brut-ink uppercase">
         Tech
         <br />
@@ -53,7 +47,7 @@ const Hero = () => (
           <span className="text-[#1f5fd6]">14</span> events
         </span>
         <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#1f5fd6]">5</span> universes
+          <span className="text-[#1f5fd6]">4</span> realities
         </span>
       </div>
     </div>
@@ -107,14 +101,14 @@ const ComboOffers = () => (
         body="A Flagship pass with the TechTatva 26 merch pack. One purchase, everything in it."
         label="FLAG"
         rings
-        shadow={BLUE}
+        shadow={shadowFor("Flagship + Merch")}
       />
       <ComboCard
         title="Conclave + Merch"
         body="A Conclave pass with the TechTatva 26 merch pack. The evening talks and acts, plus the merch."
         label="CONCLAVE"
         artClass="lp-pattern-zig"
-        shadow={GREEN}
+        shadow={shadowFor("Conclave + Merch")}
       />
     </div>
   </section>
@@ -129,7 +123,7 @@ const PassCard = ({
   shadow,
 }: {
   name: string;
-  artClass: string;
+  artClass?: string;
   label: string;
   body: string;
   action: ReactNode;
@@ -140,7 +134,7 @@ const PassCard = ({
     style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
   >
     <div className="relative h-[230px] w-full overflow-hidden border-3 border-brut-ink bg-brut-paper">
-      <div className={`absolute inset-0 ${artClass}`} />
+      {artClass && <div className={`absolute inset-0 ${artClass}`} />}
       <span className="absolute bottom-2 left-4 font-anton text-[56px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-[22px]">
         {label}
       </span>
@@ -162,7 +156,7 @@ const EventPasses = ({ onNavigate }: Props) => (
         artClass="lp-pattern-cross"
         label="General"
         body="Placeholder copy for the pass. Entry to the events listed under it."
-        shadow={BLUE}
+        shadow={shadowFor("General pass")}
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
@@ -172,10 +166,9 @@ const EventPasses = ({ onNavigate }: Props) => (
       />
       <PassCard
         name="Flagship pass"
-        artClass="lp-pattern-dots"
         label="Flagship"
         body="Placeholder copy for the pass. Entry to the events listed under it."
-        shadow={GREEN}
+        shadow={shadowFor("Flagship pass")}
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
@@ -248,7 +241,7 @@ const MorePasses = ({ onNavigate }: Props) => (
         primaryAction={() => onNavigate("speakers")}
         secondary="Purchase pass"
         secondaryAction={openRegistration}
-        shadow={BLUE}
+        shadow={shadowFor("Conclave pass")}
       />
       <WideCard
         reverse
@@ -260,7 +253,7 @@ const MorePasses = ({ onNavigate }: Props) => (
         primaryAction={openRegistration}
         secondary="Purchase merch"
         secondaryAction={openRegistration}
-        shadow={GREEN}
+        shadow={shadowFor("Merchandise")}
       />
     </div>
   </section>

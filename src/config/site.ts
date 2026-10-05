@@ -7,10 +7,10 @@ export const SITE = {
   venue: "MIT Manipal, Karnataka",
   // Registration is handled by a separate system — point this at that app/site.
   registerUrl: "https://dev-register-techtatva.manipal.edu/dashboard",
-  // PDFs live in public/assets/docs/. Drop the real files there with these names.
+  // PDFs live in public/docs/ with these names.
   downloads: {
-    rulebook: "/assets/docs/rulebook.pdf",
-    timetable: "/assets/docs/timetable.pdf",
+    rulebook: "/docs/TechTatva'26%20rulebook.pdf",
+    brochure: "/docs/TechTatva'26%20brochure.pdf",
   },
   socials: {
     instagram: "#",

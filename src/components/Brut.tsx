@@ -172,13 +172,13 @@ export const BrutFooter = () => {
   );
 };
 
-// Page wrapper: printed paper background with the halftone texture behind the content.
+// Page wrapper: printed paper background with the grid texture behind the content.
 export const BrutPage = ({ children }: { children: ReactNode }) => (
   <div className="relative min-h-screen w-full overflow-hidden bg-brut-paper font-inter text-brut-ink">
-    {/* Tree/halftone texture: covers the full page width at any viewport, aspect ratio preserved */}
+    {/* One grid image, zoomed to cover the page so the wave runs continuously. */}
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 bg-[url(/assets/landing/ffd12.svg)] bg-cover bg-top bg-no-repeat lg:bg-[url(/assets/landing/39870.svg)]"
+      className="pointer-events-none absolute inset-0 bg-[url(/assets/grid.png)] bg-fixed bg-cover bg-center bg-no-repeat"
     />
     <div className="relative">{children}</div>
   </div>

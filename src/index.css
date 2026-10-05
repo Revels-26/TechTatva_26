@@ -62,6 +62,7 @@
   --font-anton: 'Anton', Impact, sans-serif;
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
+  --font-chakra: 'Chakra Petch', system-ui, sans-serif;
 }
 
 /* Landing text effects: pink/cyan offset "glitch" shadows, sized per breakpoint like the Figma frames */
@@ -93,9 +94,6 @@
 .lp-pattern-cross {
   background: url("/assets/landing/bf184.svg") -3px -3px / 425.5px 231.5px repeat;
 }
-.lp-pattern-dots {
-  background: url("/assets/landing/878a0.svg") -3px -3px / 419.4px 227.4px repeat;
-}
 .lp-pattern-zig {
   background: url("/assets/landing/a7093.svg") -203px -3px / 612px 202px repeat;
 }
@@ -108,9 +106,6 @@
   }
   .lp-pattern-cross {
     background: url("/assets/landing/e5116.svg") -3px -3px / 323.5px 231.5px repeat;
-  }
-  .lp-pattern-dots {
-    background: url("/assets/landing/839f5.svg") -3px -3px / 323.4px 227.4px repeat;
   }
   .lp-pattern-zig {
     background: url("/assets/landing/6aae4.svg") -153px -3px / 622px 152px repeat;

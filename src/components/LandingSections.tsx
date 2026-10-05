@@ -4,11 +4,8 @@ import { FAQS, GALLERY, LEGACY_STATS, SOCIAL_POSTS, SPONSOR_TIERS } from "../dat
 import { Button, SectionHead } from "./Brut";
 import { InstagramIcon } from "./SocialIcons";
 import { Reveal } from "./Reveal";
+import { shadowFor } from "../lib/shadows";
 
-const BLUE = "#59a7ff";
-const GREEN = "#2db84d";
-const YELLOW = "#ffc93c";
-const ORANGE = "#ff8c42";
 
 // Shared wrapper so every section lines up with the header and footer gutters.
 const Container = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
@@ -24,7 +21,7 @@ export const Legacy = () => (
       <div className="flex flex-col gap-8 pb-[50px] lg:flex-row lg:items-stretch lg:gap-12 lg:pb-[80px]">
         <div
           className="flex w-full items-center justify-center border-3 border-brut-ink bg-white p-8 lg:w-[420px] lg:shrink-0"
-          style={{ boxShadow: `10px 10px 0px 0px ${BLUE}` }}
+          style={{ boxShadow: `10px 10px 0px 0px ${shadowFor("legacy crest")}` }}
         >
           <img src="/assets/about/mit-crest.png" alt="MIT Manipal crest" className="h-auto w-[220px] lg:w-[280px]" />
         </div>
@@ -37,11 +34,11 @@ export const Legacy = () => (
             This edition carries that forward: machines, code, design, business and culture under one roof for four days.
           </p>
           <div className="grid grid-cols-3 gap-4">
-            {LEGACY_STATS.map((s, i) => (
+            {LEGACY_STATS.map((s) => (
               <div
                 key={s.label}
                 className="flex flex-col gap-1 border-3 border-brut-ink bg-brut-cream p-4"
-                style={{ boxShadow: `6px 6px 0px 0px ${[BLUE, GREEN, YELLOW][i]}` }}
+                style={{ boxShadow: `6px 6px 0px 0px ${shadowFor(s.label)}` }}
               >
                 <span className="font-anton text-[56px] leading-[0.9] text-brut-ink">{s.value}</span>
                 <span className="font-roboto-mono text-[11px] font-bold tracking-[0.6px] text-brut-body uppercase">
@@ -67,7 +64,7 @@ export const Gallery = () => (
           <figure
             key={g.src}
             className={`flex flex-col border-3 border-brut-ink bg-white p-2.5 ${i === 0 ? "col-span-2 lg:col-span-2 lg:row-span-2" : ""}`}
-            style={{ boxShadow: `6px 6px 0px 0px ${[BLUE, GREEN, YELLOW, ORANGE, BLUE][i]}` }}
+            style={{ boxShadow: `6px 6px 0px 0px ${shadowFor(g.caption)}` }}
           >
             <div className={`relative overflow-hidden border-2 border-brut-ink bg-brut-paper ${i === 0 ? "aspect-[4/3] lg:aspect-auto lg:h-full" : "aspect-square"}`}>
               <img src={g.src} alt={g.caption} loading="lazy" className="absolute inset-0 size-full object-cover" />
@@ -95,7 +92,7 @@ export const Sponsors = () => (
                 <div
                   key={`${name}-${i}`}
                   className="flex min-h-[90px] min-w-[200px] flex-1 items-center justify-center border-3 border-brut-ink bg-white px-6 py-4 text-center"
-                  style={{ boxShadow: `5px 5px 0px 0px ${[BLUE, GREEN, YELLOW][i % 3]}` }}
+                  style={{ boxShadow: `5px 5px 0px 0px ${shadowFor(name + i)}` }}
                 >
                   <span className="font-anton text-[24px] leading-[1] text-brut-ink uppercase">{name}</span>
                 </div>
@@ -120,10 +117,12 @@ export const Sponsors = () => (
 export const SocialTrending = () => (
   <Reveal>
     <Container>
-      <SectionHead>
-        Trending <span className="text-[#1f5fd6]">on socials</span>
-      </SectionHead>
-      <div className="flex flex-col gap-6 pb-[50px] lg:pb-[80px]">
+      <div className="text-center">
+        <SectionHead>
+          Trending <span className="text-[#1f5fd6]">on socials</span>
+        </SectionHead>
+      </div>
+      <div className="flex flex-col gap-10 pb-[50px] lg:pb-[80px]">
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {SOCIAL_POSTS.map((post, i) => (
             <a
@@ -132,7 +131,10 @@ export const SocialTrending = () => (
               target="_blank"
               rel="noreferrer"
               className="group relative block border-3 border-brut-ink bg-white"
-              style={{ boxShadow: `6px 6px 0px 0px ${[BLUE, GREEN, YELLOW, ORANGE][i]}` }}
+              style={{
+                boxShadow: `6px 6px 0px 0px ${shadowFor(post.src)}`,
+                transform: `rotate(${[-3, 2, -2, 3][i]}deg)`,
+              }}
             >
               <div className="aspect-square overflow-hidden border-b-3 border-brut-ink bg-brut-paper">
                 <img
@@ -158,14 +160,6 @@ export const SocialTrending = () => (
           >
             Follow on Instagram
           </a>
-          <a
-            href={SITE.socials.youtube}
-            target="_blank"
-            rel="noreferrer"
-            className="border-3 border-brut-ink bg-white px-5 py-3 font-anton text-[18px] tracking-[1.44px] text-brut-ink uppercase drop-shadow-[6px_6px_0px_#12110f] hover:-translate-x-0.5 hover:-translate-y-0.5"
-          >
-            Watch on YouTube
-          </a>
         </div>
       </div>
     </Container>
@@ -173,7 +167,6 @@ export const SocialTrending = () => (
 );
 
 const DocCard = ({
-  label,
   title,
   body,
   href,
@@ -181,7 +174,6 @@ const DocCard = ({
   viewLabel,
   downloadLabel,
 }: {
-  label: string;
   title: string;
   body: string;
   href: string;
@@ -193,9 +185,6 @@ const DocCard = ({
     className="flex flex-1 flex-col gap-4 border-3 border-brut-ink bg-white p-6"
     style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
   >
-    <span className="w-fit bg-brut-ink px-2.5 py-1 font-roboto-mono text-[11px] font-bold tracking-[0.66px] text-brut-cream uppercase">
-      {label}
-    </span>
     <p className="font-anton text-[40px] leading-[0.95] text-brut-ink uppercase">{title}</p>
     <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
     <div className="mt-auto flex flex-wrap gap-3 pt-2">
@@ -215,25 +204,22 @@ export const Documents = () => (
   <Reveal>
     <Container>
       <SectionHead>
-        Rulebook <span className="text-[#1f5fd6]">&amp; timetable</span>
+        Rulebook <span className="text-[#1f5fd6]">&amp; brochure</span>
       </SectionHead>
       <div className="flex flex-col gap-10 pb-[50px] lg:flex-row lg:pb-[80px]">
         <DocCard
-          label="PDF · Rules"
           title="Rulebook"
           body="Every event's rules, judging criteria and team limits in one document. Read it before you register a team."
           href={SITE.downloads.rulebook}
-          shadow={BLUE}
+          shadow={shadowFor("Rulebook")}
           downloadLabel="Download rulebook"
         />
         <DocCard
-          label="PDF · Schedule"
-          title="Timetable"
-          body="All four days, event by event, with times and venues. The same schedule is on the timetable page."
-          href={SITE.downloads.timetable}
-          shadow={GREEN}
-          viewLabel="View timetable"
-          downloadLabel="Download PDF"
+          title="Brochure"
+          body="An overview of TechTatva 26, its universes, passes and what to expect across the four days."
+          href={SITE.downloads.brochure}
+          shadow={shadowFor("Brochure")}
+          downloadLabel="Download brochure"
         />
       </div>
     </Container>
@@ -255,7 +241,7 @@ export const Faq = () => {
               <div
                 key={item.q}
                 className="border-3 border-brut-ink bg-white"
-                style={{ boxShadow: `6px 6px 0px 0px ${isOpen ? BLUE : "#12110f"}` }}
+                style={{ boxShadow: `6px 6px 0px 0px ${isOpen ? "#59a7ff" : "#12110f"}` }}
               >
                 <button
                   type="button"

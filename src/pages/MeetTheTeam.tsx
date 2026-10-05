@@ -1,6 +1,7 @@
 import { CONVENERS, DEVELOPERS, type TeamMember } from "../data/team";
 import { InstagramIcon, LinkedinIcon } from "../components/SocialIcons";
 import { AppNav, BrutFooter, BrutPage, SectionHead } from "../components/Brut";
+import { shadowFor } from "../lib/shadows";
 
 const initials = (name: string) =>
   name
@@ -11,7 +12,10 @@ const initials = (name: string) =>
     .toUpperCase();
 
 const TeamCard = ({ member }: { member: TeamMember }) => (
-  <div className="flex flex-col items-center gap-3 border-3 border-brut-ink bg-brut-cream p-6 text-center drop-shadow-[6px_6px_0px_#12110f]">
+  <div
+    className="flex flex-col items-center gap-3 border-3 border-brut-ink bg-brut-cream p-6 text-center"
+    style={{ boxShadow: `6px 6px 0px 0px ${shadowFor(member.name)}` }}
+  >
     <div className="flex size-20 items-center justify-center border-3 border-brut-ink bg-brut-red font-anton text-[26px] text-brut-cream">
       {initials(member.name)}
     </div>
