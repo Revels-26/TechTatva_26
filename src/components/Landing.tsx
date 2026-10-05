@@ -124,7 +124,6 @@ const PassCard = ({
   name,
   artClass,
   label,
-  price,
   body,
   action,
   shadow,
@@ -132,7 +131,6 @@ const PassCard = ({
   name: string;
   artClass: string;
   label: string;
-  price: string;
   body: string;
   action: ReactNode;
   shadow: string;
@@ -148,7 +146,6 @@ const PassCard = ({
       </span>
     </div>
     <p className="font-anton text-[40px] leading-[0.95] text-brut-ink uppercase">{name}</p>
-    <p className="font-roboto-mono text-[13px] tracking-[0.78px] text-[#1f5fd6]">{price}</p>
     <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
     <div className="flex flex-wrap gap-3">{action}</div>
   </div>
@@ -164,7 +161,6 @@ const EventPasses = ({ onNavigate }: Props) => (
         name="General pass"
         artClass="lp-pattern-cross"
         label="General"
-        price="200 rupees"
         body="Placeholder copy for the pass. Entry to the events listed under it."
         shadow={BLUE}
         action={
@@ -174,12 +170,10 @@ const EventPasses = ({ onNavigate }: Props) => (
           </>
         }
       />
-      <img src="/assets/landing/ea64b.svg" alt="" aria-hidden="true" className="hidden h-[90px] w-[70px] shrink-0 lg:block" />
       <PassCard
         name="Flagship pass"
         artClass="lp-pattern-dots"
         label="Flagship"
-        price="500 rupees"
         body="Placeholder copy for the pass. Entry to the events listed under it."
         shadow={GREEN}
         action={
