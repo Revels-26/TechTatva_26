@@ -152,7 +152,7 @@ export const AppNav = ({
         className={`flex items-center justify-between gap-x-4 px-4 py-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-14 lg:py-4 ${
           overlay
             ? "absolute inset-x-0 top-0 z-20 bg-transparent"
-            : "relative z-10 border-b-3 border-brut-ink bg-[rgba(255,255,255,0.85)]"
+            : "relative z-10 bg-transparent"
         }`}
       >
         <div className="flex items-center justify-self-start">
