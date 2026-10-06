@@ -5,6 +5,7 @@ import { Button, SectionHead } from "./Brut";
 import { InstagramIcon } from "./SocialIcons";
 import { Reveal } from "./Reveal";
 import { shadowFor } from "../lib/shadows";
+import { GALLERY_PHOTOS } from "../data/gallery";
 
 
 // Shared wrapper so every section lines up with the header and footer gutters.
@@ -267,3 +268,30 @@ export const Faq = () => {
     </Reveal>
   );
 };
+
+// Photo gallery. Photos come from src/data/gallery.ts. Hovering a photo zooms it in slightly.
+export const PhotoGallery = () => (
+  <Reveal>
+    <Container>
+      <SectionHead>
+        Gallery <span className="text-[#1f5fd6]">moments</span>
+      </SectionHead>
+      <div className="grid grid-cols-2 gap-4 pb-[50px] lg:grid-cols-4 lg:gap-6 lg:pb-[80px]">
+        {GALLERY_PHOTOS.map((src, i) => (
+          <div
+            key={src}
+            className="group aspect-[4/5] overflow-hidden border-3 border-brut-ink bg-white"
+            style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
+          >
+            <img
+              src={src}
+              alt={`TechTatva 26 gallery photo ${i + 1}`}
+              loading="lazy"
+              className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            />
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Reveal>
+);

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { AppNav, Button, BrutFooter, BrutPage, ConcentricRings, SectionHead } from "./Brut";
 import { Reveal } from "./Reveal";
-import { Documents, Faq, SocialTrending } from "./LandingSections";
+import { Documents, Faq, SocialTrending, PhotoGallery } from "./LandingSections";
 // TODO: Gallery, Legacy and Sponsors are commented out until their design is finished.
 // import { Gallery, Legacy, Sponsors } from "./LandingSections";
 import { openRegistration } from "../lib/navigation";
@@ -233,6 +233,7 @@ const Landing = ({ onNavigate }: Props) => (
     <Reveal>
       <MorePasses onNavigate={onNavigate} />
     </Reveal>
+    <PhotoGallery />
     {/* <Gallery /> */}
     {/* <Legacy /> */}
     {/* <Sponsors /> */}
