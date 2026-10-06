@@ -39,11 +39,11 @@ const UniverseCard = ({
 );
 
 // Event card as laid out in the Figma "Tech Tatva 26" events frame. Sizes are scaled to the grid column.
-// 1 person is an individual event. More than 1 is a team of that size. Blank means not known yet.
+// "1" is an individual event. A number or range like "2-4" is a team of that size. Blank means not known yet.
 const peopleText = (people: string | null) => {
-  const count = Number(people);
-  if (!people || Number.isNaN(count)) return "People: TBA";
-  return count === 1 ? "Individual event" : `Team of ${count}`;
+  if (!people) return "People: TBA";
+  if (people.trim() === "1") return "Individual event";
+  return `Team of ${people.trim()}`;
 };
 
 const EventCard = ({ event }: { event: EventSummary }) => {
