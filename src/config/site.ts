@@ -5,7 +5,9 @@ export const SITE = {
   tagline: "MIT Manipal's National Level Techno-Management Fest",
   dates: "Dates to be announced",
   venue: "MIT Manipal, Karnataka",
-  // Registration is handled by a separate system — point this at that app/site.
+  // Registration is handled by a separate system. Login and pass buttons currently go to the
+  // in-app "comingsoon" page instead (see openRegistration in lib/navigation.ts); restore that
+  // function's window.location.assign(SITE.registerUrl) when sales open.
   registerUrl: "https://register-techtatva.manipal.edu/login?returnUrl=%2Fdashboard",
   // PDFs live in public/docs/ with these names.
   downloads: {
@@ -47,4 +49,4 @@ export const NAV_LINKS: { label: string; page: string; anchor?: string }[] = [
   { label: "Contact", page: "home", anchor: "#contact" },
 ];
 
-export const VALID_PAGES = ["home", "events", "timetable", "speakers", "meettheteam"];
+export const VALID_PAGES = ["home", "events", "timetable", "speakers", "meettheteam", "comingsoon"];

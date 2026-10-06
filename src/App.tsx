@@ -7,6 +7,7 @@ import Timetable from "./pages/Timetable";
 import Speakers from "./pages/Speakers";
 import MeetTheTeam from "./pages/MeetTheTeam";
 import NotFound from "./pages/NotFound";
+import ComingSoon from "./pages/ComingSoon";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -86,6 +87,8 @@ function App() {
       return <Speakers onNavigate={handleNavigate} />;
     case "meettheteam":
       return <MeetTheTeam onNavigate={handleNavigate} />;
+    case "comingsoon":
+      return <ComingSoon onNavigate={handleNavigate} />;
     default:
       return <Landing onNavigate={handleNavigate} />;
   }
