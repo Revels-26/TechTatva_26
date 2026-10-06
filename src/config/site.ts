@@ -18,7 +18,7 @@ export const SITE = {
     brochure: "/docs/TechTatva'26%20brochure.pdf",
   },
   socials: {
-    instagram: "#",
+    instagram: "https://www.instagram.com/techtatvamit",
     twitter: "#",
     linkedin: "#",
     youtube: "#",
