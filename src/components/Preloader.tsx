@@ -23,7 +23,7 @@ const PRELOAD = [
   "/assets/logo/sc-logo.png",
 ];
 
-const MIN_SHOW_MS = 1200; // same minimum as the M-26 loader
+const MIN_SHOW_MS = 2000; // minimum time on screen
 const MAX_WAIT_MS = 8000; // never keep the visitor waiting longer than this
 const SLIDE_MS = 900;
 
