@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { UniverseKey } from "../data/events";
 import {
+  CATEGORY_LOGOS,
   CATEGORY_REALITY,
   normalizeTimetableRow,
   type EventSummary,
@@ -59,16 +60,26 @@ const useSheetRows = (key: string, loader: () => Promise<SheetRow[]>) => {
 };
 
 // Timetable: every day tab, fetched in parallel. Times are converted to 12-hour text and the date comes from the tab.
+// Category names are matched to the logo list regardless of case ("Cosmic con" is "Cosmic Con").
+const canonicalCategory = (name: string) =>
+  Object.keys(CATEGORY_LOGOS).find((key) => key.toLowerCase() === name.trim().toLowerCase()) ?? name.trim();
+
 const loadTimetable = async (): Promise<SheetRow[]> => {
   const days = await Promise.all(
     TIMETABLE_SHEET.days.map(async (day) => {
       const rows = await fetchSheetRows(TIMETABLE_SHEET.id, day.gid);
-      return rows.map((row) => ({
-        ...row,
-        date: day.date,
-        start_time: to12Hour(row.start_time ?? ""),
-        end_time: to12Hour(row.end_time ?? ""),
-      }));
+      // A blank category means the same category as the row above, as in the sheet.
+      let category = "";
+      return rows.map((row) => {
+        category = row.category?.trim() ? canonicalCategory(row.category) : category;
+        return {
+          ...row,
+          category,
+          date: day.date,
+          start_time: to12Hour(row.start_time ?? ""),
+          end_time: to12Hour(row.end_time ?? ""),
+        };
+      });
     }),
   );
   return days.flat();
@@ -98,7 +109,7 @@ export const useEventSummaries = (
       .map((row) => {
         const title = row.event.trim();
         const rounds = timetable.filter((t) => t.event.toLowerCase() === title.toLowerCase());
-        const category = (row.category?.trim() || rounds[0]?.category || "").trim();
+        const category = canonicalCategory(row.category?.trim() || rounds[0]?.category || "");
         const reality = row.reality?.trim().toLowerCase() as UniverseKey;
         return {
           title,

@@ -39,10 +39,17 @@ const UniverseCard = ({
 );
 
 // Event card as laid out in the Figma "Tech Tatva 26" events frame. Sizes are scaled to the grid column.
+// 1 person is an individual event. More than 1 is a team of that size. Blank means not known yet.
+const peopleText = (people: string | null) => {
+  const count = Number(people);
+  if (!people || Number.isNaN(count)) return "People: TBA";
+  return count === 1 ? "Individual event" : `Team of ${count}`;
+};
+
 const EventCard = ({ event }: { event: EventSummary }) => {
   const reality = UNIVERSES.find((u) => u.key === event.reality);
   const rows = [
-    { icon: "/assets/events/person.svg", text: `People: ${event.people ?? "TBA"}` },
+    { icon: "/assets/events/person.svg", text: peopleText(event.people) },
     { icon: "/assets/events/pin.svg", text: event.venues.join(" · ") || "TBA" },
     {
       icon: "/assets/events/rocket.svg",
