@@ -3,7 +3,6 @@ import { AppNav, BrutFooter, BrutPage, Button } from "../components/Brut";
 import { UNIVERSES, type UniverseKey } from "../data/events";
 import { CATEGORY_REALITY, categoryLogoSrc, type TimetableRow } from "../data/timetable";
 import { useTimetableRows } from "../lib/liveData";
-import { shadowFor } from "../lib/shadows";
 
 type TimetablePageProps = {
   onNavigate: (page: string) => void;
@@ -41,7 +40,7 @@ const TimeBlock = ({ row }: { row: TimetableRow }) => {
 const TimetableCard = ({ row }: { row: TimetableRow }) => (
   <article
     className="grid min-w-0 grid-cols-[104px_minmax(0,1fr)] gap-4 border-3 border-brut-ink bg-white p-4 lg:grid-cols-[170px_minmax(0,1fr)_260px] lg:items-center lg:gap-8 lg:p-5"
-    style={{ boxShadow: `6px 6px 0px 0px ${shadowFor(row.event + row.round)}` }}
+    style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
   >
     <TimeBlock row={row} />
 

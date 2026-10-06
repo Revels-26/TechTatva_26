@@ -15,7 +15,7 @@ const TeamCard = ({ member }: { member: TeamMember }) => {
   return (
     <div className="[perspective:1000px] py-3" onMouseMove={onMove} onMouseLeave={() => setTilt({ x: 0, y: 0 })}>
       <div
-        className="flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-3 text-white shadow-[6px_6px_0px_0px_#12110f] transition-transform duration-300 ease-out"
+        className="flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-3 text-white shadow-[6px_6px_0px_0px_#0B3566] transition-transform duration-300 ease-out"
         style={{
           transform: `rotateX(${-tilt.y * 14}deg) rotateY(${tilt.x * 14}deg)`,
           transformStyle: "preserve-3d",
@@ -65,8 +65,8 @@ const MeetTheTeam = ({ onNavigate }: { onNavigate: (page: string) => void }) => 
   <BrutPage>
     <AppNav onNavigate={onNavigate} page="meettheteam" />
     <main className="mx-auto w-full max-w-[1440px] px-4 pb-20 lg:px-14">
-      <h1 className="pt-[50px] font-anton text-[clamp(52px,5.84vw,84px)] leading-[0.95] text-brut-ink uppercase lp-glitch lg:pt-20">
-        Meet the team
+      <h1 className="pt-[50px] font-anton text-[clamp(52px,5.84vw,84px)] leading-[0.95] text-brut-ink uppercase lg:pt-20">
+        Meet the <span className="text-[#1f5fd6]">team</span>
       </h1>
 
       {TEAM_SECTIONS.map((section) => (
