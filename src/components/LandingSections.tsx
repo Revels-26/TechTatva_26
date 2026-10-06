@@ -372,12 +372,17 @@ const SponsorCard = ({ name, logo, title, dark = false }: { name: string; logo: 
   </figure>
 );
 
+// Smaller, centred title for the sponsors section.
+const SponsorHeading = ({ children }: { children: ReactNode }) => (
+  <h2 className="pt-[50px] pb-[22px] text-center font-anton text-[clamp(40px,4.4vw,64px)] leading-[0.95] text-brut-ink uppercase lg:pt-20">
+    {children}
+  </h2>
+);
+
 export const SponsorsMatrix = () => (
   <Reveal>
     <Container>
-      <SectionHead>
-        Industry <span className="text-[#1f5fd6]">Sponsors</span>
-      </SectionHead>
+      <SponsorHeading>Sponsors</SponsorHeading>
       <div className="mx-auto mb-6 max-w-[200px] sm:max-w-[260px] lg:mb-10 lg:max-w-[300px]">
         <SponsorCard {...ACADEMIC_SPONSOR} dark />
       </div>
