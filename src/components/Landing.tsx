@@ -6,6 +6,7 @@ import { Documents, Faq, SocialTrending, PhotoGallery, SponsorsMatrix } from "./
 // import { Gallery, Legacy, Sponsors } from "./LandingSections";
 import { openRegistration } from "../lib/navigation";
 import { Hero } from "./Hero";
+import { ContactUs } from "./ContactUs";
 
 type Props = {
   onNavigate: (page: string) => void;
@@ -238,6 +239,7 @@ const Landing = ({ onNavigate }: Props) => (
     {/* <Sponsors /> */}
     <SocialTrending />
     <Documents />
+    <ContactUs />
     <Faq />
     <BrutFooter />
   </BrutPage>
