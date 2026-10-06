@@ -6,7 +6,7 @@ export const SITE = {
   dates: "Dates to be announced",
   venue: "MIT Manipal, Karnataka",
   // Registration is handled by a separate system — point this at that app/site.
-  registerUrl: "https://dev-register-techtatva.manipal.edu/dashboard",
+  registerUrl: "https://register-techtatva.manipal.edu/login?returnUrl=%2Fdashboard",
   // Live data from the two Google Sheets web apps (see apps-script/Code.gs). Pages fall back to bundled data if these fail.
   dataApi: {
     timetable: "https://script.google.com/macros/s/AKfycbwUjxEUqDwMpa-swKOBzE6JG4RRTGGzTEYYaNmxe55Mn9-DWdcHXlMMgvv5HUplpL1Z/exec",
