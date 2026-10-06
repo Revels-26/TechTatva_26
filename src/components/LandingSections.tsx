@@ -6,7 +6,7 @@ import { InstagramIcon } from "./SocialIcons";
 import { Reveal } from "./Reveal";
 import { shadowFor } from "../lib/shadows";
 import { GALLERY_PHOTOS } from "../data/gallery";
-import { SPONSORS } from "../data/sponsors";
+import { ACADEMIC_SPONSOR, SPONSORS } from "../data/sponsors";
 
 
 // Shared wrapper so every section lines up with the header and footer gutters.
@@ -353,27 +353,37 @@ export const PhotoGallery = () => {
   );
 };
 
-// Sponsors in a matrix: logo on top, sponsor type below it. Data is in src/data/sponsors.ts.
+// Sponsors: the academic sponsor on its own at the top, then the industry sponsors in a three-per-row grid on every screen size.
+const SponsorCard = ({ name, logo, title, dark = false }: { name: string; logo: string; title: string; dark?: boolean }) => (
+  <figure
+    className={`flex flex-col items-center gap-2 border-3 border-brut-ink p-2.5 text-center lg:gap-3 lg:p-4 ${dark ? "bg-brut-ink" : "bg-white"}`}
+    style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
+  >
+    <div className="flex h-12 w-full items-center justify-center sm:h-16 lg:h-20">
+      <img src={logo} alt={name} loading="lazy" className="max-h-full max-w-full object-contain" />
+    </div>
+    <figcaption
+      className={`font-roboto-mono text-[9px] font-bold tracking-[0.4px] uppercase sm:text-[11px] lg:text-[13px] ${
+        dark ? "text-brut-cream" : "text-brut-ink"
+      }`}
+    >
+      {title}
+    </figcaption>
+  </figure>
+);
+
 export const SponsorsMatrix = () => (
   <Reveal>
     <Container>
       <SectionHead>
-        Our <span className="text-[#1f5fd6]">sponsors</span>
+        Industry <span className="text-[#1f5fd6]">Sponsors</span>
       </SectionHead>
-      <div className="grid grid-cols-2 gap-4 pb-[50px] lg:grid-cols-3 lg:gap-6 lg:pb-[80px]">
+      <div className="mx-auto mb-6 max-w-[200px] sm:max-w-[260px] lg:mb-10 lg:max-w-[300px]">
+        <SponsorCard {...ACADEMIC_SPONSOR} dark />
+      </div>
+      <div className="mx-auto grid max-w-[900px] grid-cols-3 gap-3 pb-[50px] sm:gap-4 lg:gap-5 lg:pb-[80px]">
         {SPONSORS.map((sponsor) => (
-          <figure
-            key={sponsor.name}
-            className="flex flex-col items-center gap-4 border-3 border-brut-ink bg-white p-5 text-center lg:p-8"
-            style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
-          >
-            <div className="flex h-24 w-full items-center justify-center lg:h-32">
-              <img src={sponsor.logo} alt={sponsor.name} loading="lazy" className="max-h-full max-w-full object-contain" />
-            </div>
-            <figcaption className="font-roboto-mono text-[11px] font-bold tracking-[0.5px] text-brut-ink uppercase lg:text-[13px]">
-              {sponsor.title}
-            </figcaption>
-          </figure>
+          <SponsorCard key={sponsor.name} name={sponsor.name} logo={sponsor.logo} title={sponsor.title} />
         ))}
       </div>
     </Container>

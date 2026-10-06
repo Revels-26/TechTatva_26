@@ -11,3 +11,6 @@ export const SPONSORS: { name: string; logo: string; title: string }[] = [
   { name: "TooYumm", logo: "/sponsors/tooyumm.png", title: "M# Refreshments Partner" },
   { name: "Avvatar", logo: "/sponsors/avvatar.jpeg", title: "TechTatva Protein Partner" },
 ];
+
+// Academic sponsor, shown on its own above the industry sponsors. Its logo is light, so it sits on a dark panel.
+export const ACADEMIC_SPONSOR = { name: "Deakin", logo: "/sponsors/deakin.png", title: "Academic Sponsor" };
