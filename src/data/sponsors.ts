@@ -7,7 +7,7 @@ export const SPONSORS: { name: string; logo: string; title: string; href?: strin
   { name: "Global Extent", logo: "/sponsors/global-extent.png", title: "TechTatva Honorary Partner" },
   { name: "Ambrosia", logo: "/sponsors/ambrosia.png", title: "TechTatva Title Sponsor" },
   { name: "FellaRide", logo: "/sponsors/fellaride.png", title: "TechTatva Mobility Partner + M# Travel Partner", href: "https://fellaride.com/" },
-  { name: "Cognecto", logo: "/sponsors/cognecto.jpeg", title: "M# Co-Title Sponsor", href: "https://www.cognecto.com/" },
+  { name: "Cognecto", logo: "/sponsors/cognecto.jpeg", title: "M# Title Sponsor", href: "https://www.cognecto.com/" },
   { name: "TooYumm", logo: "/sponsors/tooyumm.png", title: "M# Refreshments Partner", href: "https://tooyumm.com/" },
   { name: "Avvatar", logo: "/sponsors/avvatar.jpeg", title: "TechTatva Protein Partner", href: "https://www.avvatarindia.com/" },
 ];
