@@ -157,10 +157,6 @@ export const Hero = () => {
         <div className="hero-ring absolute top-1/2 left-1/2 aspect-[2.4/1] w-[min(760px,96%)] rounded-[50%] border border-dashed border-[#84d0fc]/35" />
         <div className="hero-ring hero-ring-alt absolute top-1/2 left-1/2 aspect-[2.9/1] w-[min(900px,104%)] rounded-[50%] border border-[#c4b3f5]/25" />
 
-        {/* Shockwave: two rings pulse out from the logo */}
-        <div className="hero-shock absolute top-1/2 left-1/2 aspect-square w-[min(440px,72%)] rounded-full border border-[#b5f0ff]/70" />
-        <div className="hero-shock hero-shock-late absolute top-1/2 left-1/2 aspect-square w-[min(440px,72%)] rounded-full border border-[#b5f0ff]/70" />
-
         <div className="hero-logo-in absolute top-1/2 left-1/2 w-[min(440px,72%)] -translate-x-1/2 -translate-y-1/2">
           <img src="/assets/hero/hero-logo.png" alt="TechTatva 26 Convergence" className="hero-logo h-auto w-full" />
         </div>

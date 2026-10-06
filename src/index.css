@@ -334,8 +334,7 @@ html[data-hero-intro="waiting"] .hero-fly,
 html[data-hero-intro="waiting"] .hero-intro-zoom,
 html[data-hero-intro="waiting"] .hero-logo-in,
 html[data-hero-intro="waiting"] .hero-tagline-in,
-html[data-hero-intro="waiting"] .hero-beams,
-html[data-hero-intro="waiting"] .hero-shock {
+html[data-hero-intro="waiting"] .hero-beams {
   animation-play-state: paused;
 }
 
@@ -345,10 +344,6 @@ html[data-hero-intro="waiting"] .hero-shock {
 }
 @keyframes hero-beam-flow {
   to { stroke-dashoffset: -100; }
-}
-@keyframes hero-shock {
-  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.5); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.4); }
 }
 .hero-beams { opacity: 0; animation: hero-beam-in 1.5s ease-out 3.4s forwards; }
 .hero-ribbon-core {
@@ -364,10 +359,8 @@ html[data-hero-intro="waiting"] .hero-shock {
   0%, 100% { opacity: 0.2; }
   50% { opacity: 0.5; }
 }
-.hero-shock { opacity: 0; animation: hero-shock 4.5s ease-out 6s infinite; }
-.hero-shock-late { animation-delay: 8.2s; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-beams, .hero-shock { animation: none; opacity: 0; }
+  .hero-beams { animation: none; opacity: 0; }
   .hero-ribbon-core, .hero-ribbon-glow { animation: none; }
 }
 
