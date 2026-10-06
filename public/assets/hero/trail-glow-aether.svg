@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="110.92" height="246.971" viewBox="0 0 110.92 246.971" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Trail glow / Aether" opacity="0.5" filter="url(#filter0_f_0_153)">
+<path d="M27.0004 236.47L24.7804 232.18L22.7204 227.85L20.8104 223.48L19.0704 219.09L17.4904 214.66L16.0704 210.19L14.8104 205.7L13.7104 201.18L12.7704 196.64L11.9904 192.06L11.3704 187.46L10.9204 182.84L10.6304 178.19L10.5004 173.52L10.5304 168.83L10.7304 164.12L11.0904 159.4L11.6104 154.65L12.2904 149.89L13.1304 145.12L14.1304 140.33L15.3004 135.53L16.6304 130.72L18.1104 125.9L19.7604 121.07L21.5704 116.23L23.5404 111.39L25.6604 106.54L27.9504 101.69L30.3904 96.84L32.9904 91.98L35.7404 87.13L38.6604 82.28L41.7204 77.43L44.9404 72.58L48.3204 67.74L51.8404 62.9L55.5204 58.08L59.3504 53.26L63.3304 48.45L67.4604 43.65L71.7304 38.87L76.1504 34.1L80.7204 29.35L85.4304 24.61L90.2804 19.89L95.2804 15.18L100.42 10.5" stroke="url(#paint0_linear_0_153)" stroke-width="9" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_f_0_153" x="0" y="-4.76837e-07" width="110.92" height="246.971" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_0_153"/>
+</filter>
+<linearGradient id="paint0_linear_0_153" x1="26.9992" y1="236.47" x2="175.319" y2="164.186" gradientUnits="userSpaceOnUse">
+<stop stop-color="#01112B" stop-opacity="0"/>
+<stop offset="0.55" stop-color="#84D0FC"/>
+<stop offset="1" stop-color="#84D0FC"/>
+</linearGradient>
+</defs>
+</svg>

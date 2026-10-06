@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SITE } from "../config/site";
 import { openRegistration } from "../lib/navigation";
 import { Reveal } from "./Reveal";
@@ -7,6 +7,9 @@ import { Reveal } from "./Reveal";
 
 // TechTatva logo, served from /public. Change this path if the logo file moves.
 export const TECHTATVA_LOGO = "/assets/hero/logo.png";
+const LOGO_MIT = "/assets/logo/mit-logo.png";
+const LOGO_MAHE = "/assets/logo/mahe-logo.png";
+const LOGO_SC = "/assets/logo/sc-logo.png";
 
 export const scrollToId = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -88,13 +91,25 @@ export const ConcentricRings = () => (
 // The one site header, used on every page. Same tabs everywhere; the right side shows
 
 // Passes jumps to the landing page section from any page. Timetable is its own page.
-export const AppNav = ({ onNavigate, page }: { onNavigate: (page: string) => void; page: string }) => {
-  const tabClass = (current: boolean) =>
-    `cursor-pointer px-4 py-2 font-inter text-[15px] font-semibold leading-normal whitespace-nowrap ${
-      current
-        ? "border-2 border-brut-ink bg-brut-ink text-brut-cream drop-shadow-[4px_4px_0px_#59a7ff]"
-        : "text-brut-ink hover:underline"
-    }`;
+// Desktop shows the links in a row. Below lg they move into a drawer behind the menu button.
+export const AppNav = ({
+  onNavigate,
+  page,
+  overlay = false,
+}: {
+  onNavigate: (page: string) => void;
+  page: string;
+  // Overlay: transparent bar drawn over a dark hero, with light text.
+  overlay?: boolean;
+}) => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
 
   const goSection = (id: string) => {
     if (page === "home") {
@@ -105,63 +120,169 @@ export const AppNav = ({ onNavigate, page }: { onNavigate: (page: string) => voi
     window.setTimeout(() => scrollToId(id), 60);
   };
 
+  const links = [
+    { label: "Home", current: page === "home", onClick: () => onNavigate("home") },
+    { label: "Events", current: false, onClick: () => goSection("lp-passes") },
+    { label: "Timetable", current: page === "timetable", onClick: () => onNavigate("timetable") },
+    { label: "Conclave", current: page === "speakers", onClick: () => onNavigate("speakers") },
+  ];
+
+  const tabClass = (current: boolean) =>
+    `cursor-pointer px-4 py-2 font-inter text-[15px] font-semibold leading-normal whitespace-nowrap ${
+      overlay
+        ? current
+          ? "border-2 border-brut-cream bg-brut-cream text-brut-ink drop-shadow-[4px_4px_0px_#59a7ff]"
+          : "text-brut-cream hover:underline"
+        : current
+          ? "border-2 border-brut-ink bg-brut-ink text-brut-cream drop-shadow-[4px_4px_0px_#59a7ff]"
+          : "text-brut-ink hover:underline"
+    }`;
+
+  const loginClass = `cursor-pointer border-2 px-4 py-2 font-inter text-[15px] font-semibold leading-normal whitespace-nowrap drop-shadow-[4px_4px_0px_#59a7ff] hover:-translate-x-0.5 hover:-translate-y-0.5 ${
+    overlay ? "border-brut-cream bg-brut-cream text-brut-ink" : "border-brut-ink bg-brut-ink text-brut-cream"
+  }`;
+
+  const iconColor = overlay ? "text-brut-cream" : "text-brut-ink";
+  // Over the dark hero the logos show as white silhouettes; elsewhere they keep their colours.
+  const logoTone = overlay ? "brightness-0 invert" : "";
+
   return (
-    <header className="relative z-10 flex flex-wrap items-center justify-between gap-x-4 border-b-3 border-brut-ink bg-[rgba(255,255,255,0.85)] px-4 py-3 lg:px-14 lg:py-4">
-      <button type="button" onClick={() => onNavigate("home")} className="flex cursor-pointer items-center">
-        <img src={TECHTATVA_LOGO} alt="TechTatva 26" className="h-9 w-auto max-w-none lg:h-11" />
-      </button>
-
-      <nav aria-label="Main" className="order-last flex w-full gap-1 overflow-x-auto py-1 pr-1 lg:order-none lg:w-auto lg:overflow-visible lg:p-0">
-        <button
-          type="button"
-          aria-current={page === "home" ? "page" : undefined}
-          className={tabClass(page === "home")}
-          onClick={() => onNavigate("home")}
-        >
-          Home
-        </button>
-        <button type="button" className={tabClass(false)} onClick={() => goSection("lp-passes")}>Events</button>
-        <button
-          type="button"
-          aria-current={page === "timetable" ? "page" : undefined}
-          className={tabClass(page === "timetable")}
-          onClick={() => onNavigate("timetable")}
-        >
-          Timetable
-        </button>
-        <button
-          type="button"
-          aria-current={page === "speakers" ? "page" : undefined}
-          className={tabClass(page === "speakers")}
-          onClick={() => onNavigate("speakers")}
-        >
-          Conclave
-        </button>
-      </nav>
-
-      <button
-        type="button"
-        onClick={openRegistration}
-        className="cursor-pointer border-2 border-brut-ink bg-brut-ink px-4 py-2 font-inter text-[15px] font-semibold leading-normal whitespace-nowrap text-brut-cream drop-shadow-[4px_4px_0px_#59a7ff] hover:-translate-x-0.5 hover:-translate-y-0.5"
+    <>
+      <header
+        className={`flex items-center justify-between gap-x-4 px-4 py-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-14 lg:py-4 ${
+          overlay
+            ? "absolute inset-x-0 top-0 z-20 bg-transparent"
+            : "relative z-10 border-b-3 border-brut-ink bg-[rgba(255,255,255,0.85)]"
+        }`}
       >
-        Login
-      </button>
-    </header>
+        <button
+          type="button"
+          aria-label="TechTatva 26 home"
+          onClick={() => onNavigate("home")}
+          className="flex cursor-pointer items-center justify-self-start"
+        >
+          <span className="hidden items-center gap-3 lg:flex">
+            <img src={LOGO_MIT} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
+            <img src={LOGO_SC} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
+          </span>
+          <span className="flex items-center gap-2 lg:hidden">
+            <img src={LOGO_MAHE} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
+            <img src={LOGO_SC} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
+          </span>
+        </button>
+
+        <nav aria-label="Main" className="hidden items-center gap-1 justify-self-center lg:flex">
+          {links.map((link) => (
+            <button
+              key={link.label}
+              type="button"
+              aria-current={link.current ? "page" : undefined}
+              className={tabClass(link.current)}
+              onClick={link.onClick}
+            >
+              {link.label}
+            </button>
+          ))}
+        </nav>
+
+        <button type="button" onClick={openRegistration} className={`hidden justify-self-end lg:inline-flex ${loginClass}`}>
+          Login
+        </button>
+
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="site-drawer"
+          onClick={() => setOpen(true)}
+          className={`flex size-11 cursor-pointer flex-col items-center justify-center gap-[6px] lg:hidden ${iconColor}`}
+        >
+          <span className="block h-[2px] w-6 bg-current" />
+          <span className="block h-[2px] w-6 bg-current" />
+          <span className="block h-[2px] w-6 bg-current" />
+        </button>
+      </header>
+
+      {/* Mobile and tablet drawer. Slides in from the right; closes on backdrop, Escape or a link. */}
+      <div
+        id="site-drawer"
+        className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        aria-hidden={!open}
+      >
+        <div
+          onClick={() => setOpen(false)}
+          className={`absolute inset-0 bg-[#01112b]/70 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+        />
+        <aside
+          className={`absolute top-0 right-0 flex h-full w-[min(86vw,360px)] flex-col gap-8 border-l-3 border-brut-cream/30 bg-[#022554] px-6 py-6 shadow-[-12px_0_40px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <img src={TECHTATVA_LOGO} alt="" className="h-9 w-auto max-w-none brightness-0 invert" />
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+              className="flex size-11 cursor-pointer items-center justify-center font-anton text-[32px] leading-none text-brut-cream"
+            >
+              ×
+            </button>
+          </div>
+
+          <nav aria-label="Mobile" className="flex flex-col">
+            {links.map((link) => (
+              <button
+                key={link.label}
+                type="button"
+                aria-current={link.current ? "page" : undefined}
+                onClick={() => {
+                  setOpen(false);
+                  link.onClick();
+                }}
+                className={`cursor-pointer border-b border-brut-cream/15 py-4 text-left font-anton text-[28px] leading-none uppercase ${
+                  link.current ? "text-[#84d0fc]" : "text-brut-cream hover:text-[#84d0fc]"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              openRegistration();
+            }}
+            className="mt-auto cursor-pointer border-2 border-brut-cream bg-brut-cream px-4 py-3 font-anton text-[20px] tracking-[1.2px] text-brut-ink uppercase drop-shadow-[4px_4px_0px_#59a7ff]"
+          >
+            Login
+          </button>
+        </aside>
+      </div>
+    </>
   );
 };
 
-// Site footer from the TT26 Figma "Footer" component (desktop 1440, mobile 390).
 export const BrutFooter = () => {
   const links = [
-    { label: "Twitter", href: SITE.socials.twitter },
     { label: "Instagram", href: SITE.socials.instagram },
-    { label: "YouTube", href: SITE.socials.youtube },
     { label: "Rulebook", href: SITE.downloads.rulebook },
   ];
   return (
-    <footer className="flex flex-col items-start justify-between gap-4 bg-brut-ink px-4 py-[26px] text-brut-cream lg:flex-row lg:items-center lg:px-14">
-      <p className="font-anton text-[28px] leading-[0.95] tracking-[1.12px] whitespace-nowrap uppercase">Tech Tatva 2026</p>
-      <div className="flex flex-wrap gap-x-[22px] gap-y-2 font-inter text-[15px] leading-normal font-medium whitespace-nowrap">
+    <footer className="flex flex-col gap-8 overflow-hidden bg-brut-ink px-4 py-10 text-brut-cream lg:grid lg:grid-cols-3 lg:items-center lg:gap-6 lg:px-14 lg:py-12">
+      <address className="flex flex-col gap-2 border-l-3 border-[#84d0fc] pl-4 not-italic">
+        <span className="font-roboto-mono text-[11px] font-bold tracking-[0.66px] text-[#84d0fc] uppercase">Location</span>
+        <span className="font-anton text-[22px] leading-[1.05] tracking-[0.5px] uppercase">Manipal Institute of Technology</span>
+        <span className="font-inter text-[14px] leading-normal text-brut-cream/70">MAHE, Manipal, Karnataka 576104</span>
+      </address>
+
+      <p className="text-center font-anton text-[clamp(48px,7vw,104px)] leading-[0.9] whitespace-nowrap text-brut-cream/15 uppercase">
+        TechTatva 26
+      </p>
+
+      <div className="flex flex-wrap gap-x-[22px] gap-y-2 font-inter text-[15px] leading-normal font-medium whitespace-nowrap lg:justify-end">
         {links.map((l) => (
           <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="hover:text-brut-pink">
             {l.label}
@@ -174,7 +295,7 @@ export const BrutFooter = () => {
 
 // Page wrapper: printed paper background with the grid texture behind the content.
 export const BrutPage = ({ children }: { children: ReactNode }) => (
-  <div className="relative min-h-screen w-full overflow-hidden bg-brut-paper font-inter text-brut-ink">
+  <div className="relative min-h-screen w-full overflow-hidden bg-[#E8F1FB] font-inter text-brut-ink">
     {/* One grid image, zoomed to cover the page so the wave runs continuously. */}
     <div
       aria-hidden="true"

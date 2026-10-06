@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="178.681" height="250.851" viewBox="0 0 178.681 250.851" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Trail glow / Ember" opacity="0.5" filter="url(#filter0_f_0_4)">
+<path d="M165.761 12.0005L166.231 16.6205L166.531 21.2705L166.681 25.9305L166.661 30.6205L166.481 35.3305L166.141 40.0505L165.631 44.8005L164.971 49.5605L164.141 54.3305L163.151 59.1205L162.001 63.9205L160.681 68.7305L159.211 73.5505L157.581 78.3705L155.781 83.2105L153.831 88.0505L151.721 92.9005L149.451 97.7505L147.021 102.6L144.441 107.46L141.701 112.31L138.801 117.17L135.751 122.02L132.541 126.86L129.181 131.7L125.671 136.54L122.001 141.37L118.191 146.18L114.221 150.99L110.111 155.79L105.851 160.58L101.441 165.35L96.8906 170.1L92.1906 174.84L87.3506 179.57L82.3606 184.27L77.2406 188.96L71.9806 193.62L66.5806 198.26L61.0406 202.88L55.3706 207.47L49.5606 212.04L43.6206 216.58L37.5506 221.1L31.3506 225.58L25.0306 230.03L18.5806 234.46L12.0006 238.85" stroke="url(#paint0_linear_0_4)" stroke-width="12" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_f_0_4" x="-4.76837e-07" y="4.76837e-07" width="178.681" height="250.851" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_0_4"/>
+</filter>
+<linearGradient id="paint0_linear_0_4" x1="165.762" y1="12.0005" x2="-44.6183" y2="156.307" gradientUnits="userSpaceOnUse">
+<stop stop-color="#01112B" stop-opacity="0"/>
+<stop offset="0.55" stop-color="#F24F05"/>
+<stop offset="1" stop-color="#F24F05"/>
+</linearGradient>
+</defs>
+</svg>

@@ -7,6 +7,11 @@ export const SITE = {
   venue: "MIT Manipal, Karnataka",
   // Registration is handled by a separate system — point this at that app/site.
   registerUrl: "https://dev-register-techtatva.manipal.edu/dashboard",
+  // Live data from the two Google Sheets web apps (see apps-script/Code.gs). Pages fall back to bundled data if these fail.
+  dataApi: {
+    timetable: "https://script.google.com/macros/s/AKfycbwUjxEUqDwMpa-swKOBzE6JG4RRTGGzTEYYaNmxe55Mn9-DWdcHXlMMgvv5HUplpL1Z/exec",
+    events: "https://script.google.com/macros/s/AKfycbwhTFksUxsnw374oyio52DtYH0KWuPFWta8WWZBi3G9o_DeS9rZntei07TF9TZn3I2aGw/exec",
+  },
   // PDFs live in public/docs/ with these names.
   downloads: {
     rulebook: "/docs/TechTatva'26%20rulebook.pdf",

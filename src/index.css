@@ -63,6 +63,8 @@
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
   --font-chakra: 'Chakra Petch', system-ui, sans-serif;
+  --font-michroma: 'Michroma', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', serif;
 }
 
 /* Landing text effects: pink/cyan offset "glitch" shadows, sized per breakpoint like the Figma frames */
@@ -214,4 +216,42 @@ button,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Landing hero: subtle motion. Positions stay where they are; only transform, opacity and glow change. */
+@keyframes hero-aether-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(0, -6px, 0) rotate(1.5deg); }
+}
+@keyframes hero-zenith-tilt {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-2.5deg); }
+  50% { transform: translate3d(0, -2px, 0) rotate(2.5deg); }
+}
+@keyframes hero-ember-glow {
+  0%, 100% { transform: translate3d(0, 0, 0); filter: drop-shadow(0 0 6px rgba(242, 79, 5, 0.35)); }
+  50% { transform: translate3d(0, -3px, 0); filter: drop-shadow(0 0 18px rgba(242, 79, 5, 0.6)); }
+}
+@keyframes hero-obsidian-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(1.5deg); }
+  50% { transform: translate3d(0, 4px, 0) rotate(-1.5deg); }
+}
+@keyframes hero-orbit-breathe {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+@keyframes hero-logo-glow {
+  0%, 100% { filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 22px rgba(181, 240, 255, 0.22)); }
+  50% { filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 30px rgba(181, 240, 255, 0.36)); }
+}
+.hero-aether { animation: hero-aether-float 6s ease-in-out infinite; }
+.hero-zenith { animation: hero-zenith-tilt 7s ease-in-out infinite; }
+.hero-ember { animation: hero-ember-glow 5s ease-in-out infinite; }
+.hero-obsidian { animation: hero-obsidian-float 7s ease-in-out infinite; }
+.hero-stage img[src$="orbit-outer.svg"],
+.hero-stage img[src$="orbit-front.svg"] { animation: hero-orbit-breathe 12s ease-in-out infinite; }
+.hero-logo { animation: hero-logo-glow 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-aether, .hero-zenith, .hero-ember, .hero-obsidian, .hero-logo,
+  .hero-stage img[src$="orbit-outer.svg"],
+  .hero-stage img[src$="orbit-front.svg"] { animation: none; }
 }

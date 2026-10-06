@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="473.232" height="54.0915" viewBox="0 0 473.232 54.0915" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Trail glow / Obsidian" opacity="0.5" filter="url(#filter0_f_0_152)">
+<path d="M461.232 26.8015L451.101 28.2915L440.961 29.7015L430.821 31.0315L420.691 32.3015L410.551 33.4815L400.411 34.5915L390.291 35.6315L380.172 36.5915L370.071 37.4715L359.971 38.2715L349.901 39.0015L339.851 39.6615L329.821 40.2315L319.811 40.7315L309.831 41.1515L299.881 41.4915L289.961 41.7615L280.081 41.9515L270.241 42.0615L260.431 42.0915L250.671 42.0515L240.961 41.9315L231.291 41.7315L221.671 41.4515L212.101 41.0915L202.591 40.6615L193.141 40.1515L183.741 39.5715L174.411 38.9015L165.141 38.1615L155.941 37.3415L146.811 36.4515L137.751 35.4815L128.771 34.4315L119.861 33.3115L111.031 32.1215L102.281 30.8415L93.6215 29.5015L85.0315 28.0815L76.5415 26.5815L68.1415 25.0115L59.8315 23.3715L51.6115 21.6515L43.4915 19.8715L35.4615 18.0115L27.5415 16.0715L19.7215 14.0715L12.0015 12.0015" stroke="url(#paint0_linear_0_152)" stroke-width="12" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_f_0_152" x="-4.76837e-07" y="-4.76837e-07" width="473.232" height="54.0915" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="3" result="effect1_foregroundBlur_0_152"/>
+</filter>
+<linearGradient id="paint0_linear_0_152" x1="461.231" y1="26.8031" x2="451.075" y2="-47.785" gradientUnits="userSpaceOnUse">
+<stop stop-color="#01112B" stop-opacity="0"/>
+<stop offset="0.55" stop-color="#D6B181"/>
+<stop offset="1" stop-color="#D6B181"/>
+</linearGradient>
+</defs>
+</svg>

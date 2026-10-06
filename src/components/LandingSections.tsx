@@ -211,14 +211,14 @@ export const Documents = () => (
           title="Rulebook"
           body="Every event's rules, judging criteria and team limits in one document. Read it before you register a team."
           href={SITE.downloads.rulebook}
-          shadow={shadowFor("Rulebook")}
+          shadow="#12110f"
           downloadLabel="Download rulebook"
         />
         <DocCard
           title="Brochure"
           body="An overview of TechTatva 26, its universes, passes and what to expect across the four days."
           href={SITE.downloads.brochure}
-          shadow={shadowFor("Brochure")}
+          shadow="#12110f"
           downloadLabel="Download brochure"
         />
       </div>

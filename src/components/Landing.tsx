@@ -1,88 +1,50 @@
 import type { ReactNode } from "react";
-import { AppNav, Button, BrutFooter, BrutPage, ConcentricRings, SectionHead, scrollToId } from "./Brut";
+import { AppNav, Button, BrutFooter, BrutPage, ConcentricRings, SectionHead } from "./Brut";
 import { Reveal } from "./Reveal";
 import { Documents, Faq, SocialTrending } from "./LandingSections";
 // TODO: Gallery, Legacy and Sponsors are commented out until their design is finished.
 // import { Gallery, Legacy, Sponsors } from "./LandingSections";
 import { openRegistration } from "../lib/navigation";
-import { shadowFor } from "../lib/shadows";
+import { Hero } from "./Hero";
 
 type Props = {
   onNavigate: (page: string) => void;
 };
-
-const Planet = () => (
-  <div className="lp-float relative aspect-square w-full max-w-[330px] lg:w-[484px] lg:max-w-none">
-    <div className="absolute top-[16.36%] left-[16.36%] size-[67.27%] overflow-hidden rounded-full border-4 border-brut-ink bg-brut-cream shadow-[10px_10px_0px_0px_#12110f]">
-      <img src="/assets/landing/bb2fc.svg" alt="" className="absolute -top-[1.2%] -left-[1.2%] w-[99%] max-w-none" />
-      <img src="/assets/landing/fec67.svg" alt="" className="absolute top-[11.8%] left-[15.8%] w-[15%] max-w-none" />
-      <img src="/assets/landing/5597e.svg" alt="" className="absolute top-[48.8%] left-[43.8%] w-1/2 max-w-none mix-blend-multiply" />
-    </div>
-    <div className="absolute top-[16.6%] -left-[0.74%] flex h-[66.7%] w-[101.5%] items-center justify-center">
-      <img src="/assets/landing/48e41.svg" alt="" className="w-[96.6%] max-w-none -rotate-[24deg]" />
-    </div>
-    <img src="/assets/landing/61216.svg" alt="" className="absolute top-[30%] left-[80%] size-[7.27%] max-w-none" />
-  </div>
-);
-
-const Hero = () => (
-  <section className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[30px] px-4 pt-[50px] pb-10 lg:flex-row lg:px-14 lg:pb-20">
-    <div className="flex w-full flex-col items-start gap-5 lg:w-[700px] lg:shrink-0">
-      <h1 className="font-anton text-[clamp(110px,14.58vw,210px)] leading-[0.88] whitespace-nowrap text-brut-ink uppercase">
-        Tech
-        <br />
-        Tatva
-      </h1>
-      <p className="max-w-[640px] font-inter text-[18px] leading-normal text-brut-body">
-        Four days across the TechTatva 26: talks, machines, design, business and culture. Pick your passes, then your universes.
-      </p>
-      <div className="flex flex-wrap gap-4">
-        <Button variant="ink" large onClick={() => scrollToId("lp-passes")}>Buy passes</Button>
-      </div>
-      <div className="flex flex-wrap gap-2.5">
-        <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#1f5fd6]">4</span> days
-        </span>
-        <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#1f5fd6]">14</span> events
-        </span>
-        <span className="border-2 border-brut-ink bg-brut-cream px-3 py-1.5 font-roboto-mono text-[12px] font-bold uppercase text-brut-ink">
-          <span className="text-[#1f5fd6]">4</span> realities
-        </span>
-      </div>
-    </div>
-    <Planet />
-  </section>
-);
 
 const ComboCard = ({
   title,
   body,
   label,
   artClass,
+  image,
   rings,
-  shadow,
 }: {
   title: string;
-  body: string;
+  body?: string;
   label: string;
   artClass?: string;
+  image?: string;
   rings?: boolean;
-  shadow: string;
 }) => (
   <div
     className="flex flex-col gap-5 border-3 border-brut-ink bg-white p-[18px] lg:flex-1 lg:flex-row lg:items-center"
-    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
+    style={{ boxShadow: "8px 8px 0px 0px #12110f" }}
   >
     <div className="relative h-[150px] w-full shrink-0 overflow-hidden border-3 border-brut-ink bg-brut-paper lg:h-[200px] lg:w-[220px]">
-      {rings ? <ConcentricRings /> : <div className={`absolute inset-0 ${artClass}`} />}
+      {image ? (
+        <img src={image} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
+      ) : rings ? (
+        <ConcentricRings />
+      ) : (
+        <div className={`absolute inset-0 ${artClass}`} />
+      )}
       <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-2.5">
         {label}
       </span>
     </div>
     <div className="flex w-full min-w-0 flex-col gap-2.5 lg:flex-1">
       <p className="font-anton text-[34px] leading-[0.95] text-brut-ink uppercase">{title}</p>
-      <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
+      {body && <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>}
       <div className="flex">
         <Button variant="blue" onClick={openRegistration}>Buy combo</Button>
       </div>
@@ -98,17 +60,13 @@ const ComboOffers = () => (
     <div className="flex flex-col gap-10 pb-5 lg:flex-row">
       <ComboCard
         title="Flagship + Merch"
-        body="A Flagship pass with the TechTatva 26 merch pack. One purchase, everything in it."
-        label="FLAG"
-        rings
-        shadow={shadowFor("Flagship + Merch")}
+        label="FLAGSHIP"
+        image="/assets/combo/flagship-merch.png"
       />
       <ComboCard
         title="Conclave + Merch"
-        body="A Conclave pass with the TechTatva 26 merch pack. The evening talks and acts, plus the merch."
         label="CONCLAVE"
-        artClass="lp-pattern-zig"
-        shadow={shadowFor("Conclave + Merch")}
+        image="/assets/merch/astronaut.png"
       />
     </div>
   </section>
@@ -117,30 +75,34 @@ const ComboOffers = () => (
 const PassCard = ({
   name,
   artClass,
+  image,
   label,
   body,
   action,
-  shadow,
 }: {
   name: string;
   artClass?: string;
+  image?: string;
   label: string;
-  body: string;
+  body?: string;
   action: ReactNode;
-  shadow: string;
 }) => (
   <div
     className="flex w-full max-w-[460px] flex-col gap-3.5 border-3 border-brut-ink bg-white p-[18px] lg:w-[460px]"
-    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
+    style={{ boxShadow: "8px 8px 0px 0px #12110f" }}
   >
     <div className="relative h-[230px] w-full overflow-hidden border-3 border-brut-ink bg-brut-paper">
-      {artClass && <div className={`absolute inset-0 ${artClass}`} />}
+      {image ? (
+        <img src={image} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
+      ) : (
+        artClass && <div className={`absolute inset-0 ${artClass}`} />
+      )}
       <span className="absolute bottom-2 left-4 font-anton text-[56px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-[22px]">
         {label}
       </span>
     </div>
     <p className="font-anton text-[40px] leading-[0.95] text-brut-ink uppercase">{name}</p>
-    <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
+    {body && <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>}
     <div className="flex flex-wrap gap-3">{action}</div>
   </div>
 );
@@ -153,10 +115,8 @@ const EventPasses = ({ onNavigate }: Props) => (
     <div className="flex flex-col items-center gap-[60px] pb-5 lg:flex-row lg:justify-center">
       <PassCard
         name="General pass"
-        artClass="lp-pattern-cross"
+        image="/assets/passes/general.png"
         label="General"
-        body="Placeholder copy for the pass. Entry to the events listed under it."
-        shadow={shadowFor("General pass")}
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
@@ -166,9 +126,8 @@ const EventPasses = ({ onNavigate }: Props) => (
       />
       <PassCard
         name="Flagship pass"
+        image="/assets/passes/flagship.png"
         label="Flagship"
-        body="Placeholder copy for the pass. Entry to the events listed under it."
-        shadow={shadowFor("Flagship pass")}
         action={
           <>
             <Button variant="cream" onClick={() => onNavigate("events")}>View events</Button>
@@ -183,6 +142,7 @@ const EventPasses = ({ onNavigate }: Props) => (
 const WideCard = ({
   reverse,
   artClass,
+  image,
   label,
   title,
   body,
@@ -190,10 +150,10 @@ const WideCard = ({
   primaryAction,
   secondary,
   secondaryAction,
-  shadow,
 }: {
   reverse?: boolean;
-  artClass: string;
+  artClass?: string;
+  image?: string;
   label: string;
   title: string;
   body: string;
@@ -201,16 +161,19 @@ const WideCard = ({
   primaryAction: () => void;
   secondary: string;
   secondaryAction: () => void;
-  shadow: string;
 }) => (
   <div
     className={`flex w-full flex-col gap-5 border-3 border-brut-ink bg-white p-[18px] lg:items-center ${
       reverse ? "lg:flex-row-reverse" : "lg:flex-row"
     }`}
-    style={{ boxShadow: `8px 8px 0px 0px ${shadow}` }}
+    style={{ boxShadow: "8px 8px 0px 0px #12110f" }}
   >
     <div className="relative h-[150px] w-full shrink-0 overflow-hidden border-3 border-brut-ink bg-brut-paper lg:h-[200px] lg:w-[220px]">
-      <div className={`absolute inset-0 ${artClass}`} />
+      {image ? (
+        <img src={image} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
+      ) : (
+        <div className={`absolute inset-0 ${artClass}`} />
+      )}
       <span className="absolute bottom-3 left-4 font-anton text-[40px] leading-[0.95] text-[#f1f4ee] uppercase [-webkit-text-stroke:2px_#12110f] lg:left-2.5">
         {label}
       </span>
@@ -234,26 +197,24 @@ const MorePasses = ({ onNavigate }: Props) => (
     <div className="flex flex-col gap-10 pb-[50px] lg:pb-[90px]">
       <WideCard
         label="CONCLAVE"
-        artClass="lp-pattern-zig"
+        image="/assets/passes/conclave.png"
         title="Conclave pass"
         body="Talks and a headline act on each of the three evenings."
         primary="View lineup"
         primaryAction={() => onNavigate("speakers")}
         secondary="Purchase pass"
         secondaryAction={openRegistration}
-        shadow={shadowFor("Conclave pass")}
       />
       <WideCard
         reverse
         label="MERCH"
-        artClass="lp-pattern-cross-sm"
+        image="/assets/combo/general-merch.png"
         title="Merchandise"
         body="Tees, posters and stickers in the printed TechTatva 26 style."
         primary="View merch"
         primaryAction={openRegistration}
         secondary="Purchase merch"
         secondaryAction={openRegistration}
-        shadow={shadowFor("Merchandise")}
       />
     </div>
   </section>
@@ -261,7 +222,7 @@ const MorePasses = ({ onNavigate }: Props) => (
 
 const Landing = ({ onNavigate }: Props) => (
   <BrutPage>
-    <AppNav onNavigate={onNavigate} page="home" />
+    <AppNav onNavigate={onNavigate} page="home" overlay />
     <Hero />
     <Reveal>
       <ComboOffers />
