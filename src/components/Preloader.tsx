@@ -72,22 +72,17 @@ export const Preloader = () => {
       }`}
       style={{ transitionDuration: `${SLIDE_MS}ms` }}
     >
-      {/* The universe: the same static image as the hero, a glow in the middle, and a ring around the logo */}
+      {/* The universe: the same static image as the hero, and a glow in the middle */}
       <img src="/assets/hero/universe-bg.jpg" alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 size-full object-cover" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#03040a_100%)]" />
       <div aria-hidden="true" className="pointer-events-none absolute h-[620px] w-[620px] rounded-full bg-[#84d0fc]/15 blur-[160px]" />
-      <div className="hero-ring pointer-events-none absolute top-1/2 left-1/2 aspect-square w-[min(560px,90%)] rounded-full border border-dashed border-[#84d0fc]/35" />
-      <div className="hero-ring hero-ring-alt pointer-events-none absolute top-1/2 left-1/2 aspect-[2.9/1] w-[min(760px,110%)] rounded-[50%] border border-[#c4b3f5]/25" />
 
-      <div className="relative flex flex-col items-center gap-6 text-center">
+      <div className="relative flex flex-col items-center text-center">
         <img
           src="/assets/hero/hero-logo.png"
           alt="TechTatva 26"
-          className="hero-logo h-auto w-[min(360px,70vw)]"
+          className="hero-logo h-auto w-[min(360px,70vw)] opacity-60 brightness-75"
         />
-        <span className="font-anton text-[clamp(20px,2.4vw,30px)] tracking-[0.08em] text-[#84d0fc] uppercase">
-          Welcome to Tech Tatva &apos;26
-        </span>
       </div>
     </div>
   );
