@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { SITE } from "../config/site";
 import { FAQS, GALLERY, LEGACY_STATS, SOCIAL_POSTS, SPONSOR_TIERS } from "../data/landing";
 import { Button, SectionHead } from "./Brut";
@@ -6,6 +6,7 @@ import { InstagramIcon } from "./SocialIcons";
 import { Reveal } from "./Reveal";
 import { shadowFor } from "../lib/shadows";
 import { GALLERY_PHOTOS } from "../data/gallery";
+import { SPONSORS } from "../data/sponsors";
 
 
 // Shared wrapper so every section lines up with the header and footer gutters.
@@ -269,27 +270,110 @@ export const Faq = () => {
   );
 };
 
-// Photo gallery. Photos come from src/data/gallery.ts. Hovering a photo zooms it in slightly.
-export const PhotoGallery = () => (
+// Photo gallery, in the Revels "Moments" style: a large centre photo with smaller angled photos either side.
+// Photos come from src/data/gallery.ts. Desktop auto-advances and pauses on hover. Phones show the centre photo only.
+const SLIDE_MS = 700;
+const AUTOPLAY_MS = 4000;
+
+const slideStyle = (rel: number): React.CSSProperties => {
+  if (rel === 0) return { transform: "translate(-50%, -50%) scale(1)", opacity: 1, zIndex: 20 };
+  if (rel === -1) return { transform: "translate(calc(-50% - 63%), -50%) scale(0.5) rotateY(35deg)", opacity: 1, zIndex: 10 };
+  if (rel === 1) return { transform: "translate(calc(-50% + 63%), -50%) scale(0.5) rotateY(-35deg)", opacity: 1, zIndex: 10 };
+  return { transform: "translate(-50%, -50%) scale(0.4)", opacity: 0, zIndex: 0 };
+};
+
+const arrowButton = "absolute top-1/2 z-30 flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center border-3 border-brut-ink bg-white md:size-12";
+
+export const PhotoGallery = () => {
+  const count = GALLERY_PHOTOS.length;
+  const [current, setCurrent] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const busy = useRef(false);
+
+  const step = (dir: 1 | -1) => {
+    if (busy.current || count < 2) return;
+    busy.current = true;
+    setCurrent((c) => (c + dir + count) % count);
+    window.setTimeout(() => {
+      busy.current = false;
+    }, SLIDE_MS);
+  };
+
+  useEffect(() => {
+    if (hovered || !window.matchMedia("(min-width: 768px)").matches) return;
+    const id = window.setInterval(() => step(1), AUTOPLAY_MS);
+    return () => window.clearInterval(id);
+  }, [hovered, current]);
+
+  return (
+    <Reveal>
+      <Container>
+        <SectionHead>
+          Gallery <span className="text-[#1f5fd6]">moments</span>
+        </SectionHead>
+        <div
+          className="relative mx-auto h-[230px] w-full max-w-5xl pb-[50px] [perspective:1500px] md:h-[470px] lg:pb-[80px]"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {GALLERY_PHOTOS.map((src, i) => {
+            const offset = (i - current + count) % count;
+            const rel = offset > count / 2 ? offset - count : offset;
+            return (
+              <figure
+                key={src}
+                className={`absolute top-1/2 left-1/2 aspect-[16/9] w-[min(760px,78vw)] overflow-hidden border-3 border-brut-ink bg-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                  rel === 0 ? "" : "max-md:!opacity-0"
+                }`}
+                style={{ ...slideStyle(rel), boxShadow: "6px 6px 0px 0px #12110f" }}
+              >
+                <img
+                  src={src}
+                  alt={`TechTatva 26 gallery photo ${i + 1}`}
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
+              </figure>
+            );
+          })}
+
+          <button type="button" onClick={() => step(-1)} aria-label="Previous photo" className={`${arrowButton} left-2 md:left-4`}>
+            <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button type="button" onClick={() => step(1)} aria-label="Next photo" className={`${arrowButton} right-2 md:right-4`}>
+            <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </Container>
+    </Reveal>
+  );
+};
+
+// Sponsors in a matrix: logo on top, sponsor type below it. Data is in src/data/sponsors.ts.
+export const SponsorsMatrix = () => (
   <Reveal>
     <Container>
       <SectionHead>
-        Gallery <span className="text-[#1f5fd6]">moments</span>
+        Our <span className="text-[#1f5fd6]">sponsors</span>
       </SectionHead>
-      <div className="grid grid-cols-2 gap-4 pb-[50px] lg:grid-cols-4 lg:gap-6 lg:pb-[80px]">
-        {GALLERY_PHOTOS.map((src, i) => (
-          <div
-            key={src}
-            className="group aspect-[4/5] overflow-hidden border-3 border-brut-ink bg-white"
+      <div className="grid grid-cols-2 gap-4 pb-[50px] lg:grid-cols-3 lg:gap-6 lg:pb-[80px]">
+        {SPONSORS.map((sponsor) => (
+          <figure
+            key={sponsor.name}
+            className="flex flex-col items-center gap-4 border-3 border-brut-ink bg-white p-5 text-center lg:p-8"
             style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
           >
-            <img
-              src={src}
-              alt={`TechTatva 26 gallery photo ${i + 1}`}
-              loading="lazy"
-              className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-            />
-          </div>
+            <div className="flex h-24 w-full items-center justify-center lg:h-32">
+              <img src={sponsor.logo} alt={sponsor.name} loading="lazy" className="max-h-full max-w-full object-contain" />
+            </div>
+            <figcaption className="font-roboto-mono text-[11px] font-bold tracking-[0.5px] text-brut-ink uppercase lg:text-[13px]">
+              {sponsor.title}
+            </figcaption>
+          </figure>
         ))}
       </div>
     </Container>

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { SITE } from "../config/site";
-import { openRegistration } from "../lib/navigation";
+import { goToPage, openRegistration } from "../lib/navigation";
 import { Reveal } from "./Reveal";
 
 // Shared building blocks for the TT26 Figma design (Page 2 of "TT26 Landing Page").
@@ -155,12 +155,7 @@ export const AppNav = ({
             : "relative z-10 border-b-3 border-brut-ink bg-[rgba(255,255,255,0.85)]"
         }`}
       >
-        <button
-          type="button"
-          aria-label="TechTatva 26 home"
-          onClick={() => onNavigate("home")}
-          className="flex cursor-pointer items-center justify-self-start"
-        >
+        <div className="flex items-center justify-self-start">
           <span className="hidden items-center gap-3 lg:flex">
             <img src={LOGO_MIT} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
             <img src={LOGO_SC} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
@@ -169,7 +164,7 @@ export const AppNav = ({
             <img src={LOGO_MAHE} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
             <img src={LOGO_SC} alt="" className={`h-9 w-auto max-w-none ${logoTone}`} />
           </span>
-        </button>
+        </div>
 
         <nav aria-label="Main" className="hidden items-center gap-1 justify-self-center lg:flex">
           {links.map((link) => (
@@ -267,7 +262,6 @@ export const AppNav = ({
 
 export const BrutFooter = () => {
   const links = [
-    { label: "Instagram", href: SITE.socials.instagram },
     { label: "Rulebook", href: SITE.downloads.rulebook },
   ];
   return (
@@ -288,6 +282,9 @@ export const BrutFooter = () => {
             {l.label}
           </a>
         ))}
+        <button type="button" onClick={() => goToPage("meettheteam")} className="cursor-pointer hover:text-brut-pink">
+          Meet the team
+        </button>
       </div>
     </footer>
   );
