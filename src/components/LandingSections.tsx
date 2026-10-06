@@ -354,7 +354,8 @@ export const PhotoGallery = () => {
 };
 
 // Sponsors: the academic sponsor on its own at the top, then the industry sponsors in a three-per-row grid on every screen size.
-const SponsorCard = ({ name, logo, title, dark = false }: { name: string; logo: string; title: string; dark?: boolean }) => (
+const SponsorCard = ({ name, logo, title, href, dark = false }: { name: string; logo: string; title: string; href?: string; dark?: boolean }) => {
+  const card = (
   <figure
     className={`flex flex-col items-center gap-2 border-3 border-brut-ink p-2.5 text-center lg:gap-3 lg:p-4 ${dark ? "bg-brut-ink" : "bg-white"}`}
     style={{ boxShadow: "6px 6px 0px 0px #12110f" }}
@@ -370,7 +371,15 @@ const SponsorCard = ({ name, logo, title, dark = false }: { name: string; logo: 
       {title}
     </figcaption>
   </figure>
-);
+  );
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name} website`} className="block">
+      {card}
+    </a>
+  ) : (
+    card
+  );
+};
 
 // Smaller, centred title for the sponsors section.
 const SponsorHeading = ({ children }: { children: ReactNode }) => (
@@ -388,7 +397,7 @@ export const SponsorsMatrix = () => (
       </div>
       <div className="mx-auto grid max-w-[900px] grid-cols-3 gap-3 pb-[50px] sm:gap-4 lg:gap-5 lg:pb-[80px]">
         {SPONSORS.map((sponsor) => (
-          <SponsorCard key={sponsor.name} name={sponsor.name} logo={sponsor.logo} title={sponsor.title} />
+          <SponsorCard key={sponsor.name} name={sponsor.name} logo={sponsor.logo} title={sponsor.title} href={sponsor.href} />
         ))}
       </div>
     </Container>
