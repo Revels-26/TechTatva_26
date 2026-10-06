@@ -1,79 +1,192 @@
-// Landing hero, built from the TechTatva 26 Figma hero layers (1440 x 960 artboard).
-// Every position is a percentage of the artboard, and the stage is a size container, so the hero
-// keeps its layout at any screen width. On phones the stage is taller and the emblems are enlarged.
-// Landing hero, built from the TechTatva 26 Figma hero layers (1440 x 960 artboard).
-// The section fills the screen. The artboard inside it scales to fit the screen and keeps its proportions:
-// landscape screens use the 3:2 layout, portrait phones use a taller 3:4 layout with bigger emblems.
-export const Hero = () => (
-  <section
-    className="relative h-[min(100svh,calc(100vw/1.5))] w-full overflow-hidden portrait:h-auto portrait:pt-20"
-    style={{
-      background:
-        "radial-gradient(96% 53% at 50% 42%, #153d79 0%, #0c3167 27.5%, #022554 55%, #01112b 100%)",
-    }}
-  >
-    <img
-      src="/assets/hero/starfield.svg"
-      alt=""
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 size-full object-cover"
-    />
-    <h1 className="sr-only">TechTatva 26: Convergence. Realities Reengineered.</h1>
-    <div
-      aria-hidden="true"
-      className="hero-stage absolute top-1/2 left-1/2 aspect-[3/2] w-[min(100vw,calc(100svh*1.5))] -translate-x-1/2 -translate-y-1/2 overflow-hidden [--emblem-scale:1] [container-type:inline-size] portrait:relative portrait:top-auto portrait:left-1/2 portrait:w-[110vw] portrait:translate-y-0 portrait:aspect-[3/2]"
-    >
-        <img src="/assets/hero/aura-ember.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "64.699%", top: "32.119%", width: "37.139%", aspectRatio: "534.8 / 534.8" }} />
-        <img src="/assets/hero/aura-obsidian.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "2.618%", top: "46.868%", width: "37.139%", aspectRatio: "534.8 / 534.8" }} />
-        <img src="/assets/hero/aura-zenith.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "69.568%", top: "-1.281%", width: "29.167%", aspectRatio: "420 / 420" }} />
-        <img src="/assets/hero/aura-aether.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "-2.349%", top: "15.804%", width: "29.167%", aspectRatio: "420 / 420" }} />
-        <img src="/assets/hero/orbit-outer.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "-2.265%", top: "8.172%", width: "104.531%", aspectRatio: "1505.25 / 731.1" }} />
-        <img src="/assets/hero/orbit-back.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "5.991%", top: "14.644%", width: "87.906%", aspectRatio: "1265.85 / 403.54" }} />
-        <img src="/assets/hero/trail-glow-aether.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "5.99%", top: "37.679%", width: "6.244%", aspectRatio: "89.92 / 225.97" }} />
-        <img src="/assets/hero/trail-aether.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "5.99%", top: "37.679%", width: "6.244%", aspectRatio: "89.92 / 225.97" }} />
-        <img src="/assets/hero/trail-glow-zenith.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "55.283%", top: "14.644%", width: "28.868%", aspectRatio: "415.7 / 57.12" }} />
-        <img src="/assets/hero/trail-zenith.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "55.283%", top: "14.644%", width: "28.868%", aspectRatio: "415.7 / 57.12" }} />
-        <img src="/assets/hero/core-bloom.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "12.5%", top: "15.208%", width: "75.0%", aspectRatio: "1080 / 620" }} />
-        <img src="/assets/hero/orbit-front.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "6.103%", top: "35.821%", width: "87.906%", aspectRatio: "1265.85 / 403.54" }} />
-        <img src="/assets/hero/trail-glow-obsidian.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "21.188%", top: "74.722%", width: "31.197%", aspectRatio: "449.23 / 30.09" }} />
-        <img src="/assets/hero/trail-obsidian.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "21.188%", top: "74.722%", width: "31.197%", aspectRatio: "449.23 / 30.09" }} />
-        <img src="/assets/hero/trail-glow-ember.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "83.268%", top: "36.344%", width: "10.742%", aspectRatio: "154.68 / 226.85" }} />
-        <img src="/assets/hero/trail-ember.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "83.268%", top: "36.344%", width: "10.742%", aspectRatio: "154.68 / 226.85" }} />
-        <img src="/assets/hero/bead-a.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "72.661%", top: "8.707%", width: "0.22%", aspectRatio: "3.167 / 3.167" }} />
-        <img src="/assets/hero/bead-a.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "20.533%", top: "21.092%", width: "0.22%", aspectRatio: "3.167 / 3.167" }} />
-        <img src="/assets/hero/bead-b.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "28.485%", top: "23.454%", width: "0.216%", aspectRatio: "3.117 / 3.117" }} />
-        <img src="/assets/hero/bead-c.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "39.992%", top: "83.953%", width: "0.379%", aspectRatio: "5.457 / 5.457" }} />
-        <img src="/assets/hero/bead-d.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "71.213%", top: "75.57%", width: "0.377%", aspectRatio: "5.425 / 5.425" }} />
-        <img src="/assets/hero/bead-e.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "11.381%", top: "68.062%", width: "0.332%", aspectRatio: "4.778 / 4.778" }} />
-        <img src="/assets/hero/bead-f.svg" alt="" aria-hidden="true" className="absolute block max-w-none" style={{ left: "73.204%", top: "67.419%", width: "0.372%", aspectRatio: "5.354 / 5.354" }} />
-        <img src="/assets/hero/emblem-aether.png" alt="" aria-hidden="true" className="hero-aether absolute block max-w-none" style={{ left: "7.026%", top: "29.867%", width: "calc(10.417% * var(--emblem-scale))", aspectRatio: "1 / 1" }} />
-        <img src="/assets/hero/emblem-zenith.png" alt="" aria-hidden="true" className="hero-zenith absolute block max-w-none" style={{ left: "78.943%", top: "12.781%", width: "calc(10.417% * var(--emblem-scale))", aspectRatio: "1 / 1" }} />
-        <img src="/assets/hero/emblem-obsidian.png" alt="" aria-hidden="true" className="hero-obsidian absolute block max-w-none" style={{ left: "14.556%", top: "64.774%", width: "calc(13.264% * var(--emblem-scale))", aspectRatio: "1 / 1" }} />
-        <img src="/assets/hero/emblem-ember.png" alt="" aria-hidden="true" className="hero-ember absolute block max-w-none" style={{ left: "76.636%", top: "50.025%", width: "calc(13.264% * var(--emblem-scale))", aspectRatio: "1 / 1" }} />
-        <span className="hero-label hero-label-aether absolute font-michroma uppercase whitespace-nowrap opacity-80 text-[color:var(--color-text-primary)]" style={{ left: "9.722%", top: "46.354%", fontSize: "clamp(9px, 0.85cqw, 11px)", letterSpacing: "0.14em" }}>Aether</span>
-        <span className="hero-label hero-label-zenith absolute font-michroma uppercase whitespace-nowrap opacity-80 text-[color:var(--color-text-primary)]" style={{ left: "81.875%", top: "29.271%", fontSize: "clamp(9px, 0.85cqw, 11px)", letterSpacing: "0.14em" }}>Zenith</span>
-        <span className="hero-label hero-label-obsidian absolute font-michroma uppercase whitespace-nowrap opacity-80 text-[color:var(--color-text-primary)]" style={{ left: "18.125%", top: "85.521%", fontSize: "clamp(9px, 0.85cqw, 11px)", letterSpacing: "0.14em" }}>Obsidian</span>
-        <span className="hero-label hero-label-ember absolute font-michroma uppercase whitespace-nowrap opacity-80 text-[color:var(--color-text-primary)]" style={{ left: "81.042%", top: "70.729%", fontSize: "clamp(9px, 0.85cqw, 11px)", letterSpacing: "0.14em" }}>Ember</span>
-        <img
-          src="/assets/hero/hero-logo.png"
-          alt=""
-          aria-hidden="true"
-          className="hero-logo absolute block max-w-none"
-          style={{ left: "27.778%", top: "27.917%", width: "44.444%", aspectRatio: "640 / 370" }}
-        />
-        <p
-          className="hero-tagline absolute whitespace-nowrap text-center font-cormorant font-semibold italic text-[color:var(--color-text-display)]"
-          style={{ left: "34.167%", top: "61.771%", width: "24.653%", fontSize: "clamp(18px, 3.06cqw, 44px)", lineHeight: 1.05 }}
-        >
-          Realities Reengineered
-        </p>
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+// Multiverse hero: the four realities sit in a V around the Convergence logo, which is centred in the section.
+// Two fly in from the left and two from the right. Four energy rays run from each reality straight to the centre.
+const REALITIES = [
+  { name: "Aether", image: "/assets/hero/emblem-aether.png", motion: "hero-aether", glow: "#84d0fc", left: "8%", top: "20%", enter: "hero-fly-left", delay: "0s" },
+  { name: "Obsidian", image: "/assets/hero/emblem-obsidian.png", motion: "hero-obsidian", glow: "#d6b181", left: "20%", top: "70%", enter: "hero-fly-left", delay: "0s" },
+  { name: "Ember", image: "/assets/hero/emblem-ember.png", motion: "hero-ember", glow: "#f24f05", left: "80%", top: "70%", enter: "hero-fly-right", delay: "0s" },
+  { name: "Zenith", image: "/assets/hero/emblem-zenith.png", motion: "hero-zenith", glow: "#c4b3f5", left: "92%", top: "20%", enter: "hero-fly-right", delay: "0s" },
+];
+
+type Ray = { name: string; glow: string; x1: number; y1: number; x2: number; y2: number };
+
+
+// A point along a stream: the straight line from the emblem to the centre, bent sideways by a slow sine wave.
+const streamPoint = (ray: Ray, t: number, amplitude: number, frequency: number, phase: number, time: number): [number, number] => {
+  const dx = ray.x2 - ray.x1;
+  const dy = ray.y2 - ray.y1;
+  const length = Math.hypot(dx, dy);
+  const nx = -dy / length;
+  const ny = dx / length;
+  // The crests move along the stream, from the reality towards the centre.
+  const bend = length * amplitude * Math.sin(2 * Math.PI * frequency * t + phase - time * 0.7) * Math.sin(Math.PI * t);
+  return [ray.x1 + dx * t + nx * bend, ray.y1 + dy * t + ny * bend];
+};
+
+// A smooth curving path for a stream. Each stream bends differently, so no two are straight.
+const streamPath = (ray: Ray, amplitude: number, frequency: number, phase: number, time = 0) => {
+  const points = Array.from({ length: 41 }, (_, step) => streamPoint(ray, step / 40, amplitude, frequency, phase, time));
+  return `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)} ` + points.slice(1).map(([x, y]) => `L ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+};
+
+export const Hero = () => {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const slotRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [stage, setStage] = useState<{ w: number; h: number; rays: Ray[] }>({ w: 0, h: 0, rays: [] });
+  const wavePaths = useRef<(SVGPathElement | null)[]>([]);
+
+  // Measure where each emblem sits and draw a ray from it to the centre. Re-measured whenever the stage resizes.
+  useLayoutEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const measure = () => {
+      const box = el.getBoundingClientRect();
+      const rays: Ray[] = [];
+      REALITIES.forEach((reality, i) => {
+        const slot = slotRefs.current[i];
+        if (!slot) return;
+        const r = slot.getBoundingClientRect();
+        // The emblem is square and sits at the top of its slot, so its centre is the slot's centre across, and half its width down.
+        rays.push({
+          name: reality.name,
+          glow: reality.glow,
+          x1: r.left - box.left + r.width / 2,
+          y1: r.top - box.top + r.width / 2,
+          x2: box.width / 2,
+          y2: box.height / 2,
+        });
+      });
+      setStage({ w: box.width, h: box.height, rays });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Move the waves: each frame rewrites the three paths of every stream, so the ripples keep travelling inward.
+  useEffect(() => {
+    if (stage.rays.length === 0) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const start = performance.now();
+    let frameId = 0;
+    const draw = (now: number) => {
+      const time = (now - start) / 1000;
+      stage.rays.forEach((ray, i) => {
+        const paths = [
+          streamPath(ray, 0.1, 2.2, i * 0.9, time),
+          streamPath(ray, 0.16, 2.8, i * 0.9 + 1.7, time),
+          streamPath(ray, 0.07, 3.4, i * 0.9 + 3.1, time),
+        ];
+        paths.forEach((d, k) => wavePaths.current[i * 3 + k]?.setAttribute("d", d));
+      });
+      if (!reduce) frameId = requestAnimationFrame(draw);
+    };
+    draw(start);
+    return () => cancelAnimationFrame(frameId);
+  }, [stage]);
+
+  return (
+    <section className="relative overflow-hidden border-b-3 border-brut-ink bg-[#03040a] pt-[64px] text-brut-cream">
+      {/* Background: a static universe image, with a faint turning glow and the four realities as glows that blend together */}
+      <img src="/assets/hero/universe-bg.jpg" alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <div aria-hidden="true" className="hero-spin pointer-events-none absolute top-1/2 left-1/2 size-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[conic-gradient(from_0deg,#84d0fc,#d6b181,#f24f05,#c4b3f5,#84d0fc)] opacity-10 mix-blend-screen blur-[80px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#03040a_100%)]" />
+      {REALITIES.map((reality, i) => (
         <div
-          className="absolute inset-x-0 bottom-0 h-[4px]"
-          style={{
-            background:
-              "linear-gradient(90deg, #84d0fc 0%, #d6b181 30%, #ffffff 50%, #c4b3f5 70%, #f24f05 100%)",
-          }}
+          key={reality.name}
+          aria-hidden="true"
+          className={`hero-blend-${i % 2 === 0 ? "a" : "b"} pointer-events-none absolute h-[70%] w-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 mix-blend-screen blur-[70px]`}
+          style={{ left: reality.left, top: reality.top, background: `radial-gradient(circle, ${reality.glow}88 0%, ${reality.glow}22 45%, transparent 70%)` }}
         />
-    </div>
-  </section>
-);
+      ))}
+
+      <h1 className="sr-only">TechTatva 26: Convergence. Realities Reengineered.</h1>
+
+      {/* The stage: the logo at the exact centre, the emblems in a V around it, and the rays between them */}
+      <div ref={stageRef} className="relative mx-auto h-[calc(100svh-64px)] min-h-[600px] w-full sm:aspect-[4/3] sm:h-auto lg:aspect-auto lg:h-[calc(100svh-64px)] lg:min-h-[600px]">
+        {/* Smoky energy streams, thin: each reality releases a curling river of light toward the centre, and they merge at the logo */}
+        <svg aria-hidden="true" width={stage.w} height={stage.h} viewBox={`0 0 ${stage.w} ${stage.h}`} className="hero-streams pointer-events-none absolute inset-0">
+          <defs>
+            <filter id="hero-smoke-flow" x="-30%" y="-30%" width="160%" height="160%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="4" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="70" xChannelSelector="R" yChannelSelector="G" result="wispy" />
+              <feGaussianBlur in="wispy" stdDeviation="7" />
+            </filter>
+            <filter id="hero-smoke-soft" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="18" />
+            </filter>
+            {stage.rays.map((ray) => (
+              <linearGradient key={ray.name} id={`hero-stream-${ray.name}`} gradientUnits="userSpaceOnUse" x1={ray.x1} y1={ray.y1} x2={ray.x2} y2={ray.y2}>
+                <stop offset="0" stopColor={ray.glow} stopOpacity="0.2" />
+                <stop offset="0.6" stopColor={ray.glow} stopOpacity="0.55" />
+                <stop offset="1" stopColor={ray.glow} stopOpacity="0.95" />
+              </linearGradient>
+            ))}
+            <radialGradient id="hero-convergence">
+              <stop offset="0" stopColor="#b5f0ff" stopOpacity="0.4" />
+              <stop offset="0.4" stopColor="#84d0fc" stopOpacity="0.18" />
+              <stop offset="1" stopColor="#b5f0ff" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          <g style={{ mixBlendMode: "screen" }}>
+            {stage.rays.map((ray, i) => {
+              const size = Math.min(stage.w, stage.h);
+              const main = streamPath(ray, 0.1, 2.2, i * 0.9);
+              const wispA = streamPath(ray, 0.16, 2.8, i * 0.9 + 1.7);
+              const wispB = streamPath(ray, 0.07, 3.4, i * 0.9 + 3.1);
+              return (
+                <g key={ray.name} filter="url(#hero-smoke-flow)" className="hero-ray-pulse">
+                  <path ref={(el) => { wavePaths.current[i * 3] = el; }} d={main} fill="none" stroke={`url(#hero-stream-${ray.name})`} strokeWidth={size * 0.12} strokeLinecap="round" opacity={0.6} />
+                  <path ref={(el) => { wavePaths.current[i * 3 + 1] = el; }} d={wispA} fill="none" stroke={ray.glow} strokeWidth={size * 0.04} strokeLinecap="round" opacity={0.35} />
+                  <path ref={(el) => { wavePaths.current[i * 3 + 2] = el; }} d={wispB} fill="none" stroke={ray.glow} strokeWidth={size * 0.018} strokeLinecap="round" opacity={0.5} />
+                </g>
+              );
+            })}
+
+            {/* The convergence cloud behind the logo, where the four streams merge */}
+            <g filter="url(#hero-smoke-soft)">
+              <circle cx={stage.w / 2} cy={stage.h / 2} r={Math.min(stage.w, stage.h) * 0.22} fill="url(#hero-convergence)" />
+            </g>
+          </g>
+        </svg>
+
+        {/* Orbit rings: two tilted rings turn slowly around the logo */}
+        <div className="hero-ring absolute top-1/2 left-1/2 aspect-[2.4/1] w-[min(760px,96%)] rounded-[50%] border border-dashed border-[#84d0fc]/35" />
+        <div className="hero-ring hero-ring-alt absolute top-1/2 left-1/2 aspect-[2.9/1] w-[min(900px,104%)] rounded-[50%] border border-[#c4b3f5]/25" />
+
+        {/* Shockwave: two rings pulse out from the logo */}
+        <div className="hero-shock absolute top-1/2 left-1/2 aspect-square w-[min(440px,72%)] rounded-full border border-[#b5f0ff]/70" />
+        <div className="hero-shock hero-shock-late absolute top-1/2 left-1/2 aspect-square w-[min(440px,72%)] rounded-full border border-[#b5f0ff]/70" />
+
+        <div className="hero-logo-in absolute top-1/2 left-1/2 w-[min(440px,72%)] -translate-x-1/2 -translate-y-1/2">
+          <img src="/assets/hero/hero-logo.png" alt="TechTatva 26 Convergence" className="hero-logo h-auto w-full" />
+        </div>
+
+        {REALITIES.map((reality, i) => (
+          <div
+            key={reality.name}
+            ref={(el) => {
+              slotRefs.current[i] = el;
+            }}
+            className={`hero-slot-${reality.name.toLowerCase()} absolute flex w-[26%] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 sm:w-[18%] lg:w-[11%]`}
+            style={{ left: reality.left, top: reality.top }}
+          >
+            <div className={`hero-fly ${reality.enter} flex w-full flex-col items-center gap-2`} style={{ animationDelay: reality.delay }}>
+              <img
+                src={reality.image}
+                alt=""
+                aria-hidden="true"
+                className={`w-full object-contain ${reality.motion}`}
+                style={{ filter: `drop-shadow(0 0 28px ${reality.glow})` }}
+              />
+              <span className="font-roboto-mono text-[10px] font-bold tracking-[0.3em] uppercase opacity-90 sm:text-[12px]">{reality.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};

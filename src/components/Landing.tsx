@@ -156,7 +156,7 @@ const WideCard = ({
   image?: string;
   label: string;
   title: string;
-  body: string;
+  body?: string;
   primary: string;
   primaryAction: () => void;
   secondary: string;
@@ -180,7 +180,7 @@ const WideCard = ({
     </div>
     <div className="flex w-full min-w-0 flex-col gap-2.5 lg:flex-1">
       <p className="font-anton text-[44px] leading-[0.95] text-brut-ink uppercase">{title}</p>
-      <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>
+      {body && <p className="font-inter text-[15px] leading-normal text-brut-body">{body}</p>}
       <div className="flex flex-wrap gap-3">
         <Button variant="cream" onClick={primaryAction}>{primary}</Button>
         <Button variant="blue" onClick={secondaryAction}>{secondary}</Button>
@@ -199,7 +199,6 @@ const MorePasses = ({ onNavigate }: Props) => (
         label="CONCLAVE"
         image="/assets/passes/conclave.png"
         title="Conclave pass"
-        body="Talks and a headline act on each of the three evenings."
         primary="View lineup"
         primaryAction={() => onNavigate("speakers")}
         secondary="Purchase pass"
@@ -210,7 +209,6 @@ const MorePasses = ({ onNavigate }: Props) => (
         label="MERCH"
         image="/assets/combo/general-merch.png"
         title="Merchandise"
-        body="Tees, posters and stickers in the printed TechTatva 26 style."
         primary="View merch"
         primaryAction={openRegistration}
         secondary="Purchase merch"

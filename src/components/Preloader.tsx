@@ -7,7 +7,7 @@ const PRELOAD = [
   "/assets/hero/emblem-zenith.png",
   "/assets/hero/emblem-obsidian.png",
   "/assets/hero/emblem-ember.png",
-  "/assets/hero/starfield.svg",
+  "/assets/hero/universe-bg.jpg",
   "/assets/combo/flagship-merch.png",
   "/assets/combo/general-merch.png",
   "/assets/merch/astronaut.png",
@@ -27,7 +27,7 @@ const MIN_SHOW_MS = 2000; // minimum time on screen
 const MAX_WAIT_MS = 8000; // never keep the visitor waiting longer than this
 const SLIDE_MS = 900;
 
-// Full-screen loader shown on first load. It slides up once the landing images are ready.
+// Full-screen loader shown on first load, in the same universe as the hero. It slides up once the landing images are ready.
 export const Preloader = () => {
   const [phase, setPhase] = useState<"loading" | "leaving" | "done">("loading");
 
@@ -56,6 +56,7 @@ export const Preloader = () => {
 
   useEffect(() => {
     if (phase !== "leaving") return;
+    document.documentElement.dataset.heroIntro = "go"; // start the hero intro as the loader lifts
     const doneTimer = window.setTimeout(() => setPhase("done"), SLIDE_MS);
     return () => window.clearTimeout(doneTimer);
   }, [phase]);
@@ -66,26 +67,25 @@ export const Preloader = () => {
     <div
       role="status"
       aria-label="Loading Tech Tatva 26"
-      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#0B3566] text-brut-cream transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#03040a] text-brut-cream transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] ${
         phase === "leaving" ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{ transitionDuration: `${SLIDE_MS}ms` }}
     >
-      {/* Grid and glows, in the galaxy blues */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(132,208,252,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(132,208,252,0.18)_1px,transparent_1px)] bg-[size:3rem_3rem]"
-      />
-      <div aria-hidden="true" className="pointer-events-none absolute h-[700px] w-[700px] rounded-full bg-[#84d0fc]/20 blur-[180px]" />
-      <div aria-hidden="true" className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-[#59a7ff]/20 blur-[150px]" />
+      {/* The universe: the same static image as the hero, a glow in the middle, and a ring around the logo */}
+      <img src="/assets/hero/universe-bg.jpg" alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#03040a_100%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute h-[620px] w-[620px] rounded-full bg-[#84d0fc]/15 blur-[160px]" />
+      <div className="hero-ring pointer-events-none absolute top-1/2 left-1/2 aspect-square w-[min(560px,90%)] rounded-full border border-dashed border-[#84d0fc]/35" />
+      <div className="hero-ring hero-ring-alt pointer-events-none absolute top-1/2 left-1/2 aspect-[2.9/1] w-[min(760px,110%)] rounded-[50%] border border-[#c4b3f5]/25" />
 
-      <div className="relative flex flex-col items-center gap-6">
+      <div className="relative flex flex-col items-center gap-6 text-center">
         <img
           src="/assets/hero/hero-logo.png"
           alt="TechTatva 26"
-          className="h-64 w-auto object-contain drop-shadow-[0_0_50px_rgba(132,208,252,0.45)] sm:h-80"
+          className="hero-logo h-auto w-[min(360px,70vw)]"
         />
-        <span className="animate-pulse font-roboto-mono text-xs font-bold tracking-[0.4em] text-[#84d0fc] uppercase sm:text-sm">
+        <span className="font-anton text-[clamp(20px,2.4vw,30px)] tracking-[0.08em] text-[#84d0fc] uppercase">
           Welcome to Tech Tatva &apos;26
         </span>
       </div>

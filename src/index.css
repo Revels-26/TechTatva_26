@@ -255,3 +255,179 @@ button,
   .hero-stage img[src$="orbit-outer.svg"],
   .hero-stage img[src$="orbit-front.svg"] { animation: none; }
 }
+
+/* Multiverse hero: the background drifts, the nebula turns slowly, and the realities' glows float and blend. */
+@keyframes hero-warp {
+  0%, 100% { transform: scale(1) translate3d(0, 0, 0); }
+  50% { transform: scale(1.08) translate3d(-1.5%, 1%, 0); }
+}
+@keyframes hero-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes hero-blend-a {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(calc(-50% + 4%), calc(-50% - 3%)) scale(1.12); }
+}
+@keyframes hero-blend-b {
+  0%, 100% { transform: translate(-50%, -50%) scale(1.05); }
+  50% { transform: translate(calc(-50% - 4%), calc(-50% + 3%)) scale(0.95); }
+}
+/* Intro: each reality flies in from far away, spinning and blurred, and sharpens as it settles. */
+@keyframes hero-fly-left {
+  0% { opacity: 0; filter: blur(14px); transform: translate3d(-90vw, -12vh, 0) rotate(-140deg) scale(0.3); }
+  70% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+@keyframes hero-fly-right {
+  0% { opacity: 0; filter: blur(14px); transform: translate3d(90vw, 12vh, 0) rotate(140deg) scale(0.3); }
+  70% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+@keyframes hero-fly-top {
+  0% { opacity: 0; filter: blur(14px); transform: translate3d(-8vw, -95vh, 0) rotate(-90deg) scale(0.35); }
+  70% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+@keyframes hero-fly-top-right {
+  0% { opacity: 0; filter: blur(14px); transform: translate3d(14vw, -95vh, 0) rotate(120deg) scale(0.35); }
+  70% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+@keyframes hero-fade-up {
+  0% { opacity: 0; transform: translate3d(0, 24px, 0) scale(0.96); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes hero-zoom-in {
+  0% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.hero-fly {
+  opacity: 0;
+  animation-duration: 3.2s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+.hero-fly-left { animation-name: hero-fly-left; }
+.hero-fly-right { animation-name: hero-fly-right; }
+.hero-fly-top { animation-name: hero-fly-top; }
+.hero-fly-top-right { animation-name: hero-fly-top-right; }
+.hero-intro-zoom { animation: hero-zoom-in 5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-logo-in {
+  opacity: 0;
+  animation: hero-fade-up 2s cubic-bezier(0.22, 1, 0.36, 1) 5.6s forwards;
+}
+.hero-tagline-in {
+  opacity: 0;
+  animation: hero-fade-up 1.4s ease-out 3.2s forwards;
+}
+.hero-warp { animation: hero-warp 40s ease-in-out infinite; }
+.hero-spin { animation: hero-spin 90s linear infinite; }
+.hero-blend-a { animation: hero-blend-a 18s ease-in-out infinite; }
+.hero-blend-b { animation: hero-blend-b 22s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-warp, .hero-spin, .hero-blend-a, .hero-blend-b { animation: none; }
+  .hero-fly, .hero-intro-zoom, .hero-logo-in, .hero-tagline-in { animation: none; opacity: 1; filter: none; }
+}
+
+/* The hero intro waits behind the welcome loader and starts when the loader begins to lift. */
+html[data-hero-intro="waiting"] .hero-fly,
+html[data-hero-intro="waiting"] .hero-intro-zoom,
+html[data-hero-intro="waiting"] .hero-logo-in,
+html[data-hero-intro="waiting"] .hero-tagline-in,
+html[data-hero-intro="waiting"] .hero-beams,
+html[data-hero-intro="waiting"] .hero-shock {
+  animation-play-state: paused;
+}
+
+/* Energy beams: fade in after the intro, with light flowing toward the logo. */
+@keyframes hero-beam-in {
+  to { opacity: 0.85; }
+}
+@keyframes hero-beam-flow {
+  to { stroke-dashoffset: -100; }
+}
+@keyframes hero-shock {
+  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.5); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.4); }
+}
+.hero-beams { opacity: 0; animation: hero-beam-in 1.5s ease-out 3.4s forwards; }
+.hero-ribbon-core {
+  stroke-dasharray: 10 90;
+  animation: hero-beam-flow 2.6s linear infinite;
+  filter: drop-shadow(0 0 3px currentColor);
+}
+.hero-ribbon-glow {
+  filter: blur(4px);
+  animation: hero-ribbon-pulse 3.4s ease-in-out infinite;
+}
+@keyframes hero-ribbon-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+.hero-shock { opacity: 0; animation: hero-shock 4.5s ease-out 6s infinite; }
+.hero-shock-late { animation-delay: 8.2s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-beams, .hero-shock { animation: none; opacity: 0; }
+  .hero-ribbon-core, .hero-ribbon-glow { animation: none; }
+}
+
+/* Multiverse layers: the nebula drifts, two orbit rings turn around the logo. */
+@keyframes hero-spin-slow {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes hero-ring-spin {
+  0% { transform: translate(-50%, -50%) rotate(-14deg); }
+  100% { transform: translate(-50%, -50%) rotate(346deg); }
+}
+@keyframes hero-ring-spin-alt {
+  0% { transform: translate(-50%, -50%) rotate(20deg) scaleY(0.8); }
+  100% { transform: translate(-50%, -50%) rotate(-340deg) scaleY(0.8); }
+}
+.hero-spin-slow { animation: hero-spin-slow 200s linear infinite; }
+.hero-ring { animation: hero-ring-spin 70s linear infinite; }
+.hero-ring-alt { animation: hero-ring-spin-alt 110s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-spin-slow, .hero-ring, .hero-ring-alt { animation: none; }
+}
+
+/* Phones: pull the outer emblems in so they sit fully on screen. Desktop and tablet keep their positions. */
+@media (max-width: 639px) {
+  .hero-slot-aether { left: 16% !important; top: 22% !important; }
+  .hero-slot-zenith { left: 84% !important; top: 22% !important; }
+  .hero-slot-obsidian { left: 24% !important; top: 72% !important; }
+  .hero-slot-ember { left: 76% !important; top: 72% !important; }
+}
+/* Energy rays: a gentle pulse so the rays feel alive. */
+@keyframes hero-ray-pulse-anim {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.hero-ray-pulse { animation: hero-ray-pulse-anim 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-ray-pulse { animation: none; }
+}
+/* Energy waves: a bright packet travels along each wave toward the centre; the glow breathes gently. */
+@keyframes hero-energy-travel {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -100; }
+}
+@keyframes hero-wave-breathe {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.55; }
+}
+.hero-energy-pulse { stroke-dasharray: 16 84; animation: hero-energy-travel 5s linear infinite; }
+.hero-wave-pulse { animation: hero-wave-breathe 4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-energy-pulse, .hero-wave-pulse { animation: none; }
+}
+
+/* Smoky streams flow out only after the realities have settled (about 3.4s after the loader lifts). */
+@keyframes hero-streams-in {
+  from { opacity: 0; filter: blur(14px); }
+  to { opacity: 1; filter: blur(0); }
+}
+.hero-streams { opacity: 0; animation: hero-streams-in 2.4s ease-out 3.4s forwards; }
+html[data-hero-intro="waiting"] .hero-streams { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-streams { animation: none; opacity: 1; }
+}
