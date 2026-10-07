@@ -1,10 +1,12 @@
+import { SITE } from "../config/site";
+
 // Lets any component (e.g. the footer) change page without prop drilling. App.tsx listens for this.
 export const goToPage = (page: string) => {
   window.dispatchEvent(new CustomEvent("tt-navigate", { detail: page }));
 };
 
-// Login, passes, combos and merch used to go to the separate registration site (SITE.registerUrl).
-// Sales are not open yet, so every one of these buttons shows the coming-soon page instead.
+// Passes, combos and merch are bought on the separate registration site (SITE.registerUrl).
+// Same tab, so the visitor stays in the flow and can use the back button.
 export const openRegistration = () => {
-  goToPage("comingsoon");
+  window.location.assign(SITE.registerUrl);
 };
