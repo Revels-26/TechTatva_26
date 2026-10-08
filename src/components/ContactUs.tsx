@@ -55,6 +55,28 @@ const MailCard = () => {
   );
 };
 
+// Payment issues: shown above the mail form so it's the first thing visitors see on the left.
+const PaymentIssueCard = () => (
+  <div className={`${cardClass} text-center`} style={cardShadow}>
+    <div>
+      <p className={labelClass}>Payment issues?</p>
+      <p className="mt-2 font-inter text-[15px] leading-normal text-brut-body">
+        If you are facing any payment issues, kindly fill this form and our team will get back to you.
+      </p>
+    </div>
+    <div className="flex justify-center">
+      <a
+        href="https://forms.gle/aiNjpenxSXTjcFgh9"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex shrink-0 cursor-pointer items-center justify-center border-3 border-brut-ink bg-[#1f5fd6] px-5 py-3 font-anton text-[18px] text-white uppercase leading-[0.95] whitespace-nowrap tracking-[1.44px] drop-shadow-[6px_6px_0px_#12110f] transition-transform duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0 active:translate-y-0"
+      >
+        Fill payment issue form
+      </a>
+    </div>
+  </div>
+);
+
 // Phone directory: the numbers appear here once they are added to src/data/contacts.ts.
 const PhoneCard = () => (
   <div className={cardClass} style={cardShadow}>
@@ -93,7 +115,10 @@ export const ContactUs = () => (
         Contact <span className="text-[#1f5fd6]">us</span>
       </SectionHead>
       <div className="grid gap-10 pb-[50px] lg:grid-cols-2 lg:pb-[80px]">
-        <MailCard />
+        <div className="flex flex-col gap-10">
+          <PaymentIssueCard />
+          <MailCard />
+        </div>
         <PhoneCard />
       </div>
     </section>

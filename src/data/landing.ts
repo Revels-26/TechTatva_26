@@ -47,6 +47,10 @@ export const FAQS: { q: string; a: string }[] = [
     a: "Please recheck your enrollment number. If that is correct, and the system is sending OTP to some number, please check if the number displayed is of your parent or guardian. If that isn't the case, please log in to your SLcM 1.0 (Go to SLcM 2.0 -> Profile -> Navigate to SLcM 1.0), go to Admissions Profile, go to address, and change your present details phone number to the desired phone number. Wait 24 hours before trying to sign up.",
   },
   {
+    q: "My address details are incorrect, how do I update them?",
+    a: "Please log in to your SLcM 1.0 (Go to SLcM 2.0 -> Profile -> Navigate to SLcM 1.0), go to Profile, go to address, and update your details there. Then wait until 12 AM (midnight) before trying again.",
+  },
+  {
     q: "What should I do if I make the payment, and it's not reflected on the website?",
     a: "If payment is debited, the website will update in 48 hours, else you will get a refund automatically.",
   },
