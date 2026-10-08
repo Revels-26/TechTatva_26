@@ -2,7 +2,7 @@ export const SITE = {
   name: "Tech Tatva",
   edition: "'26",
   fullName: "Tech Tatva 26",
-  tagline: "MIT Manipal's National Level Techno-Management Fest",
+  tagline: "MIT Manipal's National Level Technical Fest",
   dates: "Dates to be announced",
   venue: "MIT Manipal, Karnataka",
   // Registration is handled by a separate system — point this at that app/site.

@@ -1,6 +1,6 @@
 # Tech Tatva 26 — Landing Page
 
-Marketing/landing page for Tech Tatva 26 (MIT Manipal's techno-management fest).
+Marketing/landing page for Tech Tatva 26 (MIT Manipal's technical fest).
 
 This repo is **only the landing page**. Registration, sign-in, and attendee data are
 handled by a separate system — this site just links out to it (see `SITE.registerUrl`
