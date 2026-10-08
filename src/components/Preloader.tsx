@@ -66,7 +66,7 @@ export const Preloader = () => {
   return (
     <div
       role="status"
-      aria-label="Loading TechTatva'26"
+      aria-label="Loading TechTatva '26"
       className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#03040a] text-brut-cream transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] ${
         phase === "leaving" ? "-translate-y-full" : "translate-y-0"
       }`}
@@ -80,7 +80,7 @@ export const Preloader = () => {
       <div className="relative flex flex-col items-center text-center">
         <img
           src="/assets/hero/hero-logo.png"
-          alt="TechTatva'26"
+          alt="TechTatva '26"
           className="hero-logo h-auto w-[min(360px,70vw)] opacity-60 brightness-75"
         />
       </div>

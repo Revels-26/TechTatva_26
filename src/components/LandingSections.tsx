@@ -18,7 +18,7 @@ export const Legacy = () => (
   <Reveal>
     <Container>
       <SectionHead>
-        TechTatva'26 <span className="text-[#1f5fd6]">our legacy</span>
+        TechTatva '26 <span className="text-[#1f5fd6]">our legacy</span>
       </SectionHead>
       <div className="flex flex-col gap-8 pb-[50px] lg:flex-row lg:items-stretch lg:gap-12 lg:pb-[80px]">
         <div
@@ -103,7 +103,7 @@ export const Sponsors = () => (
           </div>
         ))}
         <div className="flex flex-wrap items-center gap-4">
-          <p className="font-inter text-[15px] text-brut-body">Interested in sponsoring TechTatva'26?</p>
+          <p className="font-inter text-[15px] text-brut-body">Interested in sponsoring TechTatva '26?</p>
           <a
             href={`mailto:${SITE.contactEmail}`}
             className="border-2 border-brut-ink bg-brut-cream px-4 py-2 font-roboto-mono text-[12px] font-bold text-brut-ink uppercase drop-shadow-[4px_4px_0px_#12110f] hover:-translate-x-0.5 hover:-translate-y-0.5"
@@ -218,7 +218,7 @@ export const Documents = () => (
         />
         <DocCard
           title="Brochure"
-          body="An overview of TechTatva'26, its universes, passes and what to expect across the four days."
+          body="An overview of TechTatva '26, its universes, passes and what to expect across the four days."
           href={SITE.downloads.brochure}
           shadow="#12110f"
           downloadLabel="Download brochure"
@@ -329,7 +329,7 @@ export const PhotoGallery = () => {
               >
                 <img
                   src={src}
-                  alt={`TechTatva'26 gallery photo ${i + 1}`}
+                  alt={`TechTatva '26 gallery photo ${i + 1}`}
                   loading="lazy"
                   className="size-full object-cover"
                 />

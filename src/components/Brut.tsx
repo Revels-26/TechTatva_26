@@ -273,7 +273,7 @@ export const BrutFooter = () => {
       </address>
 
       <p className="text-center font-anton text-[clamp(48px,7vw,104px)] leading-[0.9] whitespace-nowrap text-brut-cream/15 uppercase">
-        TechTatva'26
+        TechTatva '26
       </p>
 
       <div className="flex flex-wrap gap-x-[22px] gap-y-2 font-inter text-[15px] leading-normal font-medium whitespace-nowrap lg:justify-end">
