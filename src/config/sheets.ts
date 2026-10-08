@@ -12,8 +12,10 @@ export const TIMETABLE_SHEET = {
   ],
 };
 
-// Events sheet: one tab with Event | Category | Reality | People.
+// Events sheet: one tab with Event | Category | Reality | Team Size | Venue | Date | Start Time
+// (older sheets used "People" instead of "Team Size"). Venue/Date/Start Time are read straight from
+// this sheet - the events page no longer looks them up in TIMETABLE_SHEET.
 export const EVENTS_SHEET = {
   id: "1QqBVjxfMuoGd_X3epG1j_Wd7fzHvdZ5-cih9hfQWAcM",
-  gid: "0",
+  gid: "1498161783",
 };

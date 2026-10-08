@@ -96,31 +96,29 @@ export const useTimetableRows = (): { data: TimetableRow[] | null; error: boolea
   return { data, error };
 };
 
-// Events come from the events sheet. Venues, dates and start time come from the matching timetable rows,
-// so the cards wait for the timetable.
-export const useEventSummaries = (
-  timetable: TimetableRow[] | null,
-): { data: EventSummary[] | null; error: boolean } => {
+// Events come from the events sheet, which carries its own venue, date and start time
+// columns (filled from the rulebook-derived master list) - no lookup into the timetable sheet needed.
+export const useEventSummaries = (): { data: EventSummary[] | null; error: boolean } => {
   const { rows, error } = useSheetRows("csv-events", loadEvents);
   const data = useMemo(() => {
-    if (!rows || !timetable) return null;
+    if (!rows) return null;
     return rows
       .filter((row) => row.event?.trim())
       .map((row) => {
         const title = row.event.trim();
-        const rounds = timetable.filter((t) => t.event.toLowerCase() === title.toLowerCase());
-        const category = canonicalCategory(row.category?.trim() || rounds[0]?.category || "");
+        const category = canonicalCategory(row.category?.trim() || "");
         const reality = row.reality?.trim().toLowerCase() as UniverseKey;
         return {
           title,
           category,
           reality: REALITY_KEYS.includes(reality) ? reality : (CATEGORY_REALITY[category] ?? "aether"),
-          venues: [...new Set(rounds.map((t) => t.venue))],
-          dates: [...new Set(rounds.map((t) => t.date))],
-          start: rounds.find((t) => t.start)?.start ?? null,
-          people: row.people?.trim() || null,
+          venues: row.venue ? row.venue.split("/").map((v) => v.trim()).filter(Boolean) : [],
+          dates: row.date ? row.date.split(",").map((d) => d.trim()).filter(Boolean) : [],
+          start: row.start_time?.trim() || null,
+          // "People" is the older header name; "Team Size" is what the rulebook-derived sheet uses.
+          people: row.team_size?.trim() || row.people?.trim() || null,
         };
       });
-  }, [rows, timetable]);
+  }, [rows]);
   return { data, error };
 };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AppNav, BrutFooter, BrutPage } from "../components/Brut";
 import { UNIVERSES, type UniverseKey } from "../data/events";
 import { categoryLogoSrc, type EventSummary } from "../data/timetable";
-import { useEventSummaries, useTimetableRows } from "../lib/liveData";
+import { useEventSummaries } from "../lib/liveData";
 
 type EventsPageProps = {
   onNavigate: (page: string) => void;
@@ -105,8 +105,7 @@ const EventCard = ({ event }: { event: EventSummary }) => {
 };
 
 export default function EventsPage({ onNavigate }: EventsPageProps) {
-  const { data: timetable, error: timetableError } = useTimetableRows();
-  const { data: summaries, error: eventsError } = useEventSummaries(timetable);
+  const { data: summaries, error: eventsError } = useEventSummaries();
   const list = summaries ?? [];
   const [activeUniverse, setActiveUniverse] = useState<UniverseKey | null>(null);
 
@@ -168,7 +167,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
           </>
         ) : (
           <p className="mt-8 mb-[60px] border-3 border-dashed border-brut-ink bg-brut-cream p-6 font-inter text-[16px] text-brut-body lg:mt-10 lg:mb-[100px]">
-            {eventsError || timetableError
+            {eventsError
               ? "The events couldn't load right now. Refresh the page to try again."
               : "Loading the events…"}
           </p>
