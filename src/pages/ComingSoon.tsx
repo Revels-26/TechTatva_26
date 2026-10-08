@@ -17,7 +17,7 @@ const ComingSoon = ({ onNavigate }: ComingSoonProps) => (
       </p>
       <p className="font-anton text-[clamp(36px,4vw,56px)] leading-[0.95] text-brut-ink uppercase">Login and passes open soon.</p>
       <p className="max-w-[560px] font-inter text-[18px] leading-normal text-brut-body">
-        Registration and pass sales for TechTatva 26 are not open yet. Check back soon.
+        Registration and pass sales for TechTatva'26 are not open yet. Check back soon.
       </p>
       <Button variant="ink" large onClick={() => onNavigate("home")}>Back to home</Button>
     </main>

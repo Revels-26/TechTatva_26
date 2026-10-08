@@ -25,7 +25,7 @@ const MailCard = () => {
     }
     setError(null);
     const body = `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}`;
-    const subject = `Tech Tatva 26 enquiry from ${name.trim()}`;
+    const subject = `TechTatva'26 enquiry from ${name.trim()}`;
     window.location.href = `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 

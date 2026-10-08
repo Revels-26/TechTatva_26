@@ -102,7 +102,7 @@ export const Hero = () => {
         />
       ))}
 
-      <h1 className="sr-only">TechTatva 26: Convergence. Realities Reengineered.</h1>
+      <h1 className="sr-only">TechTatva'26: Convergence. Realities Reengineered.</h1>
 
       {/* The stage: the logo at the exact centre, the emblems in a V around it, and the rays between them */}
       <div ref={stageRef} className="relative mx-auto h-[calc(100svh-64px)] min-h-[600px] w-full sm:aspect-[4/3] sm:h-auto lg:aspect-auto lg:h-[calc(100svh-64px)] lg:min-h-[600px]">
@@ -154,7 +154,7 @@ export const Hero = () => {
         </svg>
 
         <div className="hero-logo-in absolute top-1/2 left-1/2 w-[min(440px,72%)] -translate-x-1/2 -translate-y-1/2">
-          <img src="/assets/hero/hero-logo.png" alt="TechTatva 26 Convergence" className="hero-logo h-auto w-full" />
+          <img src="/assets/hero/hero-logo.png" alt="TechTatva'26 Convergence" className="hero-logo h-auto w-full" />
         </div>
 
         {REALITIES.map((reality, i) => (

@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Tech Tatva",
   edition: "'26",
-  fullName: "Tech Tatva 26",
+  fullName: "TechTatva'26",
   tagline: "MIT Manipal's National Level Technical Fest",
   dates: "Dates to be announced",
   venue: "MIT Manipal, Karnataka",

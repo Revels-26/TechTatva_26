@@ -23,15 +23,15 @@ export const SPONSOR_TIERS: { tier: string; names: string[] }[] = [
 ];
 
 export const SOCIAL_POSTS: { src: string; alt: string }[] = [
-  { src: "/assets/socials/post-1.png", alt: "TechTatva 26 social post 1" },
-  { src: "/assets/socials/post-2.png", alt: "TechTatva 26 social post 2" },
-  { src: "/assets/socials/post-3.png", alt: "TechTatva 26 social post 3" },
-  { src: "/assets/socials/post-4.png", alt: "TechTatva 26 social post 4" },
+  { src: "/assets/socials/post-1.png", alt: "TechTatva'26 social post 1" },
+  { src: "/assets/socials/post-2.png", alt: "TechTatva'26 social post 2" },
+  { src: "/assets/socials/post-3.png", alt: "TechTatva'26 social post 3" },
+  { src: "/assets/socials/post-4.png", alt: "TechTatva'26 social post 4" },
 ];
 
 export const FAQS: { q: string; a: string }[] = [
   {
-    q: "Can students from non-MAHE colleges participate in TechTatva 26?",
+    q: "Can students from non-MAHE colleges participate in TechTatva'26?",
     a: "Students from non MAHE institutions are eligible only if they are from BTech or Engineering colleges. All MAHE colleges are allowed to participate without this restriction.",
   },
   {
