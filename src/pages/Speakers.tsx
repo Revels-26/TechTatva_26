@@ -173,7 +173,7 @@ const ActCard = ({ act, accent }: { act: Act; accent: "blue" | "green" }) => (
       accent === "blue" ? "drop-shadow-[8px_8px_0px_#59a7ff]" : "drop-shadow-[8px_8px_0px_#2db84d]"
     }`}
   >
-    <div className="relative h-[200px] w-full shrink-0 overflow-hidden border-b-3 border-brut-ink bg-[#aef5c4] lg:h-[260px]">
+    <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden border-b-3 border-brut-ink bg-[#aef5c4] md:aspect-[3/4] lg:aspect-[4/5]">
       {act.image ? (
         <img
           src={act.image}
